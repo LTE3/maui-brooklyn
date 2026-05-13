@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maui Brooklyn · Instagram Logo (1080×1080)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Pacifico&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  :root{
+    --primary:#0e5a64;--mid:#168088;--deep:#063e45;
+    --yellow:#F2C744;--teal:#1B9AAA;--cream:#FFF8F0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:#1a1a1a;color:var(--cream);
+    font-family:system-ui,sans-serif;min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:30px;gap:20px;
+  }
+  .canvas-wrap{
+    position:relative;
+    width:min(540px,92vw);height:min(540px,92vw);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+    border-radius:14px;overflow:hidden;
+  }
+  .canvas-wrap .scale{
+    width:1080px;height:1080px;
+    transform-origin:top left;
+    position:absolute;top:0;left:0;
+  }
+  #logo-card{
+    width:1080px;height:1080px;position:relative;overflow:hidden;
+    background:var(--primary);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  }
+  .bg-mesh{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 15% 20%, rgba(27,154,170,.55), transparent 70%),
+      radial-gradient(ellipse 50% 60% at 85% 30%, rgba(22,128,136,.5), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 80%, rgba(6,62,69,.6), transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 95%, rgba(242,199,68,.18), transparent 70%),
+      linear-gradient(180deg, var(--deep) 0%, var(--primary) 40%, var(--mid) 100%);
+  }
+  .bg-waves{position:absolute;inset:0;pointer-events:none;opacity:.5;overflow:hidden}
+  .bg-waves svg{position:absolute;left:0;top:0;width:100%;height:100%}
+  .logo{position:relative;z-index:2;padding:0 60px}
+  .maui{
+    font-family:'Permanent Marker',cursive;
+    font-size:380px;color:var(--yellow);line-height:.85;letter-spacing:-.01em;
+    text-shadow:0 14px 100px rgba(242,199,68,.55),0 6px 12px rgba(0,0,0,.5),0 0 200px rgba(242,199,68,.25);
+  }
+  .brooklyn{
+    font-family:'Pacifico',cursive;font-size:180px;color:var(--teal);
+    margin-top:-20px;line-height:1;
+    text-shadow:0 5px 32px rgba(27,154,170,.55),0 2px 6px rgba(0,0,0,.45);
+  }
+  .controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn{
+    background:var(--yellow);color:#0b2326;
+    padding:14px 28px;border-radius:999px;border:none;cursor:pointer;
+    font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    transition:transform .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.3)}
+  .meta{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,248,240,.55);text-align:center}
+  .meta b{color:var(--yellow);margin:0 6px}
+</style>
+</head>
+<body>
+
+<div class="meta">Instagram Square <b>·</b> 1080 × 1080 <b>·</b> Maui Brooklyn</div>
+
+<div class="canvas-wrap">
+  <div class="scale" id="scale">
+    <div id="logo-card">
+      <div class="bg-mesh"></div>
+      <div class="bg-waves">
+        <svg viewBox="0 0 2000 1080" preserveAspectRatio="none">
+          <path d="M0 540 Q 250 420 500 540 T 1000 540 T 1500 540 T 2000 540 L 2000 1080 L 0 1080 Z" fill="rgba(27,154,170,.22)"/>
+          <path d="M0 640 Q 250 560 500 640 T 1000 640 T 1500 640 T 2000 640 L 2000 1080 L 0 1080 Z" fill="rgba(22,128,136,.22)"/>
+          <path d="M0 480 Q 200 380 400 480 T 800 480 T 1200 480 T 1600 480 T 2000 480 L 2000 1080 L 0 1080 Z" fill="rgba(6,62,69,.35)"/>
+        </svg>
+      </div>
+      <div class="logo">
+        <div class="maui">Maui</div>
+        <div class="brooklyn">Brooklyn</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="btn" id="download">Download 1080 × 1080 PNG</button>
+  <button class="btn ghost" id="download2x">Download 2160 × 2160 PNG (2×)</button>
+</div>
+
+<div class="meta">Tip: hold-press the PNG on phone → save to photos</div>
+
+<script>
+  function scale(){
+    const wrap = document.querySelector('.canvas-wrap');
+    const w = wrap.clientWidth;
+    document.getElementById('scale').style.transform = 'scale(' + (w/1080) + ')';
+  }
+  window.addEventListener('resize', scale); scale();
+
+  async function render(scaleFactor){
+    const node = document.getElementById('logo-card');
+    const canvas = await html2canvas(node, {
+      width:1080, height:1080,
+      scale: scaleFactor,
+      backgroundColor:null,
+      useCORS:true,
+      logging:false
+    });
+    const link = document.createElement('a');
+    link.download = 'maui-brooklyn-ig-' + (1080*scaleFactor) + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+  document.getElementById('download').onclick = ()=>render(1);
+  document.getElementById('download2x').onclick = ()=>render(2);
+</script>
+</body>
+</html>
