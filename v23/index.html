@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Maui Brooklyn — Side A / Side B · Tiki Kitchen Mixtape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&family=VT323&family=Bungee&display=swap" rel="stylesheet">
+<style>
+/* ───────────────────────────── PALETTE ─────────────────────────── */
+:root{
+  --craft:#d9c9a8;
+  --pink:#ff61aa;
+  --yellow:#f7ff4a;
+  --black:#1a1a1a;
+  --cream:#f5edd6;
+  --blue:#2c5dff;
+  --red:#e63946;
+  --tape:#3a2f22;
+  --line:rgba(26,26,26,.85);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--craft);color:var(--black);font-family:'Special Elite',monospace;overflow-x:hidden}
+
+/* ───────────────────────────── PAPER GRAIN / PHOTOCOPY NOISE ──── */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;mix-blend-mode:multiply;opacity:.22;
+  background-image:
+    radial-gradient(rgba(0,0,0,.6) 1px,transparent 1px),
+    radial-gradient(rgba(0,0,0,.4) 1px,transparent 1px);
+  background-size:3px 3px, 7px 7px;
+  background-position:0 0, 1px 2px;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.04) 2px 3px),
+    radial-gradient(ellipse at 30% 0%,transparent 55%,rgba(0,0,0,.18) 100%);
+}
+
+/* ───────────────────────────── TAPE STRIPES ────────────────────── */
+.tape-stripes{
+  background:repeating-linear-gradient(135deg,
+    var(--black) 0 10px,
+    var(--yellow) 10px 20px,
+    var(--black) 20px 30px,
+    var(--pink) 30px 40px);
+}
+
+/* ───────────────────────────── NAV ─────────────────────────────── */
+nav.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:stretch;justify-content:space-between;
+  background:var(--cream);
+  border-bottom:3px solid var(--black);
+  box-shadow:0 4px 0 var(--black);
+}
+.brand-label{
+  display:flex;align-items:center;gap:10px;
+  background:var(--pink);
+  padding:10px 22px 10px 16px;
+  border-right:3px solid var(--black);
+  clip-path:polygon(0 0,100% 0,calc(100% - 18px) 100%,0 100%);
+  transform:rotate(-1.2deg) translateY(-2px);
+}
+.brand-label .reels{display:flex;gap:6px}
+.brand-label .reel-mini{width:18px;height:18px;border-radius:50%;background:var(--black);position:relative;border:2px solid var(--cream)}
+.brand-label .reel-mini::after{content:"";position:absolute;inset:4px;border:1.5px dashed var(--cream);border-radius:50%;animation:spin 4s linear infinite}
+.brand-label h1{
+  font-family:'Permanent Marker',cursive;font-size:22px;letter-spacing:1px;color:var(--black);
+  text-transform:uppercase;line-height:1;
+}
+.brand-label small{font-family:'VT323',monospace;font-size:14px;color:var(--black);opacity:.7}
+.navlinks{display:flex;align-items:center;gap:0;font-family:'VT323',monospace;font-size:20px}
+.navlinks a{
+  color:var(--black);text-decoration:none;padding:0 16px;height:100%;display:flex;align-items:center;
+  border-left:1px dashed rgba(0,0,0,.4);position:relative;
+}
+.navlinks a:hover{background:var(--yellow)}
+.navlinks a::before{content:"▶ ";color:var(--pink)}
+.cta-reserve{
+  align-self:stretch;display:flex;align-items:center;gap:8px;
+  background:var(--black);color:var(--yellow);
+  font-family:'Bungee',sans-serif;font-size:14px;letter-spacing:2px;
+  padding:0 22px;border-left:3px solid var(--black);text-decoration:none;
+  transition:transform .2s;
+}
+.cta-reserve:hover{background:var(--pink);color:var(--black);transform:rotate(-1deg)}
+
+/* ───────────────────────────── HERO / J-CARD ───────────────────── */
+.hero{
+  position:relative;padding:60px 40px 80px;
+  background:
+    radial-gradient(ellipse at 50% 120%,rgba(255,97,170,.18),transparent 60%),
+    var(--craft);
+  overflow:hidden;
+}
+.hero::before{
+  content:"SIDE A · TIKI MIXTAPE · VOL.66 · BROOKLYN NY";
+  position:absolute;top:10px;left:-30px;right:-30px;
+  font-family:'VT323',monospace;font-size:18px;letter-spacing:8px;
+  color:var(--black);opacity:.5;text-align:center;
+  border-top:1px dashed var(--black);border-bottom:1px dashed var(--black);
+  padding:4px 0;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.2fr .9fr;gap:50px;align-items:center;
+  max-width:1280px;margin:50px auto 0;position:relative;
+}
+.hero-left{position:relative}
+.tape-label{
+  display:inline-block;background:var(--cream);
+  padding:14px 26px 8px;border:2px solid var(--black);
+  transform:rotate(-2deg);box-shadow:6px 6px 0 var(--black);
+  margin-bottom:6px;position:relative;
+}
+.tape-label::before, .tape-label::after{
+  content:"";position:absolute;width:60px;height:18px;background:var(--yellow);
+  border:1.5px solid var(--black);top:50%;transform:translateY(-50%);
+  background-image:repeating-linear-gradient(90deg,transparent 0 4px,rgba(0,0,0,.2) 4px 5px);
+}
+.tape-label::before{left:-50px;transform:translateY(-50%) rotate(-3deg)}
+.tape-label::after{right:-50px;transform:translateY(-50%) rotate(3deg)}
+.tape-label h2{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(64px,11vw,140px);line-height:.95;color:var(--black);
+  letter-spacing:-2px;
+}
+.tape-label.brk{transform:rotate(1.4deg) translateX(40px);background:var(--pink);margin-top:-10px;box-shadow:6px 6px 0 var(--blue)}
+.tape-label.brk h2{color:var(--cream);text-shadow:3px 3px 0 var(--black)}
+
+.hero-tag{
+  margin-top:38px;font-family:'Bungee',sans-serif;font-size:22px;letter-spacing:2px;
+  color:var(--black);background:var(--yellow);display:inline-block;
+  padding:6px 18px;transform:rotate(-.6deg);
+  border:2px solid var(--black);
+  position:relative;
+}
+.hero-tag::after{
+  content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;
+  background:var(--pink);transform:skewX(-10deg);
+}
+.hero-addr{
+  margin-top:26px;font-family:'VT323',monospace;font-size:22px;
+  display:flex;align-items:center;gap:14px;
+}
+.hero-addr .pin{
+  width:34px;height:34px;background:var(--red);border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg);border:2px solid var(--black);
+}
+.hero-addr u{text-decoration:none;background:linear-gradient(transparent 60%,var(--yellow) 60%);padding:0 4px}
+
+.hero-ctas{margin-top:34px;display:flex;gap:18px;flex-wrap:wrap}
+.btn{
+  font-family:'Bungee',sans-serif;font-size:14px;letter-spacing:2px;
+  padding:14px 22px;text-decoration:none;border:3px solid var(--black);
+  display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn.primary{background:var(--black);color:var(--yellow);box-shadow:6px 6px 0 var(--pink)}
+.btn.primary:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--pink)}
+.btn.ghost{background:var(--cream);color:var(--black);box-shadow:6px 6px 0 var(--blue)}
+.btn.ghost:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--blue)}
+
+/* ───────────────────────────── CASSETTE SVG WRAPPER ────────────── */
+.cassette-wrap{
+  position:relative;transform:rotate(3deg);
+  filter:drop-shadow(10px 10px 0 var(--black));
+}
+.cassette-wrap svg{width:100%;height:auto;display:block}
+.reel{transform-origin:center;animation:spin 6s linear infinite}
+.reel.r2{animation-duration:6.4s}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* scribbled tape strip */
+.scribble-strip{
+  position:absolute;top:-30px;left:-30px;right:-30px;height:46px;
+  background:var(--cream);border:2px solid var(--black);
+  transform:rotate(-2deg);z-index:3;
+  font-family:'Permanent Marker',cursive;font-size:22px;
+  display:flex;align-items:center;justify-content:center;letter-spacing:2px;
+  background-image:repeating-linear-gradient(90deg,transparent 0 8px,rgba(0,0,0,.08) 8px 9px);
+}
+.scribble-strip span{background:var(--yellow);padding:0 6px;margin:0 4px;transform:rotate(-1deg)}
+
+/* ───────────────────────────── SECTION DIVIDER (tape) ──────────── */
+.tape-divider{
+  height:42px;background:var(--black);position:relative;
+  background-image:
+    repeating-linear-gradient(90deg,transparent 0 28px,rgba(247,255,74,.7) 28px 32px),
+    linear-gradient(var(--black),var(--black));
+  border-top:2px solid var(--black);border-bottom:2px solid var(--black);
+}
+.tape-divider::before, .tape-divider::after{
+  content:"";position:absolute;top:50%;width:120px;height:18px;background:var(--cream);
+  border:2px solid var(--black);transform:translateY(-50%) rotate(-2deg);
+}
+.tape-divider::before{left:6%}
+.tape-divider::after{right:6%;transform:translateY(-50%) rotate(2deg)}
+
+/* ───────────────────────────── ABOUT / LINER NOTES ─────────────── */
+.liner{
+  padding:80px 40px;background:var(--cream);
+  position:relative;
+  background-image:
+    linear-gradient(transparent 31px,rgba(44,93,255,.35) 31px,rgba(44,93,255,.35) 32px,transparent 32px);
+  background-size:100% 32px;
+}
+.liner-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:.85fr 1.4fr;gap:50px;align-items:start}
+.liner h3{
+  font-family:'Permanent Marker',cursive;font-size:54px;line-height:.95;
+  transform:rotate(-1.5deg);background:var(--pink);color:var(--cream);
+  display:inline-block;padding:8px 20px;border:2px solid var(--black);
+  box-shadow:6px 6px 0 var(--black);
+}
+.liner-meta{margin-top:22px;font-family:'VT323',monospace;font-size:20px;line-height:1.5}
+.liner-meta li{list-style:none;padding:4px 0;border-bottom:1px dashed rgba(0,0,0,.3);display:flex;justify-content:space-between}
+.liner-meta li span:last-child{color:var(--blue)}
+
+.liner-text p{font-family:'Special Elite',monospace;font-size:17px;line-height:32px;margin-bottom:24px}
+.liner-text p::first-letter{
+  font-family:'Permanent Marker',cursive;font-size:46px;float:left;
+  margin:6px 8px 0 0;color:var(--pink);
+}
+.hand-underline{background:linear-gradient(transparent 55%,var(--yellow) 55%,var(--yellow) 92%,transparent 92%);padding:0 2px}
+.sharpie{color:var(--pink);font-family:'Permanent Marker',cursive;letter-spacing:1px}
+
+/* ───────────────────────────── COCKTAILS / TRACKLIST ──────────── */
+.tracks{
+  padding:90px 40px;background:var(--craft);position:relative;overflow:hidden;
+}
+.tracks-header{
+  max-width:1280px;margin:0 auto 50px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;
+}
+.tracks-header h3{
+  font-family:'Permanent Marker',cursive;font-size:72px;line-height:.9;
+  transform:rotate(-1deg);
+}
+.tracks-header h3 b{background:var(--black);color:var(--yellow);padding:0 12px;font-weight:400}
+.tracks-meta{
+  font-family:'VT323',monospace;font-size:20px;background:var(--cream);
+  padding:10px 16px;border:2px solid var(--black);transform:rotate(1deg);
+  box-shadow:4px 4px 0 var(--pink);
+}
+
+.sides{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.side{
+  background:var(--cream);border:3px solid var(--black);padding:0;
+  box-shadow:10px 10px 0 var(--black);position:relative;
+}
+.side:nth-child(2){box-shadow:10px 10px 0 var(--pink);transform:rotate(.6deg)}
+.side:nth-child(1){transform:rotate(-.5deg)}
+.side-head{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--black);color:var(--yellow);
+  padding:14px 22px;font-family:'Bungee',sans-serif;letter-spacing:3px;
+}
+.side-head .side-letter{
+  background:var(--pink);color:var(--black);width:50px;height:50px;border-radius:50%;
+  display:grid;place-items:center;font-size:28px;border:3px solid var(--cream);
+}
+.side-head .runtime{font-family:'VT323',monospace;font-size:18px;letter-spacing:1px;color:var(--cream)}
+.side ol{list-style:none;counter-reset:track;padding:18px 22px 26px}
+.side ol li{
+  counter-increment:track;
+  display:grid;grid-template-columns:36px 1fr auto;align-items:baseline;
+  padding:14px 6px;border-bottom:1.5px dashed rgba(0,0,0,.35);
+  transition:transform .15s, background .15s;
+  position:relative;
+}
+.side ol li::before{
+  content:counter(track,decimal-leading-zero);
+  font-family:'VT323',monospace;font-size:26px;color:var(--pink);
+}
+.side ol li:hover{background:var(--yellow);transform:translateX(4px) rotate(-.3deg)}
+.side ol li:hover::after{
+  content:"▶ PLAY";position:absolute;right:-72px;top:50%;transform:translateY(-50%);
+  font-family:'Bungee',sans-serif;font-size:11px;color:var(--black);
+  background:var(--pink);padding:3px 8px;border:2px solid var(--black);
+}
+.t-name{font-family:'Permanent Marker',cursive;font-size:24px;line-height:1.1}
+.t-name small{display:block;font-family:'Special Elite',monospace;font-size:13px;color:rgba(0,0,0,.7);letter-spacing:.5px;margin-top:3px}
+.t-price{font-family:'Bungee',sans-serif;font-size:18px;color:var(--blue);padding-left:14px;white-space:nowrap}
+
+/* cassette controls strip */
+.controls{
+  max-width:1280px;margin:50px auto 0;display:flex;justify-content:center;gap:14px;
+}
+.ctl{
+  width:64px;height:48px;background:var(--cream);border:2.5px solid var(--black);
+  display:grid;place-items:center;box-shadow:4px 4px 0 var(--black);
+  font-family:'Bungee',sans-serif;font-size:18px;cursor:pointer;
+  transition:transform .12s;
+}
+.ctl:hover{transform:translate(-2px,-2px);background:var(--yellow)}
+.ctl:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--black)}
+
+/* ───────────────────────────── VIBE ─────────────────────────────── */
+.vibe{padding:90px 40px;background:var(--cream);position:relative}
+.vibe::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:8px;
+  background:repeating-linear-gradient(90deg,var(--pink) 0 14px,var(--yellow) 14px 28px,var(--blue) 28px 42px,var(--black) 42px 56px);
+}
+.vibe-head{max-width:1280px;margin:0 auto 40px;display:flex;align-items:center;gap:24px}
+.vibe-head h3{font-family:'Permanent Marker',cursive;font-size:60px;line-height:.95;transform:rotate(-1.2deg)}
+.vibe-head .blurb{font-family:'VT323',monospace;font-size:22px;max-width:420px;border-left:4px solid var(--pink);padding-left:14px}
+
+.vibe-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.vibe-grid .v{
+  border:3px solid var(--black);background:var(--craft);
+  box-shadow:8px 8px 0 var(--black);position:relative;overflow:hidden;
+  transition:transform .25s;
+}
+.vibe-grid .v:hover{transform:rotate(-1deg) scale(1.02)}
+.vibe-grid .v::after{
+  content:attr(data-label);position:absolute;left:10px;bottom:10px;
+  background:var(--cream);padding:4px 10px;border:2px solid var(--black);
+  font-family:'Permanent Marker',cursive;font-size:14px;transform:rotate(-2deg);
+}
+.vibe-grid .v::before{
+  content:"";position:absolute;top:8px;right:8px;width:54px;height:18px;
+  background:var(--yellow);border:1.5px solid var(--black);transform:rotate(6deg);z-index:2;
+  background-image:repeating-linear-gradient(90deg,transparent 0 4px,rgba(0,0,0,.15) 4px 5px);
+}
+.vibe-grid .v img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05) saturate(.95)}
+.v1{grid-column:span 7;height:340px}
+.v2{grid-column:span 5;height:340px;transform:rotate(1deg)}
+.v3{grid-column:span 4;height:280px;transform:rotate(-1.2deg)}
+.v4{grid-column:span 8;height:280px}
+
+/* ───────────────────────────── GALLERY ──────────────────────────── */
+.gallery{
+  padding:90px 40px;background:var(--craft);position:relative;
+}
+.gallery-head{max-width:1280px;margin:0 auto 30px}
+.gallery-head h3{
+  font-family:'Permanent Marker',cursive;font-size:60px;
+  background:var(--yellow);display:inline-block;padding:8px 22px;
+  transform:rotate(-1.2deg);border:2px solid var(--black);box-shadow:6px 6px 0 var(--black);
+}
+.contact-line{font-family:'VT323',monospace;font-size:20px;margin-top:14px;color:var(--black);opacity:.8}
+
+.contact-strip{
+  max-width:1280px;margin:18px auto 28px;display:flex;justify-content:space-between;align-items:center;
+  background:var(--cream);border:2px dashed var(--black);padding:10px 18px;font-family:'VT323',monospace;font-size:18px;
+}
+.contact-strip span b{color:var(--pink);font-family:'Permanent Marker',cursive;letter-spacing:1px}
+
+.poly{
+  max-width:1280px;margin:0 auto;
+  column-count:4;column-gap:18px;
+}
+.poly figure{
+  break-inside:avoid;margin:0 0 18px;background:var(--cream);
+  padding:10px 10px 14px;border:2px solid var(--black);box-shadow:6px 6px 0 var(--black);
+  position:relative;transition:transform .25s;
+}
+.poly figure:nth-child(2n){transform:rotate(1deg);box-shadow:6px 6px 0 var(--pink)}
+.poly figure:nth-child(3n){transform:rotate(-1.5deg);box-shadow:6px 6px 0 var(--blue)}
+.poly figure:hover{transform:rotate(0) scale(1.03);z-index:2}
+.poly figure img{width:100%;display:block;filter:grayscale(.1) contrast(1.08)}
+.poly figure figcaption{
+  font-family:'Permanent Marker',cursive;font-size:15px;margin-top:8px;
+  display:flex;justify-content:space-between;color:var(--black);
+}
+.poly figure figcaption em{font-style:normal;color:var(--blue);font-family:'VT323',monospace;font-size:18px}
+.poly figure::before{
+  content:"";position:absolute;top:-10px;left:50%;width:72px;height:20px;
+  background:var(--yellow);border:1.5px solid var(--black);transform:translateX(-50%) rotate(-2deg);
+  background-image:repeating-linear-gradient(90deg,transparent 0 4px,rgba(0,0,0,.2) 4px 5px);
+}
+
+/* ───────────────────────────── VISIT ────────────────────────────── */
+.visit{
+  padding:100px 40px;background:var(--black);color:var(--cream);
+  position:relative;overflow:hidden;
+}
+.visit::before{
+  content:"REC · ●";position:absolute;top:24px;right:30px;
+  font-family:'VT323',monospace;font-size:20px;color:var(--red);letter-spacing:4px;
+  animation:blink 1.2s steps(2) infinite;
+}
+@keyframes blink{50%{opacity:.2}}
+.visit-grid{
+  max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:start;
+}
+.visit h3{
+  font-family:'Permanent Marker',cursive;font-size:90px;line-height:.9;color:var(--yellow);
+  transform:rotate(-1.5deg);
+}
+.visit h3 b{color:var(--pink);font-weight:400}
+.visit .lead{font-family:'VT323',monospace;font-size:22px;margin-top:18px;max-width:520px;line-height:1.5;color:var(--cream)}
+
+.hours-card{
+  background:var(--cream);color:var(--black);padding:24px 26px;border:3px solid var(--cream);
+  box-shadow:10px 10px 0 var(--pink);transform:rotate(1deg);
+}
+.hours-card h4{
+  font-family:'Bungee',sans-serif;font-size:18px;letter-spacing:2px;
+  border-bottom:3px solid var(--black);padding-bottom:8px;margin-bottom:14px;
+  display:flex;justify-content:space-between;
+}
+.hours-card h4 span{color:var(--pink)}
+.hours-card ul{list-style:none;font-family:'VT323',monospace;font-size:22px}
+.hours-card ul li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(0,0,0,.25)}
+.hours-card ul li b{font-weight:400;color:var(--blue);font-family:'Permanent Marker',cursive;font-size:18px}
+
+.contact-card{
+  margin-top:24px;background:var(--pink);color:var(--black);padding:22px;
+  border:3px solid var(--cream);box-shadow:10px 10px 0 var(--yellow);transform:rotate(-1deg);
+}
+.contact-card div{font-family:'VT323',monospace;font-size:22px;display:flex;justify-content:space-between;padding:5px 0}
+.contact-card div b{font-family:'Permanent Marker',cursive;font-weight:400}
+
+/* ───────────────────────────── FOOTER ───────────────────────────── */
+footer{
+  background:var(--cream);color:var(--black);padding:50px 40px 30px;
+  border-top:6px solid var(--black);position:relative;
+}
+.foot-grid{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.foot-grid .lg{
+  font-family:'Permanent Marker',cursive;font-size:54px;line-height:.9;transform:rotate(-1deg);
+}
+.foot-grid .lg span{color:var(--pink)}
+.foot-grid p{font-family:'VT323',monospace;font-size:18px;max-width:400px;line-height:1.5}
+.foot-grid .col a{color:var(--black);display:block;padding:2px 0;font-family:'VT323',monospace;font-size:18px;text-decoration:none}
+.foot-grid .col a:hover{background:var(--yellow)}
+.foot-grid .col h5{font-family:'Bungee',sans-serif;font-size:14px;letter-spacing:2px;border-bottom:2px solid var(--black);padding-bottom:6px;margin-bottom:8px}
+.colophon{
+  max-width:1280px;margin:30px auto 0;border-top:2px dashed rgba(0,0,0,.4);
+  padding-top:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:'VT323',monospace;font-size:16px;color:rgba(0,0,0,.7);
+}
+
+/* ───────────────────────────── PAGE-LOAD REVEAL (tape rewind) ──── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease, transform .8s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* hover wobble for stamps & labels */
+.wobble:hover{animation:wob .35s ease-in-out infinite alternate}
+@keyframes wob{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+
+/* tape head animation strip overlay on body load */
+.rewind-overlay{
+  position:fixed;inset:0;background:var(--black);z-index:10000;
+  display:grid;place-items:center;transition:transform .9s cubic-bezier(.7,0,.2,1) .3s;
+}
+.rewind-overlay.gone{transform:translateY(-101%)}
+.rewind-overlay .center{
+  display:flex;align-items:center;gap:30px;color:var(--yellow);
+  font-family:'VT323',monospace;font-size:22px;letter-spacing:4px;
+}
+.rewind-overlay .reel-big{
+  width:80px;height:80px;border-radius:50%;border:5px solid var(--yellow);
+  position:relative;animation:spin .8s linear infinite;
+}
+.rewind-overlay .reel-big::after{content:"";position:absolute;inset:14px;border:3px dashed var(--yellow);border-radius:50%}
+.rewind-overlay .reel-big::before{
+  content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;background:var(--yellow);border-radius:50%;
+  transform:translate(-50%,-50%);box-shadow:0 -22px 0 var(--yellow),0 22px 0 var(--yellow),-22px 0 0 var(--yellow),22px 0 0 var(--yellow);
+}
+
+/* ───────────────────────────── RESPONSIVE ──────────────────────── */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .sides{grid-template-columns:1fr}
+  .liner-inner{grid-template-columns:1fr}
+  .visit-grid{grid-template-columns:1fr}
+  .poly{column-count:2}
+  .vibe-grid .v{grid-column:span 12 !important;height:240px;transform:none !important}
+  .navlinks{display:none}
+  .foot-grid .lg{font-size:38px}
+}
+@media (max-width:600px){
+  .poly{column-count:1}
+  .tape-label h2{font-size:18vw}
+  .hero{padding:40px 18px 60px}
+  .liner,.tracks,.vibe,.gallery,.visit{padding:60px 18px}
+  .tracks-header h3{font-size:46px}
+}
+</style>
+</head>
+<body>
+
+<!-- Tape rewind preloader overlay -->
+<div class="rewind-overlay" id="rewind">
+  <div class="center">
+    <div class="reel-big"></div>
+    <div>REWINDING · SIDE A · STAND BY</div>
+    <div class="reel-big" style="animation-duration:1s"></div>
+  </div>
+</div>
+
+<!-- ───────────── NAV ───────────── -->
+<nav class="topbar">
+  <a href="#top" class="brand-label wobble">
+    <div class="reels">
+      <div class="reel-mini"></div>
+      <div class="reel-mini"></div>
+    </div>
+    <div>
+      <h1>Maui&nbsp;Brooklyn</h1>
+      <small>SIDE A · MIXTAPE VOL.66</small>
+    </div>
+  </a>
+  <div class="navlinks">
+    <a href="#about">Liner Notes</a>
+    <a href="#menu">Tracklist</a>
+    <a href="#vibe">B-Sides</a>
+    <a href="#gallery">Bootlegs</a>
+    <a href="#visit">Visit</a>
+  </div>
+  <a href="#visit" class="cta-reserve">▶▶ RESERVE</a>
+</nav>
+
+<!-- ───────────── HERO ───────────── -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-left reveal">
+      <div class="tape-label wobble">
+        <h2>Maui</h2>
+      </div>
+      <div class="tape-label brk wobble">
+        <h2>Brooklyn</h2>
+      </div>
+      <div class="hero-tag">Caribbean × Hawaiian Tiki Kitchen</div>
+      <div class="hero-addr">
+        <span class="pin"></span>
+        <span><u>66-48 Myrtle Ave</u> · Brooklyn NY</span>
+      </div>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#visit">⏺ RESERVE A BOOTH</a>
+        <a class="btn ghost" href="#menu">▶ PLAY THE TRACKLIST</a>
+      </div>
+    </div>
+
+    <div class="hero-right reveal">
+      <div class="scribble-strip">
+        <span>HOMEMADE</span> · TIKI MIXTAPE · <span>NO SKIPS</span> · 90 MIN
+      </div>
+      <div class="cassette-wrap">
+        <!-- SVG cassette -->
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- shell -->
+          <rect x="10" y="10" width="580" height="380" rx="14" fill="#f5edd6" stroke="#1a1a1a" stroke-width="6"/>
+          <!-- label background -->
+          <rect x="40" y="40" width="520" height="180" fill="#ff61aa" stroke="#1a1a1a" stroke-width="4"/>
+          <!-- label stripes -->
+          <rect x="40" y="40" width="520" height="22" fill="#1a1a1a"/>
+          <rect x="40" y="198" width="520" height="22" fill="#1a1a1a"/>
+          <!-- label text -->
+          <text x="60" y="58" font-family="Bungee, sans-serif" font-size="14" fill="#f7ff4a" letter-spacing="2">SIDE A · 90 MIN · CR HIGH-BIAS · NO NOISE REDUCTION</text>
+          <text x="300" y="128" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="62" fill="#1a1a1a">Maui ✕ BK</text>
+          <text x="300" y="170" text-anchor="middle" font-family="Special Elite, monospace" font-size="18" fill="#1a1a1a">▶ tiki kitchen & bar — myrtle ave</text>
+          <text x="60" y="214" font-family="Bungee, sans-serif" font-size="14" fill="#f7ff4a" letter-spacing="2">REC. BROOKLYN NY · DOLBY OFF · ALOHA ON</text>
+          <!-- reel holders -->
+          <circle cx="190" cy="310" r="60" fill="#d9c9a8" stroke="#1a1a1a" stroke-width="4"/>
+          <circle cx="410" cy="310" r="60" fill="#d9c9a8" stroke="#1a1a1a" stroke-width="4"/>
+          <!-- reels rotating -->
+          <g class="reel" style="transform-origin:190px 310px">
+            <circle cx="190" cy="310" r="48" fill="#1a1a1a"/>
+            <circle cx="190" cy="310" r="14" fill="#f5edd6" stroke="#1a1a1a" stroke-width="3"/>
+            <g fill="#f5edd6">
+              <rect x="186" y="266" width="8" height="14" rx="2"/>
+              <rect x="186" y="340" width="8" height="14" rx="2"/>
+              <rect x="146" y="306" width="14" height="8" rx="2"/>
+              <rect x="220" y="306" width="14" height="8" rx="2"/>
+              <rect x="155" y="278" width="8" height="14" rx="2" transform="rotate(45 159 285)"/>
+              <rect x="218" y="278" width="8" height="14" rx="2" transform="rotate(-45 222 285)"/>
+              <rect x="155" y="328" width="8" height="14" rx="2" transform="rotate(-45 159 335)"/>
+              <rect x="218" y="328" width="8" height="14" rx="2" transform="rotate(45 222 335)"/>
+            </g>
+          </g>
+          <g class="reel r2" style="transform-origin:410px 310px">
+            <circle cx="410" cy="310" r="48" fill="#1a1a1a"/>
+            <circle cx="410" cy="310" r="14" fill="#f5edd6" stroke="#1a1a1a" stroke-width="3"/>
+            <g fill="#f5edd6">
+              <rect x="406" y="266" width="8" height="14" rx="2"/>
+              <rect x="406" y="340" width="8" height="14" rx="2"/>
+              <rect x="366" y="306" width="14" height="8" rx="2"/>
+              <rect x="440" y="306" width="14" height="8" rx="2"/>
+            </g>
+          </g>
+          <!-- tape between reels -->
+          <rect x="142" y="358" width="316" height="6" fill="#3a2f22"/>
+          <!-- write protect tabs -->
+          <rect x="40" y="40" width="20" height="14" fill="#1a1a1a"/>
+          <rect x="540" y="40" width="20" height="14" fill="#1a1a1a"/>
+          <!-- center window -->
+          <rect x="240" y="240" width="120" height="42" rx="4" fill="#f5edd6" stroke="#1a1a1a" stroke-width="3"/>
+          <text x="300" y="266" text-anchor="middle" font-family="VT323, monospace" font-size="18" fill="#1a1a1a">▷ HEAR THE TAPE</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- tape divider -->
+<div class="tape-divider"></div>
+
+<!-- ───────────── LINER NOTES / ABOUT ───────────── -->
+<section class="liner" id="about">
+  <div class="liner-inner">
+    <div class="reveal">
+      <h3>Liner<br/>Notes</h3>
+      <ul class="liner-meta">
+        <li><span>Recorded</span><span>Myrtle Ave, BK</span></li>
+        <li><span>Producer</span><span>The Aunties</span></li>
+        <li><span>Genre</span><span>Tiki / Yacht / Rum</span></li>
+        <li><span>Format</span><span>Type II — 90 min</span></li>
+        <li><span>Catalog</span><span>MBK-066-48</span></li>
+        <li><span>Mood</span><span>Pink humidity</span></li>
+      </ul>
+    </div>
+    <div class="liner-text reveal">
+      <p>
+        Maui Brooklyn is what happens when a <span class="hand-underline">St. Croix kitchen</span> and a Honolulu bar end up sharing a Bushwick walk-up. We pour drinks like our grandmothers cooked — heavy on the rum, easy on the rules. The room is small, the speakers are loud, and the pineapple is always cold. You're in <span class="sharpie">Brooklyn</span>, but for ninety minutes you're not.
+      </p>
+      <p>
+        Every cocktail on this side is hand-batched and hand-labeled. We squeeze our own lime, toast our own orgeat, crush mint by hand. There is no Side B for the kitchen — only for the bar — but we'll grill jerk wings and snapper until close. <span class="hand-underline">No skips, no filler.</span> Just a long warm humid mixtape with the corner of the cassette inlay slightly bent from being passed around too much.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="tape-divider"></div>
+
+<!-- ───────────── COCKTAIL TRACKLIST ───────────── -->
+<section class="tracks" id="menu">
+  <div class="tracks-header">
+    <h3 class="reveal">The <b>Tracklist</b><br/>est. 90 min</h3>
+    <div class="tracks-meta reveal">
+      ▶ SIDE A — TROPICAL CLASSICS<br/>
+      ▶ SIDE B — BROOKLYN ORIGINALS<br/>
+      ✱ ALL DRINKS HAND-BATCHED ✱
+    </div>
+  </div>
+
+  <div class="sides">
+    <!-- SIDE A -->
+    <div class="side reveal">
+      <div class="side-head">
+        <span class="side-letter">A</span>
+        <span>SIDE A · CLASSICS</span>
+        <span class="runtime">45:00</span>
+      </div>
+      <ol>
+        <li>
+          <span></span>
+          <div class="t-name">Piña Colada<small>rum · coconut · pineapple</small></div>
+          <div class="t-price">$14</div>
+        </li>
+        <li>
+          <span></span>
+          <div class="t-name">Brooklyn Mai Tai<small>aged rum · orgeat · lime · orange curaçao</small></div>
+          <div class="t-price">$16</div>
+        </li>
+        <li>
+          <span></span>
+          <div class="t-name">Blue Hawaii<small>vodka · rum · blue curaçao · pineapple</small></div>
+          <div class="t-price">$15</div>
+        </li>
+        <li>
+          <span></span>
+          <div class="t-name">Lava Flow<small>strawberry · coconut rum · pineapple</small></div>
+          <div class="t-price">$15</div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- SIDE B -->
+    <div class="side reveal">
+      <div class="side-head" style="background:var(--pink);color:var(--black)">
+        <span class="side-letter" style="background:var(--black);color:var(--yellow)">B</span>
+        <span>SIDE B · ORIGINALS</span>
+        <span class="runtime" style="color:var(--black)">45:00</span>
+      </div>
+      <ol>
+        <li>
+          <span></span>
+          <div class="t-name">Pineapple Margarita<small>tequila · pineapple · lime · agave</small></div>
+          <div class="t-price">$15</div>
+        </li>
+        <li>
+          <span></span>
+          <div class="t-name">Spicy Mango Paloma<small>tequila · mango · grapefruit · jalapeño</small></div>
+          <div class="t-price">$15</div>
+        </li>
+        <li>
+          <span></span>
+          <div class="t-name">Chi Chi<small>vodka · coconut · pineapple</small></div>
+          <div class="t-price">$14</div>
+        </li>
+        <li>
+          <span></span>
+          <div class="t-name">Painkiller Williamsburg<small>dark rum · pineapple · orange · coconut · nutmeg</small></div>
+          <div class="t-price">$15</div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- cassette controls -->
+  <div class="controls">
+    <div class="ctl" title="rewind">◀◀</div>
+    <div class="ctl" title="play">▶</div>
+    <div class="ctl" title="pause">❚❚</div>
+    <div class="ctl" title="stop">■</div>
+    <div class="ctl" title="ff">▶▶</div>
+    <div class="ctl" title="record" style="color:var(--red)">●</div>
+  </div>
+</section>
+
+<div class="tape-divider"></div>
+
+<!-- ───────────── VIBE ───────────── -->
+<section class="vibe" id="vibe">
+  <div class="vibe-head">
+    <h3 class="reveal">B-Sides &<br/>Bootlegs</h3>
+    <div class="blurb reveal">Tropical drinks in a Myrtle Ave walk-up. Coral lamps, palm shadows, hand-painted signs, the kind of room where someone's birthday is always happening at table 4.</div>
+  </div>
+  <div class="vibe-grid">
+    <div class="v v1 reveal" data-label="Bar — 9:42 PM">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=1400&q=80" alt="bar" />
+    </div>
+    <div class="v v2 reveal" data-label="Mai Tai — Track 2">
+      <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=900&q=80" alt="mai tai" />
+    </div>
+    <div class="v v3 reveal" data-label="Pineapple Live">
+      <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=80" alt="pineapple" />
+    </div>
+    <div class="v v4 reveal" data-label="Booth 4 — Saturday">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80" alt="booth" />
+    </div>
+  </div>
+</section>
+
+<div class="tape-divider"></div>
+
+<!-- ───────────── GALLERY ───────────── -->
+<section class="gallery" id="gallery">
+  <div class="gallery-head">
+    <h3 class="reveal">Bootleg Photos</h3>
+    <div class="contact-line reveal">▼ shot on a disposable · developed at the bodega · do not bend</div>
+  </div>
+
+  <div class="contact-strip reveal">
+    <span><b>Roll</b> 01 · 12 exp · 400 ISO</span>
+    <span><b>Shot</b> Myrtle & Wyckoff · BK</span>
+    <span><b>Date</b> last Saturday · ~11pm</span>
+    <span><b>Print</b> 4×6 matte · 1 hr</span>
+  </div>
+
+  <div class="poly">
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1607644536940-6c1f6efb40fc?auto=format&fit=crop&w=900&q=80" alt="cocktail" />
+      <figcaption>Track 03 — Blue Hawaii <em>3:42</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1582106245687-cbb466a9f07f?auto=format&fit=crop&w=900&q=80" alt="cocktail" />
+      <figcaption>Mango Paloma <em>2:55</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1568644396922-5c3bfae12521?auto=format&fit=crop&w=900&q=80" alt="cocktail" />
+      <figcaption>Painkiller WBG <em>4:20</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=900&q=80" alt="cocktail" />
+      <figcaption>Lava Flow <em>3:18</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80" alt="cocktail" />
+      <figcaption>Mai Tai <em>4:01</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80" alt="dining room" />
+      <figcaption>Room Tone <em>1:08</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=900&q=80" alt="jerk wings" />
+      <figcaption>Jerk Wings <em>5:00</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80" alt="lights" />
+      <figcaption>String Lights <em>0:42</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=900&q=80" alt="bar shelf" />
+      <figcaption>Rum Shelf <em>2:10</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=900&q=80" alt="bartender" />
+      <figcaption>Bartender <em>3:33</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?auto=format&fit=crop&w=900&q=80" alt="snapper" />
+      <figcaption>Grilled Snapper <em>6:14</em></figcaption>
+    </figure>
+    <figure class="reveal">
+      <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80" alt="dessert" />
+      <figcaption>Coconut Cake <em>2:27</em></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ───────────── VISIT ───────────── -->
+<section class="visit" id="visit">
+  <div class="visit-grid">
+    <div class="reveal">
+      <h3>VISIT<br/><b>SIDE A</b></h3>
+      <p class="lead">Walk-ins welcome until the booths fill. After that we keep a clipboard by the door — same as 1996. Reservations encouraged on weekends.</p>
+      <p class="lead" style="margin-top:20px"><span style="background:var(--yellow);color:var(--black);padding:2px 8px;font-family:'Permanent Marker',cursive">66-48 Myrtle Ave</span><br/>Brooklyn, NY 11385<br/>Ridgewood / Bushwick border</p>
+    </div>
+    <div>
+      <div class="hours-card reveal">
+        <h4>Hours <span>● OPEN</span></h4>
+        <ul>
+          <li><b>Mon–Thu</b><span>5pm · 12am</span></li>
+          <li><b>Friday</b><span>5pm · 2am</span></li>
+          <li><b>Saturday</b><span>12pm · 2am</span></li>
+          <li><b>Sunday</b><span>12pm · 12am</span></li>
+        </ul>
+      </div>
+      <div class="contact-card reveal">
+        <div><b>Phone</b><span>(718) 555-0142</span></div>
+        <div><b>Email</b><span>hello@mauibrooklyn.com</span></div>
+        <div><b>Reservations</b><span>Resy · OpenTable</span></div>
+        <div><b>Train</b><span>M to Myrtle-Wyckoff</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── FOOTER ───────────── -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="lg">Maui <span>Brooklyn</span></div>
+      <p>A Caribbean × Hawaiian tiki kitchen & bar pressed on cassette. Side A pours till close. Side B keeps the kitchen open.</p>
+    </div>
+    <div class="col">
+      <h5>Tracklist</h5>
+      <a href="#menu">Side A — Classics</a>
+      <a href="#menu">Side B — Originals</a>
+      <a href="#vibe">B-Sides Gallery</a>
+      <a href="#gallery">Bootlegs</a>
+    </div>
+    <div class="col">
+      <h5>Visit</h5>
+      <a href="#visit">66-48 Myrtle Ave</a>
+      <a href="#visit">(718) 555-0142</a>
+      <a href="#visit">hello@mauibrooklyn.com</a>
+      <a href="#visit">Hours / Reservations</a>
+    </div>
+    <div class="col">
+      <h5>Liner</h5>
+      <a href="#about">About the Aunties</a>
+      <a href="#about">Press</a>
+      <a href="#about">Private Events</a>
+      <a href="#about">Gift Cards</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 MAUI BROOKLYN · MIXTAPE VOL.66 · CATALOG MBK-066-48</span>
+    <span>BE KIND · REWIND · TIP YR BARTENDER</span>
+    <span>ALL RIGHTS RESERVED · DO NOT DUPLICATE</span>
+  </div>
+</footer>
+
+<script>
+/* Tape rewind page load reveal */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('rewind').classList.add('gone');
+  },650);
+});
+
+/* Reveal on scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('on');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* Cassette control buttons — playful click */
+document.querySelectorAll('.ctl').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const t = b.getAttribute('title');
+    b.style.background = 'var(--pink)';
+    setTimeout(()=>{b.style.background='var(--cream)'},220);
+    if(t==='play' || t==='ff'){
+      document.getElementById('menu').scrollIntoView({behavior:'smooth'});
+    } else if(t==='rewind'){
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  });
+});
+
+/* Subtle parallax wobble on cassette on mousemove */
+const cas = document.querySelector('.cassette-wrap');
+if(cas){
+  document.addEventListener('mousemove',(e)=>{
+    const x = (e.clientX/window.innerWidth - .5)*6;
+    const y = (e.clientY/window.innerHeight - .5)*4;
+    cas.style.transform = `rotate(${3 + x*0.2}deg) translate(${x}px, ${y}px)`;
+  });
+}
+</script>
+</body>
+</html>

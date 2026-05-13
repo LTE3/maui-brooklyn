@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Maui Brooklyn — Caribbean × Hawaiian Tiki Kitchen & Bar</title>
+<meta name="description" content="Maui Brooklyn — a Caribbean × Hawaiian tiki kitchen & bar at 66-48 Myrtle Ave, Brooklyn NY. Aged rums, mossy plants, neon-lit nights." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ---------- TOKENS ---------- */
+:root{
+  --midnight:#0c1f1a;
+  --ink:#050a08;
+  --moss:#1f4b3a;
+  --moss-2:#2a6048;
+  --copper:#c4763a;
+  --copper-soft:#a35e29;
+  --neon:#c8ff3a;
+  --neon-soft:#a8df1f;
+  --ivory:#f3ecd9;
+  --ivory-2:#dccfa9;
+  --smoke:rgba(243,236,217,.55);
+  --line:rgba(243,236,217,.14);
+  --line-strong:rgba(243,236,217,.28);
+  --glow-neon: 0 0 1px rgba(200,255,58,.9), 0 0 8px rgba(200,255,58,.55), 0 0 22px rgba(200,255,58,.35), 0 0 48px rgba(200,255,58,.18);
+  --glow-copper: 0 0 1px rgba(196,118,58,.9), 0 0 10px rgba(196,118,58,.45), 0 0 32px rgba(196,118,58,.22);
+  --serif:'Fraunces', 'Cormorant Garamond', serif;
+  --display:'Cormorant Garamond', serif;
+  --read:'Newsreader', 'Cormorant Garamond', serif;
+  --mono:'Fraunces', serif;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--ivory);
+  font-family:var(--read);
+  font-weight:300;
+  font-size:17px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* Atmospheric body backdrop: forest gradient + soft moonlight + grain */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-3;
+  background:
+    radial-gradient(1200px 700px at 78% -10%, rgba(200,255,58,.06), transparent 60%),
+    radial-gradient(900px 600px at 10% 110%, rgba(196,118,58,.10), transparent 60%),
+    radial-gradient(1400px 900px at 50% 50%, rgba(31,75,58,.35), transparent 70%),
+    linear-gradient(180deg, #07140f 0%, #0c1f1a 35%, #0a1a14 70%, #050a08 100%);
+}
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:-2;
+  pointer-events:none;
+  opacity:.08; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Floating botanical illustrations layer */
+.botanicals{
+  position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden;
+}
+.botanicals svg{
+  position:absolute;
+  color:rgba(200,255,58,.16);
+  filter:drop-shadow(0 0 12px rgba(200,255,58,.18));
+  will-change:transform;
+}
+.bot-1{ top:-40px; left:-60px; width:520px; animation:sway 14s ease-in-out infinite; }
+.bot-2{ top:8%; right:-120px; width:640px; color:rgba(196,118,58,.14); animation:sway 18s ease-in-out -3s infinite reverse; }
+.bot-3{ bottom:-80px; left:30%; width:560px; color:rgba(243,236,217,.07); animation:sway 22s ease-in-out -6s infinite; }
+.bot-4{ top:45%; left:-80px; width:380px; color:rgba(200,255,58,.10); animation:sway 16s ease-in-out -2s infinite reverse; }
+
+@keyframes sway{
+  0%,100%{ transform:translate3d(0,0,0) rotate(-2deg); }
+  50%{    transform:translate3d(0,-18px,0) rotate(2deg); }
+}
+@keyframes pulse-glow{
+  0%,100%{ filter: drop-shadow(0 0 6px rgba(200,255,58,.45)) drop-shadow(0 0 18px rgba(200,255,58,.25)); }
+  50%   { filter: drop-shadow(0 0 10px rgba(200,255,58,.75)) drop-shadow(0 0 28px rgba(200,255,58,.45)); }
+}
+@keyframes flicker{
+  0%,19%,21%,23%,25%,54%,56%,100%{ opacity:1 }
+  20%,24%,55%{ opacity:.55 }
+}
+
+/* ---------- LAYOUT ---------- */
+.wrap{ max-width:1320px; margin:0 auto; padding:0 36px; position:relative; }
+section{ position:relative; padding:120px 0; }
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  padding:22px 36px;
+  display:flex; align-items:center; justify-content:space-between;
+  backdrop-filter: blur(14px) saturate(1.1);
+  background:linear-gradient(180deg, rgba(5,10,8,.65), rgba(5,10,8,.05));
+  border-bottom:1px solid rgba(243,236,217,.06);
+}
+.wordmark{
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:500;
+  font-size:24px;
+  letter-spacing:.02em;
+  color:var(--ivory);
+  text-decoration:none;
+}
+.wordmark span{ color:var(--neon); font-style:italic; text-shadow: var(--glow-neon); }
+.nav-links{ display:flex; gap:36px; align-items:center; }
+.nav-links a{
+  color:var(--ivory-2);
+  text-decoration:none;
+  font-family:var(--read);
+  font-size:13px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:400;
+  transition:color .3s ease;
+}
+.nav-links a:hover{ color:var(--neon); }
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:13px 22px;
+  font-family:var(--read);
+  font-size:12px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border:1px solid var(--neon);
+  color:var(--neon);
+  background:transparent;
+  border-radius:999px;
+  position:relative;
+  transition:all .35s ease;
+  box-shadow:var(--glow-neon);
+}
+.btn:hover{ background:var(--neon); color:var(--ink); }
+.btn.copper{ border-color:var(--copper); color:var(--copper); box-shadow:var(--glow-copper); }
+.btn.copper:hover{ background:var(--copper); color:var(--ink); }
+.btn.ghost{ border-color:var(--line-strong); color:var(--ivory); box-shadow:none; }
+.btn.ghost:hover{ background:var(--ivory); color:var(--ink); border-color:var(--ivory); }
+
+@media (max-width:760px){
+  .nav-links a:not(.btn){ display:none; }
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100vh;
+  padding:160px 0 80px;
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap:40px;
+  align-items:center;
+  position:relative;
+}
+.hero-eyebrow{
+  display:flex; align-items:center; gap:14px;
+  font-family:var(--read);
+  font-size:12px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--ivory-2);
+  margin-bottom:32px;
+}
+.hero-eyebrow::before{
+  content:""; width:42px; height:1px; background:var(--copper);
+  box-shadow:var(--glow-copper);
+}
+.hero h1{
+  font-family:var(--display);
+  font-weight:300;
+  font-size: clamp(72px, 14vw, 220px);
+  line-height:.86;
+  letter-spacing:-.02em;
+  margin:0;
+  color:var(--ivory);
+}
+.hero h1 .maui{
+  display:block;
+  font-style:italic;
+  font-weight:400;
+  background:linear-gradient(180deg, var(--ivory) 0%, var(--ivory-2) 60%, var(--copper) 110%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero h1 .brooklyn{
+  display:block;
+  font-style:italic;
+  font-weight:300;
+  margin-left: 12%;
+  color:transparent;
+  -webkit-text-stroke:1px var(--neon);
+  text-shadow:var(--glow-neon);
+  animation: flicker 6s infinite;
+}
+.hero-tag{
+  font-family:var(--read);
+  font-style:italic;
+  font-size:22px;
+  color:var(--ivory-2);
+  margin:36px 0 10px;
+  max-width:520px;
+}
+.hero-addr{
+  font-family:var(--read);
+  font-size:13px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--smoke);
+  margin:0 0 40px;
+}
+.hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+
+/* Hero side card — moody framed botanical poster */
+.hero-card{
+  position:relative;
+  aspect-ratio: 3/4;
+  border:1px solid var(--line-strong);
+  background:
+    radial-gradient(120% 80% at 70% 20%, rgba(200,255,58,.10), transparent 60%),
+    radial-gradient(140% 100% at 30% 90%, rgba(196,118,58,.18), transparent 60%),
+    linear-gradient(180deg, rgba(31,75,58,.55), rgba(7,20,15,.85));
+  overflow:hidden;
+  border-radius:2px;
+}
+.hero-card .frame{
+  position:absolute; inset:18px; border:1px solid rgba(200,255,58,.22);
+  pointer-events:none; border-radius:1px;
+}
+.hero-card .frame::before, .hero-card .frame::after{
+  content:""; position:absolute; width:24px; height:24px; border:1px solid var(--neon);
+  box-shadow:var(--glow-neon);
+}
+.hero-card .frame::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+.hero-card .frame::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+.hero-card .label{
+  position:absolute; top:36px; left:36px; right:36px;
+  font-family:var(--read);
+  font-size:11px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--ivory-2);
+  display:flex; justify-content:space-between;
+}
+.hero-card .number{
+  position:absolute; bottom:36px; left:36px;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:96px; line-height:.9;
+  color:var(--copper);
+  text-shadow:var(--glow-copper);
+}
+.hero-card .caption{
+  position:absolute; bottom:50px; right:36px; max-width:200px;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:22px; line-height:1.2;
+  color:var(--ivory);
+  text-align:right;
+}
+.hero-card .leaf{
+  position:absolute; bottom:-40px; right:-40px; width:340px;
+  color:rgba(200,255,58,.35);
+  animation: pulse-glow 5s ease-in-out infinite, sway 12s ease-in-out infinite;
+}
+.hero-scroll{
+  position:absolute; bottom:24px; left:50%; transform:translateX(-50%);
+  font-family:var(--read);
+  font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:var(--smoke);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+}
+.hero-scroll::after{
+  content:""; width:1px; height:36px;
+  background:linear-gradient(180deg, var(--neon), transparent);
+  animation: pulse-glow 3s infinite;
+}
+
+@media (max-width:900px){
+  .hero{ grid-template-columns:1fr; padding-top:120px; }
+  .hero h1 .brooklyn{ margin-left:0; }
+  .hero-card{ max-width:380px; margin:20px 0 0; }
+}
+
+/* ---------- SECTION HEADERS ---------- */
+.section-eyebrow{
+  font-family:var(--read);
+  font-size:12px; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--copper);
+  display:flex; align-items:center; gap:14px;
+  margin:0 0 28px;
+}
+.section-eyebrow::before{
+  content:""; width:42px; height:1px; background:var(--copper);
+}
+.section-title{
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:300;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height:.96;
+  letter-spacing:-.01em;
+  margin:0 0 60px;
+  color:var(--ivory);
+  max-width:14ch;
+}
+.section-title em{
+  color:var(--neon);
+  text-shadow:var(--glow-neon);
+  font-style:italic;
+}
+
+/* ---------- ABOUT ---------- */
+.about-grid{
+  display:grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap:80px;
+  align-items:start;
+}
+.about-grid p{
+  font-family:var(--read);
+  font-size:18px;
+  line-height:1.75;
+  color:var(--ivory-2);
+  margin:0 0 24px;
+}
+.about-grid p:first-of-type::first-letter{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:80px;
+  float:left; line-height:.85; padding:8px 14px 0 0;
+  color:var(--copper);
+}
+.about-frame{
+  position:relative;
+  aspect-ratio:4/5;
+  border:1px solid var(--line-strong);
+  background:
+    radial-gradient(80% 60% at 20% 10%, rgba(200,255,58,.10), transparent 60%),
+    linear-gradient(180deg, rgba(31,75,58,.5), rgba(7,20,15,.9));
+  overflow:hidden;
+}
+.about-frame .inner-frame{
+  position:absolute; inset:14px; border:1px solid var(--line);
+}
+.about-frame .stamp{
+  position:absolute; top:24px; left:24px;
+  width:120px; height:120px;
+  border:1px solid var(--neon);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--display); font-style:italic;
+  font-size:14px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--neon);
+  text-align:center;
+  box-shadow:var(--glow-neon);
+}
+.about-frame .stamp small{display:block; font-size:9px; letter-spacing:.3em; margin-top:4px; color:var(--ivory-2);}
+.about-frame .botanical{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:rgba(200,255,58,.25);
+}
+.about-frame .botanical svg{ width:75%; animation: sway 18s ease-in-out infinite; }
+.about-frame .caption-b{
+  position:absolute; bottom:32px; left:32px; right:32px;
+  font-family:var(--display); font-style:italic;
+  font-size:22px; line-height:1.25; color:var(--ivory);
+}
+.about-frame .meta{
+  position:absolute; bottom:14px; right:24px;
+  font-family:var(--read);
+  font-size:10px; letter-spacing:.34em; text-transform:uppercase; color:var(--smoke);
+}
+@media (max-width:900px){
+  .about-grid{ grid-template-columns:1fr; gap:48px; }
+}
+
+/* ---------- MENU ---------- */
+.menu-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:60px; gap:40px; flex-wrap:wrap;
+}
+.menu-head p{
+  font-family:var(--display); font-style:italic;
+  font-size:22px; max-width:420px; color:var(--ivory-2); margin:0;
+}
+.menu-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:32px 56px;
+}
+.cocktail{
+  position:relative;
+  padding:36px 28px 32px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(31,75,58,.18), rgba(7,20,15,.4));
+  overflow:hidden;
+  transition: border-color .4s ease, transform .5s ease;
+}
+.cocktail:hover{ border-color:var(--neon); transform:translateY(-3px); }
+.cocktail:hover .corner{ color:var(--neon); filter: drop-shadow(0 0 4px rgba(200,255,58,.7)); }
+.cocktail .corner{
+  position:absolute; width:22px; height:22px;
+  color:var(--copper); opacity:.85;
+  transition: all .4s ease;
+}
+.cocktail .corner svg{width:100%;height:100%;}
+.cocktail .corner.tl{top:6px; left:6px;}
+.cocktail .corner.tr{top:6px; right:6px; transform:scaleX(-1);}
+.cocktail .corner.bl{bottom:6px; left:6px; transform:scaleY(-1);}
+.cocktail .corner.br{bottom:6px; right:6px; transform:scale(-1,-1);}
+.cocktail .num{
+  font-family:var(--read);
+  font-size:11px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--smoke);
+  margin:0 0 14px;
+}
+.cocktail-row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:18px;
+  margin-bottom:10px;
+}
+.cocktail-name{
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:400;
+  font-size:34px; line-height:1.05;
+  color:var(--ivory);
+  margin:0;
+}
+.cocktail-price{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:22px;
+  color:var(--copper);
+  white-space:nowrap;
+}
+.cocktail-row .dots{
+  flex:1; border-bottom:1px dotted rgba(243,236,217,.18); height:1px; transform:translateY(-4px);
+}
+.cocktail-desc{
+  font-family:var(--read);
+  font-size:14px;
+  letter-spacing:.04em;
+  color:var(--ivory-2);
+  margin:6px 0 0;
+}
+.cocktail-leaf{
+  position:absolute; bottom:-30px; right:-30px;
+  width:130px; color:rgba(200,255,58,.10);
+  pointer-events:none;
+  transition:color .4s ease;
+}
+.cocktail:hover .cocktail-leaf{ color:rgba(200,255,58,.22); }
+
+@media (max-width:760px){
+  .menu-grid{ grid-template-columns:1fr; gap:22px; }
+  .cocktail-name{ font-size:28px; }
+}
+
+/* ---------- VIBE ---------- */
+.vibe-grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 80px;
+  gap:18px;
+}
+.vibe-tile{
+  position:relative; overflow:hidden;
+  border:1px solid var(--line);
+  background:#0a1814;
+}
+.vibe-tile img{
+  width:100%; height:100%; object-fit:cover;
+  filter: grayscale(.15) contrast(1.05) saturate(.9) brightness(.85);
+  transition: transform 1.2s ease, filter .8s ease;
+}
+.vibe-tile:hover img{ transform:scale(1.06); filter: grayscale(0) saturate(1.05) brightness(.95); }
+.vibe-tile::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 40%, rgba(7,20,15,.75) 100%);
+  pointer-events:none;
+}
+.vibe-tile .tag{
+  position:absolute; left:18px; bottom:14px;
+  z-index:2;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:20px; color:var(--ivory);
+  text-shadow:0 2px 14px rgba(0,0,0,.6);
+}
+.vibe-tile .tag small{
+  display:block;
+  font-family:var(--read);
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--ivory-2);
+  margin-top:4px;
+  font-style:normal;
+}
+.v1{ grid-column:1/7; grid-row:1/6; }
+.v2{ grid-column:7/13; grid-row:1/4; }
+.v3{ grid-column:7/10; grid-row:4/6; }
+.v4{ grid-column:10/13; grid-row:4/6; }
+@media (max-width:900px){
+  .vibe-grid{ grid-auto-rows:100px; }
+  .v1{ grid-column:1/13; grid-row:1/4; }
+  .v2{ grid-column:1/13; grid-row:4/6; }
+  .v3{ grid-column:1/7; grid-row:6/8; }
+  .v4{ grid-column:7/13; grid-row:6/8; }
+}
+
+/* ---------- GALLERY ---------- */
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap:14px;
+}
+.gallery .g{
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#0a1814;
+}
+.gallery .g.tall{ grid-row: span 2; aspect-ratio: 1/2.06; }
+.gallery .g.wide{ grid-column: span 2; aspect-ratio: 2.06/1; }
+.gallery .g img{
+  width:100%; height:100%; object-fit:cover;
+  filter: grayscale(.2) brightness(.78) contrast(1.05);
+  transition: transform 1s ease, filter .6s ease;
+}
+.gallery .g:hover img{ transform:scale(1.08); filter: grayscale(0) brightness(.95) contrast(1.05); }
+.gallery .g::after{
+  content:"";
+  position:absolute; inset:0;
+  border:1px solid transparent;
+  transition: border-color .4s ease;
+  pointer-events:none;
+}
+.gallery .g:hover::after{ border-color:rgba(200,255,58,.4); box-shadow: inset 0 0 32px rgba(200,255,58,.12); }
+@media (max-width:900px){
+  .gallery{ grid-template-columns: repeat(2, 1fr); }
+  .gallery .g.wide, .gallery .g.tall{ grid-column:span 1; grid-row:span 1; aspect-ratio:1/1; }
+}
+
+/* ---------- VISIT ---------- */
+.visit-grid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+.visit-block{
+  margin-bottom:42px;
+}
+.visit-block h4{
+  font-family:var(--read);
+  font-size:11px; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--copper);
+  margin:0 0 16px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+.visit-block .big{
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:400;
+  font-size:32px; line-height:1.2;
+  color:var(--ivory);
+  margin:0 0 8px;
+}
+.visit-block .small{
+  font-family:var(--read);
+  font-size:15px;
+  color:var(--ivory-2);
+  margin:0;
+}
+.hours{
+  list-style:none; padding:0; margin:0;
+  font-family:var(--read);
+  font-size:15px;
+}
+.hours li{
+  display:flex; justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  color:var(--ivory);
+}
+.hours li:last-child{ border-bottom:none; }
+.hours .day{ font-family:var(--display); font-style:italic; font-size:18px; color:var(--ivory); }
+.hours .time{ color:var(--ivory-2); letter-spacing:.04em; }
+.hours li.live .day::before{
+  content:""; display:inline-block;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--neon); margin-right:10px;
+  box-shadow:var(--glow-neon);
+  animation: pulse-glow 2s infinite;
+  vertical-align:middle;
+  transform: translateY(-2px);
+}
+.visit-card{
+  position:relative;
+  padding:48px 40px;
+  border:1px solid var(--line-strong);
+  background:
+    radial-gradient(80% 60% at 80% 10%, rgba(200,255,58,.10), transparent 60%),
+    linear-gradient(180deg, rgba(31,75,58,.4), rgba(7,20,15,.85));
+  overflow:hidden;
+}
+.visit-card .stamp-b{
+  position:absolute; top:-1px; right:-1px;
+  padding:10px 16px;
+  border:1px solid var(--neon);
+  background:var(--ink);
+  color:var(--neon);
+  font-family:var(--read);
+  font-size:10px; letter-spacing:.32em; text-transform:uppercase;
+  box-shadow:var(--glow-neon);
+}
+.visit-card h3{
+  font-family:var(--display);
+  font-style:italic; font-weight:300;
+  font-size:54px; line-height:1; margin:0 0 24px;
+  color:var(--ivory);
+}
+.visit-card .neon-line{
+  width:64px; height:1px; background:var(--copper);
+  box-shadow:var(--glow-copper);
+  margin:0 0 28px;
+}
+@media (max-width:900px){
+  .visit-grid{ grid-template-columns:1fr; gap:48px; }
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  border-top:1px solid var(--line);
+  padding:64px 0 32px;
+  margin-top:60px;
+  position:relative;
+}
+.foot-grid{
+  display:grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap:40px;
+  margin-bottom:60px;
+}
+.foot-grid h5{
+  font-family:var(--read);
+  font-size:11px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--copper);
+  margin:0 0 18px;
+}
+.foot-grid a, .foot-grid p{
+  color:var(--ivory-2);
+  text-decoration:none;
+  display:block;
+  margin:0 0 8px;
+  font-family:var(--read);
+  font-size:14px;
+  transition:color .3s ease;
+}
+.foot-grid a:hover{ color:var(--neon); }
+.foot-wordmark{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:56px;
+  color:var(--ivory);
+  line-height:1;
+  margin:0 0 14px;
+}
+.foot-wordmark span{ color:var(--neon); text-shadow:var(--glow-neon); }
+.foot-tag{
+  font-family:var(--display); font-style:italic;
+  font-size:18px; color:var(--ivory-2); max-width:300px; margin:0;
+}
+.foot-bottom{
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
+  padding-top:28px;
+  border-top:1px solid var(--line);
+  font-family:var(--read);
+  font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--smoke);
+}
+@media (max-width:760px){
+  .foot-grid{ grid-template-columns:1fr 1fr; }
+}
+
+/* ---------- REVEAL ---------- */
+.reveal{ opacity:0; transform:translateY(24px); transition: opacity 1.2s ease, transform 1.2s ease; }
+.reveal.in{ opacity:1; transform:none; }
+
+/* ---------- PARALLAX SCOPE ---------- */
+.parallax{ will-change:transform; }
+</style>
+</head>
+<body>
+
+<!-- Floating botanical SVGs -->
+<div class="botanicals" aria-hidden="true">
+  <!-- Monstera -->
+  <svg class="bot-1 parallax" data-speed="0.04" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M200 380 C 200 280, 90 240, 60 140 C 100 120, 140 130, 170 170 C 170 120, 140 70, 190 30 C 230 70, 230 130, 220 170 C 260 130, 320 130, 340 170 C 320 220, 260 240, 220 230 C 250 280, 270 320, 240 360" />
+    <path d="M170 170 C 140 175, 110 180, 95 200" />
+    <path d="M195 70 C 195 110, 200 150, 200 200" />
+    <path d="M270 180 C 260 200, 240 220, 220 230" />
+    <path d="M170 140 L 120 145" /><path d="M180 110 L 140 105" />
+    <path d="M210 100 L 230 90" /><path d="M215 145 L 240 145" />
+    <path d="M260 180 L 285 175" /><path d="M250 210 L 280 215" />
+  </svg>
+  <!-- Banana leaf -->
+  <svg class="bot-2 parallax" data-speed="0.06" viewBox="0 0 500 500" fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M50 450 C 80 350, 130 250, 220 180 C 320 110, 420 90, 470 70 C 460 140, 410 240, 320 320 C 230 400, 130 440, 50 450 Z" />
+    <path d="M60 440 C 150 380, 240 300, 330 220 C 400 160, 440 110, 460 80" />
+    <path d="M80 410 L 200 320" /><path d="M100 380 L 230 290" />
+    <path d="M130 350 L 260 260" /><path d="M160 320 L 290 230" />
+    <path d="M195 290 L 320 200" /><path d="M225 260 L 350 175" />
+    <path d="M260 230 L 380 150" /><path d="M295 200 L 410 130" />
+  </svg>
+  <!-- Palm fronds -->
+  <svg class="bot-3 parallax" data-speed="0.03" viewBox="0 0 500 500" fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M250 500 C 250 400, 230 320, 230 250" />
+    <path d="M230 250 C 180 200, 100 180, 40 200 C 80 230, 160 250, 220 260" />
+    <path d="M230 250 C 280 200, 360 180, 420 200 C 380 230, 300 250, 240 260" />
+    <path d="M230 230 C 200 170, 150 100, 90 80 C 100 130, 170 200, 220 240" />
+    <path d="M230 230 C 260 170, 310 100, 370 80 C 360 130, 290 200, 240 240" />
+    <path d="M230 220 C 220 150, 200 80, 200 30 C 220 70, 235 150, 240 220" />
+    <path d="M230 220 C 250 150, 270 80, 290 40 C 280 90, 250 160, 240 220" />
+  </svg>
+  <!-- Small fern -->
+  <svg class="bot-4 parallax" data-speed="0.05" viewBox="0 0 300 300" fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M150 290 L 150 30" />
+    <path d="M150 60 C 130 50, 110 55, 95 70" /><path d="M150 60 C 170 50, 190 55, 205 70" />
+    <path d="M150 90 C 125 80, 100 85, 80 105" /><path d="M150 90 C 175 80, 200 85, 220 105" />
+    <path d="M150 120 C 120 110, 90 115, 65 140" /><path d="M150 120 C 180 110, 210 115, 235 140" />
+    <path d="M150 155 C 115 145, 80 150, 50 180" /><path d="M150 155 C 185 145, 220 150, 250 180" />
+    <path d="M150 195 C 110 185, 70 195, 40 225" /><path d="M150 195 C 190 185, 230 195, 260 225" />
+    <path d="M150 235 C 115 230, 80 240, 60 265" /><path d="M150 235 C 185 230, 220 240, 240 265" />
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="wordmark" href="#top"><em>Maui</em> <span><em>Brooklyn</em></span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#menu">Cocktails</a>
+    <a href="#vibe">Vibe</a>
+    <a href="#visit">Visit</a>
+    <a class="btn" href="#visit">Reserve</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero wrap" id="top">
+  <div>
+    <div class="hero-eyebrow reveal">Est. Brooklyn · Tiki Conservatory</div>
+    <h1 class="reveal">
+      <span class="maui">Maui</span>
+      <span class="brooklyn">Brooklyn.</span>
+    </h1>
+    <p class="hero-tag reveal">A Caribbean × Hawaiian tiki kitchen &amp; bar — aged rums, mossy greenery, neon under the leaves.</p>
+    <p class="hero-addr reveal">66-48 Myrtle Ave · Brooklyn NY</p>
+    <div class="hero-ctas reveal">
+      <a class="btn" href="#visit">Reserve a Table</a>
+      <a class="btn copper" href="#menu">See the Cocktails</a>
+    </div>
+  </div>
+  <div class="hero-card reveal parallax" data-speed="0.02">
+    <div class="frame"></div>
+    <div class="label"><span>Vol. 01</span><span>BK · NY</span></div>
+    <svg class="leaf" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+      <path d="M380 380 C 280 360, 180 320, 110 240 C 60 180, 40 100, 30 30 C 110 50, 200 100, 260 170 C 320 240, 360 320, 380 380 Z" />
+      <path d="M50 60 C 130 130, 220 200, 300 290" />
+      <path d="M70 110 L 180 220" /><path d="M100 80 L 210 190" />
+      <path d="M140 60 L 250 170" /><path d="M190 60 L 300 170" />
+      <path d="M140 240 L 250 350" /><path d="M180 220 L 280 330" />
+      <path d="M225 200 L 320 295" />
+    </svg>
+    <div class="number">N°1</div>
+    <div class="caption">Tiki, refined for the late-night botanical garden.</div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="wrap">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">Origin Story</div>
+      <h2 class="section-title">A garden, <em>after dark.</em></h2>
+    </div>
+    <div class="reveal">
+      <p>Maui Brooklyn is a Caribbean &amp; Hawaiian tiki bar living inside a converted plant conservatory off Myrtle Ave. By day the room is a sun-soaked greenhouse — banana leaves, monstera, weeping ferns. After sundown the windows fog, the neon flickers on, and the room turns into the cocktail bar your favorite uncle from Oahu would have opened in 1974, if he ever made it to Bushwick.</p>
+      <p>Our pour is aged rum, hand-cut citrus, and house-clarified pineapple. The kitchen is jerk-spiced, kalua-smoked, and built to be eaten with your hands while a Bobby Womack record plays at 78 decibels. It's loud. It's warm. The plants are real. You're staying for one more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT FRAME ROW -->
+<section class="wrap" style="padding-top:0">
+  <div class="about-grid">
+    <div class="about-frame reveal parallax" data-speed="0.03">
+      <div class="inner-frame"></div>
+      <div class="stamp">Aloha<small>From BK</small></div>
+      <div class="botanical">
+        <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.1">
+          <path d="M200 380 C 200 280, 90 240, 60 140 C 100 120, 140 130, 170 170 C 170 120, 140 70, 190 30 C 230 70, 230 130, 220 170 C 260 130, 320 130, 340 170 C 320 220, 260 240, 220 230 C 250 280, 270 320, 240 360" />
+          <path d="M170 170 C 140 175, 110 180, 95 200" />
+          <path d="M195 70 C 195 110, 200 150, 200 200" />
+          <path d="M270 180 C 260 200, 240 220, 220 230" />
+        </svg>
+      </div>
+      <div class="caption-b">"The greenhouse glows."<br/>— Time Out, 2024</div>
+      <div class="meta">Plate N°007</div>
+    </div>
+    <div class="reveal">
+      <div class="section-eyebrow">House Philosophy</div>
+      <h3 style="font-family:var(--display); font-style:italic; font-weight:300; font-size:42px; line-height:1.05; color:var(--ivory); margin:0 0 24px;">
+        Aged rum, hand-cut citrus, no shortcuts —<br/>a 1974 tiki room rebuilt by a 2026 Brooklyn band.
+      </h3>
+      <p style="font-family:var(--read); font-style:italic; font-size:17px; color:var(--ivory-2); line-height:1.7;">
+        We clarify our own pineapple. We toast our own orgeat almonds. The fern in the corner has a name (her name is Linda). Come early for the kitchen, come late for the band, come Wednesday for the secret rum list.
+      </p>
+      <div style="display:flex; gap:48px; margin-top:40px; padding-top:32px; border-top:1px solid var(--line);">
+        <div>
+          <div style="font-family:var(--display); font-style:italic; font-size:54px; color:var(--neon); text-shadow:var(--glow-neon); line-height:1;">42</div>
+          <div style="font-family:var(--read); font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--ivory-2); margin-top:6px;">Aged rums on the shelf</div>
+        </div>
+        <div>
+          <div style="font-family:var(--display); font-style:italic; font-size:54px; color:var(--copper); text-shadow:var(--glow-copper); line-height:1;">11pm</div>
+          <div style="font-family:var(--read); font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--ivory-2); margin-top:6px;">When the band starts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="wrap">
+  <div class="menu-head reveal">
+    <div>
+      <div class="section-eyebrow">The List</div>
+      <h2 class="section-title">Cocktails <em>under the leaves.</em></h2>
+    </div>
+    <p>Eight signatures. All built on aged Caribbean rum, cane sugar, and Hawaiian fruit. Served in a hand-thrown mug, garnished from the conservatory.</p>
+  </div>
+
+  <div class="menu-grid">
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°01 · Classic</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Piña Colada</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$14</span>
+      </div>
+      <p class="cocktail-desc">Aged white rum, fresh coconut cream, clarified pineapple. Served frozen, in a coupe.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°02 · House Pour</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Brooklyn Mai Tai</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$16</span>
+      </div>
+      <p class="cocktail-desc">Aged Jamaican &amp; Martinique rum, house orgeat, fresh lime, orange curaçao. Mint sprig.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°03 · Hawaiian</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Blue Hawaii</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$15</span>
+      </div>
+      <p class="cocktail-desc">Vodka, white rum, blue curaçao, pineapple. Served tall with a dried pineapple wheel.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°04 · Layered</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Lava Flow</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$15</span>
+      </div>
+      <p class="cocktail-desc">Macerated strawberry, coconut rum, pineapple. Poured slow so the lava rises through the cream.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°05 · Bright</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Pineapple Margarita</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$15</span>
+      </div>
+      <p class="cocktail-desc">Blanco tequila, charred pineapple, fresh lime, agave. Smoked salt rim.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°06 · Spicy</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Spicy Mango Paloma</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$15</span>
+      </div>
+      <p class="cocktail-desc">Reposado tequila, ripe mango, fresh grapefruit, muddled jalapeño. Tajín rim.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°07 · Light</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Chi Chi</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$14</span>
+      </div>
+      <p class="cocktail-desc">Vodka, coconut cream, pineapple. The Piña's quieter sibling — soft, snow-white, midnight friendly.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+    <article class="cocktail reveal">
+      <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/><path d="M10 22 L 6 18"/></svg></span>
+      <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22 C 2 12 12 2 22 2"/><path d="M2 16 C 6 14 10 8 16 4"/></svg></span>
+      <p class="num">N°08 · Strong</p>
+      <div class="cocktail-row">
+        <h3 class="cocktail-name">Painkiller Williamsburg</h3>
+        <span class="dots"></span>
+        <span class="cocktail-price">$15</span>
+      </div>
+      <p class="cocktail-desc">Pusser's dark rum, pineapple, fresh orange, cream of coconut. Fresh-grated Brooklyn nutmeg.</p>
+      <svg class="cocktail-leaf" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1"><path d="M200 200 C 130 180, 70 140, 30 60 C 90 50, 150 90, 200 200 Z"/><path d="M40 80 C 100 110, 150 150, 190 190"/></svg>
+    </article>
+
+  </div>
+</section>
+
+<!-- VIBE -->
+<section id="vibe" class="wrap">
+  <div class="menu-head reveal">
+    <div>
+      <div class="section-eyebrow">Inside the Room</div>
+      <h2 class="section-title">The <em>room</em> at dusk.</h2>
+    </div>
+    <p>Mossy banquettes, hand-blown lamps, six-foot monstera, and a fern named Linda. The greenhouse glows.</p>
+  </div>
+  <div class="vibe-grid reveal">
+    <div class="vibe-tile v1">
+      <img alt="Greenhouse bar at night" src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1400&q=70" loading="lazy"/>
+      <div class="tag">The Conservatory<small>Main Floor</small></div>
+    </div>
+    <div class="vibe-tile v2">
+      <img alt="Tiki cocktail with garnish" src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=1200&q=70" loading="lazy"/>
+      <div class="tag">House Mai Tai<small>Tableside</small></div>
+    </div>
+    <div class="vibe-tile v3">
+      <img alt="Lush palm leaves" src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?auto=format&fit=crop&w=900&q=70" loading="lazy"/>
+      <div class="tag">Linda<small>The Fern</small></div>
+    </div>
+    <div class="vibe-tile v4">
+      <img alt="Neon-lit bar shelf at night" src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=900&q=70" loading="lazy"/>
+      <div class="tag">The Rum Wall<small>42 Bottles</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="wrap" style="padding-top:40px">
+  <div class="menu-head reveal">
+    <div>
+      <div class="section-eyebrow">Field Notes</div>
+      <h2 class="section-title">A <em>slow scroll</em> through the room.</h2>
+    </div>
+  </div>
+  <div class="gallery reveal">
+    <div class="g tall"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=900&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g wide"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?auto=format&fit=crop&w=1400&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1597290282695-edc43d0e7129?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1568644396922-5c3bfae12521?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=700&q=70"/></div>
+    <div class="g wide"><img alt="" loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=70"/></div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="wrap">
+  <div class="visit-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">Visit Us</div>
+      <h2 class="section-title">Find us off <em>Myrtle.</em></h2>
+
+      <div class="visit-block">
+        <h4>Address</h4>
+        <p class="big">66-48 Myrtle Avenue</p>
+        <p class="small">Brooklyn, NY · M train to Forest Av</p>
+      </div>
+      <div class="visit-block">
+        <h4>Contact</h4>
+        <p class="big">(718) 555-0142</p>
+        <p class="small">hello@mauibrooklyn.com</p>
+      </div>
+    </div>
+
+    <div class="visit-card reveal">
+      <div class="stamp-b">Open Now</div>
+      <h3>Hours.</h3>
+      <div class="neon-line"></div>
+      <ul class="hours" id="hours">
+        <li data-day="1"><span class="day">Monday</span><span class="time">5pm — 12am</span></li>
+        <li data-day="2"><span class="day">Tuesday</span><span class="time">5pm — 12am</span></li>
+        <li data-day="3"><span class="day">Wednesday</span><span class="time">5pm — 12am</span></li>
+        <li data-day="4"><span class="day">Thursday</span><span class="time">5pm — 12am</span></li>
+        <li data-day="5"><span class="day">Friday</span><span class="time">5pm — 2am</span></li>
+        <li data-day="6"><span class="day">Saturday</span><span class="time">12pm — 2am</span></li>
+        <li data-day="0"><span class="day">Sunday</span><span class="time">12pm — 12am</span></li>
+      </ul>
+      <div style="display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;">
+        <a class="btn" href="#">Book a Table</a>
+        <a class="btn ghost" href="tel:7185550142">Call Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-wordmark"><em>Maui</em> <span><em>Brooklyn</em></span></p>
+        <p class="foot-tag">A Caribbean × Hawaiian tiki conservatory in the heart of Ridgewood-adjacent Brooklyn.</p>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <p>66-48 Myrtle Ave</p>
+        <p>Brooklyn, NY 11385</p>
+        <a href="#">Get Directions</a>
+      </div>
+      <div>
+        <h5>Reach</h5>
+        <a href="tel:7185550142">(718) 555-0142</a>
+        <a href="mailto:hello@mauibrooklyn.com">hello@mauibrooklyn.com</a>
+        <a href="#">Press &amp; Events</a>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Resy</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Maui Brooklyn LLC</span>
+      <span>Made with rum &amp; ferns · BK NY</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver((entries)=>{
+  for(const e of entries){
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  }
+},{ threshold:.12, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Parallax: subtle vertical drift on scroll
+const px = document.querySelectorAll('.parallax');
+let ticking = false;
+function onScroll(){
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(()=>{
+    const y = window.scrollY;
+    px.forEach(el=>{
+      const s = parseFloat(el.dataset.speed || '0.04');
+      el.style.transform = `translate3d(0, ${(-y*s).toFixed(1)}px, 0)`;
+    });
+    ticking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+
+// Mark current day as live in hours list
+(function(){
+  const today = new Date().getDay();
+  document.querySelectorAll('#hours li').forEach(li=>{
+    if(parseInt(li.dataset.day,10) === today) li.classList.add('live');
+  });
+})();
+
+// Cursor-tracked moonlight (subtle, GPU friendly)
+(function(){
+  const layer = document.createElement('div');
+  Object.assign(layer.style, {
+    position:'fixed', inset:'0', pointerEvents:'none', zIndex:'0',
+    background:'radial-gradient(420px 420px at 50% 50%, rgba(200,255,58,.05), transparent 60%)',
+    transition:'background-position 0.18s ease-out',
+    mixBlendMode:'screen'
+  });
+  document.body.appendChild(layer);
+  window.addEventListener('mousemove', (e)=>{
+    layer.style.background = `radial-gradient(420px 420px at ${e.clientX}px ${e.clientY}px, rgba(200,255,58,.07), transparent 60%)`;
+  });
+})();
+</script>
+</body>
+</html>

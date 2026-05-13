@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAUI // BROOKLYN — ISSUE №1 — tiki kitchen zine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Permanent+Marker&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   MAUI BROOKLYN — RISO PUNK ZINE №1
+   ========================================================= */
+:root{
+  --pink:#ff48a4;
+  --teal:#00a39e;
+  --must:#ffc94a;
+  --cream:#f4ede1;
+  --ink:#161616;
+  --pink-x: rgba(255,72,164,.85);
+  --teal-x: rgba(0,163,158,.85);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--ink);font-family:"Special Elite",monospace;overflow-x:hidden}
+body{
+  background-image:
+    /* paper noise */
+    radial-gradient(rgba(22,22,22,.06) 1px, transparent 1px),
+    radial-gradient(rgba(22,22,22,.04) 1px, transparent 1px),
+    /* faded yellowed corners */
+    radial-gradient(ellipse at 0% 0%, rgba(255,201,74,.18), transparent 40%),
+    radial-gradient(ellipse at 100% 100%, rgba(255,72,164,.12), transparent 45%);
+  background-size: 3px 3px, 7px 7px, 100% 100%, 100% 100%;
+  background-position: 0 0, 1px 2px, 0 0, 0 0;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ---------- global halftone + grain overlay ---------- */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:200;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(22,22,22,.18) .6px, transparent 1.2px);
+  background-size:4px 4px;
+  mix-blend-mode:multiply;opacity:.35;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:201;
+  background:
+    repeating-linear-gradient(0deg, rgba(22,22,22,.04) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 4px);
+  mix-blend-mode:multiply;
+}
+
+/* ---------- structural ---------- */
+.page{max-width:1280px;margin:0 auto;padding:0 28px;position:relative}
+.zine-edge{
+  position:relative;
+}
+.zine-edge::after{
+  /* torn deckle bottom edge for sections */
+  content:"";position:absolute;left:0;right:0;bottom:-14px;height:18px;
+  background:
+    radial-gradient(circle at 6px 0, var(--cream) 6px, transparent 7px) 0 0/14px 18px repeat-x;
+  filter:drop-shadow(0 2px 0 rgba(0,0,0,.08));
+}
+
+/* ---------- nav ---------- */
+nav.top{
+  position:sticky;top:0;z-index:150;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:14px 28px;
+  background: var(--cream);
+  border-bottom:2px dashed var(--ink);
+  box-shadow:0 2px 0 var(--pink), 0 4px 0 var(--teal);
+}
+.wordmark{
+  font-family:"Bungee Shade",sans-serif;
+  font-size:26px;letter-spacing:-1px;line-height:1;
+  display:inline-flex;align-items:baseline;gap:6px;
+  color:var(--ink);
+  transform:rotate(-2deg);
+}
+.wordmark .b{color:var(--pink)}
+.wordmark .slash{font-family:"Permanent Marker",cursive;color:var(--teal);font-size:34px;transform:translateY(2px) rotate(8deg);display:inline-block}
+nav .links{display:flex;gap:18px;font-family:"VT323",monospace;font-size:20px;text-transform:uppercase}
+nav .links a{
+  position:relative;padding:2px 6px;
+  border:1.5px solid transparent;
+  transition:.15s;
+}
+nav .links a:hover{
+  background:var(--must);border:1.5px dashed var(--ink);transform:rotate(-1.5deg)
+}
+.btn-resy{
+  font-family:"Permanent Marker",cursive;font-size:18px;
+  padding:8px 16px 10px;background:var(--pink);color:var(--cream);
+  border:2px solid var(--ink);
+  box-shadow:4px 4px 0 var(--teal);
+  transform:rotate(2deg);
+  position:relative;letter-spacing:.5px;
+  transition:.15s ease;
+}
+.btn-resy:hover{transform:rotate(-1deg) translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal)}
+.btn-resy::after{
+  content:"!!";position:absolute;top:-12px;right:-10px;
+  background:var(--must);color:var(--ink);padding:2px 5px;border:1.5px solid var(--ink);
+  font-family:"VT323",monospace;font-size:14px;transform:rotate(12deg);
+}
+
+/* ---------- TAPE element ---------- */
+.tape{
+  position:absolute;display:block;
+  background:rgba(255,201,74,.55);
+  border-left:1px dashed rgba(22,22,22,.35);
+  border-right:1px dashed rgba(22,22,22,.35);
+  width:120px;height:26px;
+  box-shadow:0 1px 1px rgba(0,0,0,.1);
+  z-index:5;
+  backdrop-filter:saturate(.7);
+  transform-origin:center;
+}
+.tape.pink{background:rgba(255,72,164,.45)}
+.tape.teal{background:rgba(0,163,158,.45)}
+.tape::after{
+  content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 8px, transparent 8px 12px),
+    radial-gradient(circle at 30% 50%, rgba(255,255,255,.4), transparent 60%);
+  mix-blend-mode:overlay;
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;padding:60px 28px 80px;min-height:88vh;overflow:hidden;
+}
+.hero .issue-tag{
+  position:absolute;top:30px;left:30px;
+  font-family:"VT323",monospace;font-size:18px;
+  background:var(--ink);color:var(--cream);padding:4px 10px;
+  transform:rotate(-3deg);
+  letter-spacing:1px;
+}
+.hero .price-tag{
+  position:absolute;top:24px;right:36px;
+  font-family:"Permanent Marker",cursive;
+  background:var(--must);color:var(--ink);
+  padding:8px 14px;border:2px solid var(--ink);
+  transform:rotate(8deg);
+  box-shadow:3px 3px 0 var(--ink);
+  font-size:18px;
+}
+.hero .price-tag small{display:block;font-family:"VT323",monospace;font-size:14px;text-transform:uppercase}
+
+.hero-title{
+  position:relative;
+  font-family:"Bungee Shade",sans-serif;
+  font-size:clamp(80px,15vw,220px);
+  line-height:.85;letter-spacing:-4px;
+  margin-top:80px;
+  text-transform:uppercase;
+}
+.hero-title .maui{
+  display:block;color:var(--ink);
+  text-shadow: 4px 4px 0 var(--pink-x), -4px -2px 0 var(--teal-x);
+  filter: contrast(1.05);
+  transform:translateX(-8px);
+}
+.hero-title .x{
+  font-family:"Permanent Marker",cursive;
+  font-size:.35em;color:var(--teal);display:inline-block;
+  transform:rotate(-8deg) translateY(-.4em);margin:0 .1em;
+  -webkit-text-stroke: 0;
+  text-shadow:2px 2px 0 var(--pink);
+}
+.hero-title .brk{
+  display:block;color:var(--pink);
+  -webkit-text-stroke: 2px var(--ink);
+  text-shadow: -5px 5px 0 var(--teal-x);
+  margin-left:8vw;
+  transform:rotate(-1.4deg);
+}
+
+.hero-tag{
+  font-family:"Permanent Marker",cursive;
+  font-size:clamp(20px,2.6vw,32px);
+  color:var(--ink);
+  background:var(--must);
+  display:inline-block;padding:6px 14px;
+  margin-top:32px;
+  transform:rotate(-1.5deg);
+  border:2px solid var(--ink);
+  box-shadow:4px 4px 0 var(--teal);
+}
+.hero-addr{
+  font-family:"VT323",monospace;font-size:22px;margin-top:18px;letter-spacing:1px;
+  display:inline-block;border-bottom:2px solid var(--pink);padding-bottom:2px;
+  transform:translateX(6px);
+}
+.hero-ctas{margin-top:30px;display:flex;gap:18px;flex-wrap:wrap}
+.cta{
+  font-family:"Permanent Marker",cursive;font-size:20px;
+  padding:14px 22px;border:2px solid var(--ink);
+  transition:.18s ease;position:relative;
+  letter-spacing:.5px;
+}
+.cta.primary{background:var(--ink);color:var(--cream);box-shadow:5px 5px 0 var(--pink);transform:rotate(-1.5deg)}
+.cta.secondary{background:var(--cream);color:var(--ink);box-shadow:5px 5px 0 var(--teal);transform:rotate(1deg)}
+.cta:hover{transform:translate(-3px,-3px) rotate(0);box-shadow:8px 8px 0 var(--ink)}
+
+/* hero decorative bits */
+.stamp{
+  position:absolute;
+  border:3px double currentColor;
+  color:var(--pink);
+  padding:8px 14px;
+  font-family:"Special Elite",monospace;
+  font-size:14px;text-transform:uppercase;letter-spacing:2px;
+  opacity:.72;
+  transform:rotate(-12deg);
+  border-radius:3px;
+  mix-blend-mode:multiply;
+}
+.stamp::before{
+  content:"";position:absolute;inset:-4px;border:1px dashed currentColor;border-radius:3px;opacity:.5;
+}
+.scribble{
+  position:absolute;font-family:"Permanent Marker",cursive;color:var(--teal);
+  font-size:18px;line-height:1.1;
+  transform:rotate(-6deg);max-width:200px;
+  pointer-events:none;
+}
+.scribble.pink{color:var(--pink)}
+.arrow{position:absolute;pointer-events:none}
+
+.hero-photo{
+  position:absolute;width:260px;height:300px;overflow:hidden;
+  border:1px solid var(--ink);
+  box-shadow:3px 3px 0 rgba(0,0,0,.18);
+  background:#000;
+}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;
+  filter: grayscale(1) contrast(1.4) brightness(.95);
+  mix-blend-mode:multiply;
+}
+.hero-photo::after{
+  /* halftone screen */
+  content:"";position:absolute;inset:0;
+  background: radial-gradient(circle at 1px 1px, rgba(22,22,22,.55) .7px, transparent 1.2px);
+  background-size:3px 3px;mix-blend-mode:multiply;opacity:.5;
+}
+.hero-photo::before{
+  /* color ink wash + misregistration */
+  content:"";position:absolute;inset:0;
+  background:var(--pink-x);
+  mix-blend-mode:screen;
+  transform:translate(-3px,2px);
+}
+
+.hero-photo.p1{top:140px;right:6%;transform:rotate(4deg)}
+.hero-photo.p1::before{background:var(--teal-x)}
+.hero-photo.p2{bottom:80px;right:22%;width:200px;height:240px;transform:rotate(-5deg)}
+
+/* ---------- generic section header ---------- */
+.section{padding:80px 28px 60px;position:relative;border-top:2px dashed var(--ink)}
+.section-num{
+  position:absolute;top:-22px;left:28px;
+  background:var(--cream);
+  font-family:"VT323",monospace;font-size:22px;
+  padding:4px 10px;border:2px solid var(--ink);
+  letter-spacing:2px;
+}
+.section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;
+  margin-bottom:50px;position:relative;
+}
+.section-title{
+  font-family:"Bungee Shade",sans-serif;
+  font-size:clamp(48px,7vw,92px);line-height:.9;
+  text-transform:uppercase;letter-spacing:-2px;
+  color:var(--ink);
+  text-shadow: 3px 3px 0 var(--pink-x);
+}
+.section-title.teal{text-shadow:3px 3px 0 var(--teal-x)}
+.section-kicker{
+  font-family:"Permanent Marker",cursive;
+  background:var(--ink);color:var(--cream);
+  padding:6px 12px;font-size:18px;
+  transform:rotate(-2deg);align-self:flex-start;
+}
+
+/* ---------- ABOUT ---------- */
+.about-grid{
+  display:grid;grid-template-columns: 1.1fr .9fr;gap:50px;align-items:start;
+  position:relative;
+}
+.about-grid p{
+  font-family:"Special Elite",monospace;
+  font-size:18px;line-height:1.55;margin-bottom:18px;
+  max-width:60ch;
+}
+.about-grid p::first-letter{
+  font-family:"Bungee Shade",sans-serif;
+  font-size:3em;float:left;line-height:.8;margin:6px 8px 0 0;
+  color:var(--pink);
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+.about-collage{
+  position:relative;height:480px;
+}
+.about-collage .clip{
+  position:absolute;border:1px solid var(--ink);overflow:hidden;background:#000;
+}
+.about-collage .clip img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.3)}
+.about-collage .clip::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 1px 1px, rgba(22,22,22,.55) .7px, transparent 1.2px);
+  background-size:3px 3px;mix-blend-mode:multiply;opacity:.55;
+}
+.about-collage .clip::before{
+  content:"";position:absolute;inset:0;background:var(--pink-x);mix-blend-mode:screen;
+  transform:translate(-2px,1px);
+}
+.about-collage .c1{top:0;left:10px;width:240px;height:280px;transform:rotate(-4deg)}
+.about-collage .c2{top:140px;right:0;width:220px;height:260px;transform:rotate(5deg)}
+.about-collage .c2::before{background:var(--teal-x)}
+.about-collage .c3{bottom:0;left:90px;width:200px;height:160px;transform:rotate(-2deg)}
+.about-collage .c3::before{background:var(--must);opacity:.55}
+
+/* ---------- COCKTAIL MENU ---------- */
+.menu-section{background:
+  linear-gradient(180deg, transparent, rgba(0,163,158,.05) 50%, transparent);
+}
+.menu-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:34px 50px;position:relative;
+}
+.drink{
+  position:relative;padding:20px 22px 22px;
+  background:var(--cream);
+  border:2px solid var(--ink);
+  transition:.18s ease;
+}
+.drink:nth-child(odd){transform:rotate(-.8deg)}
+.drink:nth-child(even){transform:rotate(.8deg)}
+.drink:hover{transform:rotate(0) translate(-4px,-4px);box-shadow:7px 7px 0 var(--pink)}
+.drink::before{
+  /* xerox edge */
+  content:"";position:absolute;inset:-2px;
+  background:repeating-linear-gradient(45deg, transparent 0 4px, rgba(22,22,22,.06) 4px 5px);
+  pointer-events:none;
+}
+.drink-num{
+  position:absolute;top:-14px;left:14px;
+  font-family:"VT323",monospace;font-size:20px;
+  background:var(--ink);color:var(--cream);padding:1px 8px;
+  letter-spacing:1px;
+}
+.drink-price{
+  position:absolute;top:-16px;right:14px;
+  font-family:"Permanent Marker",cursive;font-size:22px;
+  background:var(--must);color:var(--ink);
+  padding:2px 10px;border:2px solid var(--ink);
+  transform:rotate(6deg);
+  box-shadow:2px 2px 0 var(--ink);
+}
+.drink-name{
+  font-family:"Bungee Shade",sans-serif;
+  font-size:28px;line-height:.9;
+  margin:8px 0 12px;
+  text-transform:uppercase;
+  text-shadow: 2px 2px 0 var(--pink-x);
+}
+.drink:nth-child(3n) .drink-name{text-shadow:2px 2px 0 var(--teal-x)}
+.drink:nth-child(4n) .drink-name{text-shadow:2px 2px 0 var(--must)}
+.drink-ingredients{
+  font-family:"Special Elite",monospace;font-size:16px;line-height:1.4;
+  color:var(--ink);
+  border-top:1px dashed var(--ink);padding-top:10px;
+}
+.drink-stamp{
+  position:absolute;bottom:-12px;right:-10px;
+  font-family:"VT323",monospace;font-size:14px;letter-spacing:2px;
+  background:var(--cream);color:var(--pink);
+  border:2px double var(--pink);padding:2px 8px;
+  transform:rotate(-10deg);text-transform:uppercase;
+  mix-blend-mode:multiply;
+}
+
+/* ---------- VIBE 4-photo ---------- */
+.vibe-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+}
+.vibe-card{
+  position:relative;aspect-ratio:3/4;overflow:hidden;
+  border:1px solid var(--ink);background:#000;
+  transition:.2s;
+}
+.vibe-card:nth-child(1){transform:rotate(-3deg)}
+.vibe-card:nth-child(2){transform:rotate(2deg) translateY(20px)}
+.vibe-card:nth-child(3){transform:rotate(-1.5deg) translateY(-10px)}
+.vibe-card:nth-child(4){transform:rotate(3deg)}
+.vibe-card:hover{transform:rotate(0) translateY(-6px);box-shadow:6px 6px 0 var(--teal)}
+.vibe-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.3) brightness(.95)}
+.vibe-card::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 1px 1px, rgba(22,22,22,.5) .7px, transparent 1.2px);
+  background-size:3px 3px;mix-blend-mode:multiply;opacity:.6;
+}
+.vibe-card::before{
+  content:"";position:absolute;inset:0;mix-blend-mode:screen;
+  background:var(--pink-x);transform:translate(-2px,1px);
+}
+.vibe-card:nth-child(2)::before{background:var(--teal-x)}
+.vibe-card:nth-child(3)::before{background:var(--must);opacity:.55}
+.vibe-card:nth-child(4)::before{background:var(--pink-x)}
+
+.vibe-caption{
+  position:absolute;left:8px;bottom:8px;
+  font-family:"Permanent Marker",cursive;color:var(--cream);
+  background:var(--ink);padding:2px 8px;font-size:14px;
+  transform:rotate(-2deg);z-index:3;
+}
+
+/* ---------- GALLERY ---------- */
+.gallery{
+  display:grid;grid-template-columns:repeat(12,1fr);gap:14px;
+  grid-auto-rows:90px;
+}
+.gallery .g{
+  position:relative;overflow:hidden;
+  border:1px solid var(--ink);background:#000;
+  transition:.2s;
+}
+.gallery .g img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.3)}
+.gallery .g::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 1px 1px, rgba(22,22,22,.5) .7px, transparent 1.2px);
+  background-size:3px 3px;mix-blend-mode:multiply;opacity:.55;
+}
+.gallery .g::before{
+  content:"";position:absolute;inset:0;mix-blend-mode:screen;
+  background:var(--pink-x);transform:translate(-2px,1px);
+}
+.gallery .g:nth-child(3n)::before{background:var(--teal-x)}
+.gallery .g:nth-child(5n)::before{background:var(--must);opacity:.55}
+.gallery .g:hover{transform:scale(1.02) rotate(-1deg);z-index:4;box-shadow:5px 5px 0 var(--ink)}
+.gallery .g1{grid-column:span 5;grid-row:span 4}
+.gallery .g2{grid-column:span 4;grid-row:span 3}
+.gallery .g3{grid-column:span 3;grid-row:span 3}
+.gallery .g4{grid-column:span 4;grid-row:span 3}
+.gallery .g5{grid-column:span 3;grid-row:span 3}
+.gallery .g6{grid-column:span 5;grid-row:span 4}
+.gallery .g7{grid-column:span 6;grid-row:span 3}
+.gallery .g8{grid-column:span 6;grid-row:span 3}
+
+/* ---------- VISIT/CONTACT ---------- */
+.visit-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:start;
+}
+.visit-card{
+  background:var(--cream);border:2px solid var(--ink);
+  padding:26px;position:relative;
+  transform:rotate(-1deg);
+  box-shadow:6px 6px 0 var(--pink);
+}
+.visit-card h3{
+  font-family:"Bungee Shade",sans-serif;font-size:36px;text-transform:uppercase;
+  margin-bottom:14px;letter-spacing:-1px;
+  text-shadow:2px 2px 0 var(--teal-x);
+}
+.visit-card .row{
+  display:grid;grid-template-columns:120px 1fr;gap:12px;
+  border-bottom:1px dashed var(--ink);padding:10px 0;
+  font-family:"Special Elite",monospace;font-size:17px;
+}
+.visit-card .row b{font-family:"VT323",monospace;font-size:18px;letter-spacing:1px;text-transform:uppercase}
+.visit-card .row:last-child{border-bottom:none}
+
+.hours-list{font-family:"VT323",monospace;font-size:20px;line-height:1.5;letter-spacing:.5px}
+.hours-list li{display:flex;justify-content:space-between;border-bottom:1px dotted rgba(22,22,22,.4);padding:4px 0;list-style:none}
+.hours-list li:hover{background:var(--must)}
+
+.map-zine{
+  position:relative;background:var(--ink);color:var(--cream);
+  padding:30px;min-height:380px;
+  transform:rotate(1deg);
+  border:2px solid var(--ink);
+  box-shadow:6px 6px 0 var(--teal);
+  overflow:hidden;
+}
+.map-zine::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg, rgba(255,72,164,.18) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0,163,158,.18) 1px, transparent 1px);
+  background-size:30px 30px;opacity:.6;
+}
+.map-zine h4{font-family:"Permanent Marker",cursive;font-size:24px;color:var(--must);position:relative}
+.map-zine p{font-family:"VT323",monospace;font-size:18px;margin-top:12px;position:relative;line-height:1.5}
+.map-pin{
+  position:absolute;left:50%;top:55%;transform:translate(-50%,-50%) rotate(-8deg);
+  font-family:"Permanent Marker",cursive;font-size:18px;
+  background:var(--pink);color:var(--cream);
+  padding:8px 14px;border:2px solid var(--cream);
+  box-shadow:4px 4px 0 var(--teal);
+  z-index:3;
+}
+.map-pin::before{
+  content:"";position:absolute;left:50%;bottom:-22px;width:0;height:0;
+  border-left:8px solid transparent;border-right:8px solid transparent;
+  border-top:16px solid var(--pink);transform:translateX(-50%);
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  margin-top:80px;background:var(--ink);color:var(--cream);
+  padding:50px 28px 30px;position:relative;
+  border-top:6px solid var(--pink);
+}
+footer::before{
+  content:"";position:absolute;top:-6px;left:0;right:0;height:6px;
+  background:repeating-linear-gradient(90deg, var(--pink) 0 30px, var(--teal) 30px 60px, var(--must) 60px 90px);
+}
+.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px}
+footer h5{font-family:"Bungee Shade",sans-serif;font-size:22px;color:var(--must);margin-bottom:12px;text-transform:uppercase}
+footer p,footer a,footer li{font-family:"VT323",monospace;font-size:18px;line-height:1.55;letter-spacing:1px}
+footer ul{list-style:none}
+footer ul li{padding:2px 0;border-bottom:1px dashed rgba(244,237,225,.2)}
+footer a:hover{color:var(--pink)}
+.footer-zine{font-family:"Permanent Marker",cursive;font-size:28px;color:var(--cream);transform:rotate(-2deg);display:inline-block}
+.footer-zine span{color:var(--pink)}
+.colophon{
+  border-top:2px dashed rgba(244,237,225,.3);margin-top:30px;padding-top:18px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:"Special Elite",monospace;font-size:14px;
+}
+
+/* ---------- jitter / motion ---------- */
+@keyframes jitter{
+  0%,100%{transform:translate(0,0) rotate(0)}
+  25%{transform:translate(-1px,1px) rotate(-.5deg)}
+  50%{transform:translate(1px,-1px) rotate(.5deg)}
+  75%{transform:translate(-1px,-1px) rotate(-.3deg)}
+}
+@keyframes tape-stick{
+  0%{opacity:0;transform:translateY(-8px) rotate(-8deg) scale(.7)}
+  100%{opacity:1;transform:var(--tape-rest,rotate(-12deg))}
+}
+@keyframes ink-bleed{
+  0%{filter: blur(6px);opacity:0;transform:translateY(20px)}
+  100%{filter:blur(0);opacity:1;transform:translateY(0)}
+}
+.bleed-in{animation: ink-bleed .8s ease both}
+.tape{animation: tape-stick .7s ease both}
+.jitter:hover{animation:jitter .25s linear infinite}
+
+/* misregister flicker animation */
+@keyframes misreg{
+  0%,100%{text-shadow:4px 4px 0 var(--pink-x), -4px -2px 0 var(--teal-x)}
+  50%{text-shadow:5px 3px 0 var(--pink-x), -5px -3px 0 var(--teal-x)}
+}
+.hero-title .maui{animation:misreg 3.5s ease-in-out infinite}
+
+/* ---------- ticker ---------- */
+.ticker{
+  background:var(--ink);color:var(--must);
+  font-family:"Bungee Shade",sans-serif;font-size:24px;
+  padding:10px 0;overflow:hidden;white-space:nowrap;
+  border-top:2px solid var(--pink);border-bottom:2px solid var(--teal);
+  text-transform:uppercase;letter-spacing:2px;
+}
+.ticker-track{display:inline-block;animation: scroll 35s linear infinite;padding-left:100%}
+.ticker-track span{margin:0 30px}
+.ticker-track span:nth-child(odd){color:var(--pink)}
+.ticker-track span:nth-child(3n){color:var(--teal)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* ---------- responsive ---------- */
+@media (max-width:880px){
+  nav .links{display:none}
+  .menu-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .about-collage{height:380px}
+  .visit-grid{grid-template-columns:1fr}
+  .vibe-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-photo.p1{width:160px;height:200px;right:-10px;top:90px}
+  .hero-photo.p2{display:none}
+  .hero-title .brk{margin-left:0}
+  .gallery{grid-auto-rows:70px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav class="top">
+  <a href="#top" class="wordmark jitter">MAUI<span class="slash">/</span><span class="b">BROOKLYN</span></a>
+  <div class="links">
+    <a href="#about">// About</a>
+    <a href="#menu">// Drinks</a>
+    <a href="#vibe">// Vibe</a>
+    <a href="#gallery">// Gallery</a>
+    <a href="#visit">// Visit</a>
+  </div>
+  <a href="#visit" class="btn-resy jitter">Reserve a Table</a>
+</nav>
+
+<!-- ====== HERO ====== -->
+<header class="hero" id="top">
+  <span class="issue-tag">ISSUE №01 — VOL.MMXXVI</span>
+  <span class="price-tag">$0.00<small>// Free in Bushwick</small></span>
+
+  <span class="tape" style="top:18%;left:-30px;transform:rotate(-22deg);width:140px"></span>
+  <span class="tape pink" style="top:42%;right:-20px;transform:rotate(34deg);width:160px;height:22px"></span>
+
+  <h1 class="hero-title">
+    <span class="maui">Maui</span>
+    <span class="x">×</span>
+    <span class="brk">Brooklyn</span>
+  </h1>
+
+  <p class="hero-tag">Caribbean × Hawaiian Tiki Kitchen &amp; Bar</p>
+  <div>
+    <span class="hero-addr">66-48 MYRTLE AVE · BROOKLYN NY · 11385</span>
+  </div>
+
+  <div class="hero-ctas">
+    <a class="cta primary" href="#visit">→ Reserve a Table</a>
+    <a class="cta secondary" href="#menu">↘ See the Drinks</a>
+  </div>
+
+  <!-- scribbles + stamps -->
+  <span class="stamp" style="top:38%;left:54%;color:var(--teal)">PUNCH&nbsp;CARD&nbsp;FRIDAYS</span>
+  <span class="stamp" style="bottom:18%;left:6%;color:var(--pink)">DRINK · DANCE · DRINK</span>
+  <span class="scribble" style="top:38%;left:6%">↘ tiki drinks<br>built loud,<br>poured louder</span>
+  <span class="scribble pink" style="bottom:24%;right:8%;transform:rotate(8deg)">★ ask about<br>the secret menu</span>
+
+  <!-- arrow svg -->
+  <svg class="arrow" style="top:62%;left:34%;width:120px" viewBox="0 0 120 60">
+    <path d="M2 30 C 40 0, 80 60, 115 25" fill="none" stroke="#161616" stroke-width="2.5" stroke-dasharray="4 3"/>
+    <polygon points="115,25 105,18 109,30" fill="#161616"/>
+  </svg>
+
+  <!-- hero photos -->
+  <div class="hero-photo p1 bleed-in">
+    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=60" alt="cocktail">
+  </div>
+  <div class="hero-photo p2 bleed-in" style="animation-delay:.2s">
+    <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=600&q=60" alt="bar">
+  </div>
+</header>
+
+<!-- ticker -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>★ NOW POURING ★</span><span>BROOKLYN MAI TAI $16</span><span>★</span><span>HAPPY HOUR M–TH 5–7</span><span>☼</span><span>TIKI MUGS ON ICE</span><span>★</span><span>LIVE DJ FRI &amp; SAT</span><span>☀︎</span><span>RUM IS A FOOD GROUP</span><span>★</span><span>NOW POURING ★</span><span>BROOKLYN MAI TAI $16</span><span>★</span><span>HAPPY HOUR M–TH 5–7</span><span>☼</span><span>TIKI MUGS ON ICE</span><span>★</span><span>LIVE DJ FRI &amp; SAT</span><span>☀︎</span>
+  </div>
+</div>
+
+<!-- ====== ABOUT ====== -->
+<section class="section" id="about">
+  <span class="section-num">// 01 — ABOUT</span>
+  <span class="tape teal" style="top:-14px;right:80px;transform:rotate(-6deg);width:180px"></span>
+
+  <div class="page">
+    <div class="section-head">
+      <h2 class="section-title">A Punk Tiki<br>Love Letter</h2>
+      <span class="section-kicker">Read it twice.</span>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <p>Maui Brooklyn is what happens when a Caribbean grandma's rum cabinet runs into a Hawaiian aunty's pineapple knife on a hot night in Ridgewood. We pour stiff, we plate loud, and the playlist is mostly questionable. Our kitchen runs on smoke and citrus — jerk, kalua, ginger, scotch bonnet, lime — and our bar believes the tiki drink is a 4-minute vacation you sip through a paper straw.</p>
+        <p>This isn't a corporate concept. This is a 28-seat room with mismatched stools, a velvet shark on the wall, and a bartender named Junior who will absolutely judge your order and then make it better. We're at 66-48 Myrtle Ave, the door is painted teal, the lights are pink. You can't miss us. Don't.</p>
+
+        <span class="scribble pink" style="position:relative;display:inline-block;margin-top:10px;transform:rotate(-3deg)">— xoxo, the staff</span>
+      </div>
+
+      <div class="about-collage">
+        <span class="tape" style="top:-12px;left:60px;width:80px;transform:rotate(8deg)"></span>
+        <span class="tape pink" style="top:130px;right:-10px;width:80px;transform:rotate(-20deg)"></span>
+        <div class="clip c1"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=60" alt=""></div>
+        <div class="clip c2"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=60" alt=""></div>
+        <div class="clip c3"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=600&q=60" alt=""></div>
+        <svg class="arrow" style="top:120px;left:-30px;width:130px" viewBox="0 0 130 80">
+          <path d="M5 70 C 30 10, 90 10, 120 40" fill="none" stroke="#ff48a4" stroke-width="2.5" stroke-dasharray="5 4"/>
+          <polygon points="120,40 109,36 114,48" fill="#ff48a4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== MENU ====== -->
+<section class="section menu-section" id="menu">
+  <span class="section-num">// 02 — DRINKS</span>
+  <span class="tape" style="top:-14px;left:120px;transform:rotate(4deg);width:200px"></span>
+
+  <div class="page">
+    <div class="section-head">
+      <h2 class="section-title teal">Cocktail<br>Manifest.</h2>
+      <span class="section-kicker">$14–$16 · Cash &amp; Card</span>
+    </div>
+
+    <div class="menu-grid">
+      <article class="drink"><span class="drink-num">№ 01</span><span class="drink-price">$14</span><h3 class="drink-name">Piña Colada</h3><p class="drink-ingredients">rum · coconut · pineapple · paper umbrella included</p><span class="drink-stamp">House Classic</span></article>
+      <article class="drink"><span class="drink-num">№ 02</span><span class="drink-price">$16</span><h3 class="drink-name">Brooklyn<br>Mai Tai</h3><p class="drink-ingredients">aged rum · orgeat · lime · orange curaçao</p><span class="drink-stamp">Top Seller</span></article>
+      <article class="drink"><span class="drink-num">№ 03</span><span class="drink-price">$15</span><h3 class="drink-name">Blue Hawaii</h3><p class="drink-ingredients">vodka · rum · blue curaçao · pineapple</p><span class="drink-stamp">Aloha</span></article>
+      <article class="drink"><span class="drink-num">№ 04</span><span class="drink-price">$15</span><h3 class="drink-name">Lava Flow</h3><p class="drink-ingredients">strawberry · coconut rum · pineapple</p><span class="drink-stamp">Sunset Vibes</span></article>
+      <article class="drink"><span class="drink-num">№ 05</span><span class="drink-price">$15</span><h3 class="drink-name">Pineapple<br>Margarita</h3><p class="drink-ingredients">tequila · pineapple · lime · agave</p><span class="drink-stamp">Salt Rim</span></article>
+      <article class="drink"><span class="drink-num">№ 06</span><span class="drink-price">$15</span><h3 class="drink-name">Spicy Mango<br>Paloma</h3><p class="drink-ingredients">tequila · mango · grapefruit · jalapeño</p><span class="drink-stamp">Hot Hot Hot</span></article>
+      <article class="drink"><span class="drink-num">№ 07</span><span class="drink-price">$14</span><h3 class="drink-name">Chi Chi</h3><p class="drink-ingredients">vodka · coconut · pineapple</p><span class="drink-stamp">Cousin to Colada</span></article>
+      <article class="drink"><span class="drink-num">№ 08</span><span class="drink-price">$15</span><h3 class="drink-name">Painkiller<br>Williamsburg</h3><p class="drink-ingredients">dark rum · pineapple · orange · coconut · nutmeg</p><span class="drink-stamp">Don't Drive</span></article>
+    </div>
+
+    <div style="margin-top:40px;text-align:center;position:relative">
+      <span class="scribble" style="position:relative;display:inline-block;color:var(--ink)">↑ pick two. pace yourself. (or don't.)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== VIBE ====== -->
+<section class="section" id="vibe">
+  <span class="section-num">// 03 — VIBE</span>
+
+  <div class="page">
+    <div class="section-head">
+      <h2 class="section-title">The Room<br>Smells Like<br>Pineapple.</h2>
+      <span class="section-kicker">Loud. Pink. Real.</span>
+    </div>
+
+    <div class="vibe-grid">
+      <div class="vibe-card">
+        <img src="https://images.unsplash.com/photo-1485872299712-c41b6d76e34a?auto=format&fit=crop&w=600&q=60" alt="">
+        <span class="vibe-caption">↘ THE BAR</span>
+      </div>
+      <div class="vibe-card">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=60" alt="">
+        <span class="vibe-caption">↗ THE CROWD</span>
+      </div>
+      <div class="vibe-card">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=60" alt="">
+        <span class="vibe-caption">→ THE POUR</span>
+      </div>
+      <div class="vibe-card">
+        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=60" alt="">
+        <span class="vibe-caption">← THE NIGHT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== GALLERY ====== -->
+<section class="section" id="gallery">
+  <span class="section-num">// 04 — GALLERY</span>
+  <span class="tape pink" style="top:-14px;right:200px;transform:rotate(10deg);width:120px"></span>
+
+  <div class="page">
+    <div class="section-head">
+      <h2 class="section-title teal">Photo<br>Dump.</h2>
+      <span class="section-kicker">Shot on a $40 camera</span>
+    </div>
+
+    <div class="gallery">
+      <div class="g g1"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=900&q=60" alt=""></div>
+      <div class="g g2"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=800&q=60" alt=""></div>
+      <div class="g g3"><img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=600&q=60" alt=""></div>
+      <div class="g g4"><img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=700&q=60" alt=""></div>
+      <div class="g g5"><img src="https://images.unsplash.com/photo-1546171753-97d7676e4602?auto=format&fit=crop&w=600&q=60" alt=""></div>
+      <div class="g g6"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=60" alt=""></div>
+      <div class="g g7"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=60" alt=""></div>
+      <div class="g g8"><img src="https://images.unsplash.com/photo-1485872299712-c41b6d76e34a?auto=format&fit=crop&w=900&q=60" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== VISIT ====== -->
+<section class="section" id="visit">
+  <span class="section-num">// 05 — VISIT</span>
+
+  <div class="page">
+    <div class="section-head">
+      <h2 class="section-title">Show Up.<br>Sit Down.</h2>
+      <span class="section-kicker">Walk-ins welcome, mostly.</span>
+    </div>
+
+    <div class="visit-grid">
+      <div class="visit-card">
+        <span class="tape" style="top:-14px;left:40px;width:140px;transform:rotate(-6deg)"></span>
+        <h3>Find Us</h3>
+        <div class="row"><b>Address</b><span>66-48 Myrtle Avenue<br>Brooklyn, NY 11385</span></div>
+        <div class="row"><b>Phone</b><span><a href="tel:+17185550142">(718) 555-0142</a></span></div>
+        <div class="row"><b>Email</b><span><a href="mailto:hello@mauibrooklyn.com">hello@mauibrooklyn.com</a></span></div>
+        <div class="row"><b>Train</b><span>M to Forest Ave · L to Halsey</span></div>
+
+        <h3 style="margin-top:26px">Hours</h3>
+        <ul class="hours-list">
+          <li><span>Mon — Thu</span><span>5pm – 12am</span></li>
+          <li><span>Friday</span><span>5pm – 2am</span></li>
+          <li><span>Saturday</span><span>12pm – 2am</span></li>
+          <li><span>Sunday</span><span>12pm – 12am</span></li>
+        </ul>
+
+        <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap">
+          <a class="cta primary" href="mailto:hello@mauibrooklyn.com" style="font-size:16px;padding:10px 18px">→ Email a Reservation</a>
+          <a class="cta secondary" href="tel:+17185550142" style="font-size:16px;padding:10px 18px">↘ Just Call Us</a>
+        </div>
+      </div>
+
+      <div class="map-zine">
+        <h4>// MYRTLE AVE.</h4>
+        <p>Painted teal door. Pink neon palm in the window.<br>Across from the laundromat. Next to the bodega cat.</p>
+        <div class="map-pin">★ YOU ARE HERE</div>
+        <p style="position:absolute;bottom:20px;left:20px">— 40.6989° N · 73.9026° W</p>
+        <span class="stamp" style="bottom:30px;right:20px;color:var(--must);border-color:var(--must)">DRAFT · NOT TO SCALE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="page">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-zine">MAUI <span>/</span> BROOKLYN</div>
+        <p style="margin-top:14px">A Caribbean × Hawaiian tiki kitchen<br>printed on cheap paper by people<br>who like rum more than spreadsheets.</p>
+        <p style="margin-top:14px;color:var(--must)">— Issue No. 01 · Spring MMXXVI</p>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <ul>
+          <li>66-48 Myrtle Avenue</li>
+          <li>Brooklyn, NY 11385</li>
+          <li><a href="tel:+17185550142">(718) 555-0142</a></li>
+          <li><a href="mailto:hello@mauibrooklyn.com">hello@mauibrooklyn.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Find Us</h5>
+        <ul>
+          <li><a href="#">@mauibrooklyn // IG</a></li>
+          <li><a href="#">@mauibklyn // TT</a></li>
+          <li><a href="#">Spotify : House Mix Vol.4</a></li>
+          <li><a href="#">Newsletter : The Pour</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© MMXXVI Maui Brooklyn. All rum reserved.</span>
+      <span>Printed in 2 inks · Pink #ff48a4 · Teal #00a39e</span>
+      <span>Set in VT323, Special Elite, Permanent Marker &amp; Bungee Shade.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* small interactions: bleed-in on scroll, jitter assignments, easter-egg secret menu */
+(function(){
+  // attach bleed-in to anything that should reveal
+  const reveal = document.querySelectorAll('.drink, .vibe-card, .visit-card, .map-zine, .about-collage .clip, .gallery .g, .section-title');
+  reveal.forEach(el => el.classList.add('to-reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('bleed-in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.12});
+  reveal.forEach(el => io.observe(el));
+
+  // jitter all drinks on hover (already via :hover) + nudge price tags randomly
+  document.querySelectorAll('.drink-price').forEach(p => {
+    const r = (Math.random()*16 - 8).toFixed(1);
+    p.style.transform = `rotate(${r}deg)`;
+  });
+  document.querySelectorAll('.drink-stamp').forEach(p => {
+    const r = (Math.random()*20 - 10).toFixed(1);
+    p.style.transform = `rotate(${r}deg)`;
+  });
+  document.querySelectorAll('.tape').forEach((t,i) => {
+    // store rest rotation so animation respects it
+    const cs = getComputedStyle(t).transform;
+    t.style.setProperty('--tape-rest', t.style.transform || 'rotate(-12deg)');
+  });
+
+  // secret konami-style: type "RUM"
+  let buf = '';
+  window.addEventListener('keydown', e => {
+    buf = (buf + e.key.toUpperCase()).slice(-3);
+    if(buf === 'RUM'){
+      document.body.style.transition = 'filter .4s';
+      document.body.style.filter = 'hue-rotate(40deg) saturate(1.3)';
+      const note = document.createElement('div');
+      note.textContent = '★ SECRET MENU UNLOCKED — ASK JUNIOR FOR THE "ZINE №7" ★';
+      Object.assign(note.style, {
+        position:'fixed', top:'20px', left:'50%', transform:'translateX(-50%) rotate(-2deg)',
+        background:'var(--ink)', color:'var(--must)', padding:'10px 18px',
+        fontFamily:'"Permanent Marker",cursive', fontSize:'18px',
+        border:'2px solid var(--must)', zIndex:999,
+        boxShadow:'4px 4px 0 var(--pink)'
+      });
+      document.body.appendChild(note);
+      setTimeout(() => { note.remove(); document.body.style.filter=''; }, 4200);
+      buf = '';
+    }
+  });
+
+  // tiny continuous misregister wobble on scroll
+  const titles = document.querySelectorAll('.section-title');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    titles.forEach((t,i) => {
+      const dx = Math.sin((y + i*100)/80) * 2;
+      const dy = Math.cos((y + i*100)/100) * 2;
+      t.style.textShadow = `${3+dx}px ${3+dy}px 0 var(--pink-x), ${-dx}px ${-dy}px 0 var(--teal-x)`;
+    });
+  });
+})();
+</script>
+</body>
+</html>

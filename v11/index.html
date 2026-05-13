@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Maui Brooklyn — A Tiki Affair on Myrtle Avenue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Yeseva+One&family=Special+Elite&family=Cutive+Mono&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PULP NOIR TIKI — Maui Brooklyn
+   Cream paperback × Pacific lounge × hard-boiled type
+   ============================================================ */
+:root{
+  --paper:      #ecdfc4;       /* cream / yellowed paper       */
+  --paper-2:    #e1d2b1;       /* deeper aged paper            */
+  --paper-3:    #f4ead2;       /* highlight paper              */
+  --ink:        #1a1410;       /* near-black ink               */
+  --ink-soft:   #2a221b;
+  --blood:      #b3261e;       /* blood red                    */
+  --blood-dk:   #7a1a13;
+  --teal:       #0f6b66;       /* deep tiki teal               */
+  --teal-dk:    #094744;
+  --mustard:    #d39a2c;       /* mustard yellow accent        */
+  --rust:       #8a4a1f;
+  --shadow:     0 6px 0 #1a1410;
+  --shadow-sm:  0 3px 0 #1a1410;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);overflow-x:hidden}
+body{
+  font-family:'Special Elite','Cutive Mono',ui-monospace,monospace;
+  font-size:16px;line-height:1.55;
+  /* paper grain + spots */
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(circle at 13% 22%, rgba(122,26,19,.07) 0 .8px, transparent 1.2px),
+    radial-gradient(circle at 67% 71%, rgba(15,107,102,.06) 0 .7px, transparent 1.1px),
+    radial-gradient(circle at 82% 18%, rgba(26,20,16,.10) 0 .6px, transparent 1px),
+    radial-gradient(circle at 30% 80%, rgba(211,154,44,.08) 0 .9px, transparent 1.3px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .10  0 0 0 0 .08  0 0 0 0 .06  0 0 0 .25 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.55'/></svg>");
+  background-size: 240px 240px, 320px 320px, 180px 180px, 280px 280px, 220px 220px;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
+}
+
+/* ---------- Halftone & paper utilities ---------- */
+.halftone{
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1.6px);
+  background-size: 7px 7px;
+}
+.halftone-lg{
+  background-image: radial-gradient(circle, currentColor 1.6px, transparent 2.4px);
+  background-size: 11px 11px;
+}
+.rough{
+  /* rough cut paper edge using clip-path */
+  --rough: polygon(
+    0% 2%, 4% 0%, 9% 3%, 14% 1%, 19% 4%, 24% 0%, 29% 3%, 35% 1%, 40% 4%, 45% 0%,
+    51% 3%, 56% 1%, 61% 4%, 67% 0%, 72% 3%, 78% 1%, 83% 4%, 88% 0%, 94% 3%, 100% 1%,
+    100% 98%, 96% 100%, 91% 97%, 86% 99%, 81% 96%, 75% 100%, 70% 97%, 65% 99%,
+    60% 96%, 54% 100%, 49% 97%, 44% 99%, 39% 96%, 33% 100%, 28% 97%, 23% 99%,
+    18% 96%, 13% 100%, 8% 97%, 3% 99%, 0% 98%
+  );
+  clip-path: var(--rough);
+}
+.burn{
+  position:relative;
+}
+.burn::after{
+  content:"";position:absolute;
+  width:46px;height:46px;border-radius:50%;
+  background:radial-gradient(circle, #1a1410 30%, #5a2a1a 55%, transparent 78%);
+  filter:blur(.6px);
+  top:-14px;right:-12px;opacity:.85;pointer-events:none;
+}
+
+/* ---------- Type ---------- */
+h1,h2,h3,h4{font-family:'Alfa Slab One',serif;font-weight:400;letter-spacing:-.5px;line-height:.92}
+.serif{font-family:'Yeseva One',serif}
+.pulp{font-family:'Playfair Display',serif;font-style:italic;font-weight:900}
+.mono{font-family:'Cutive Mono',ui-monospace,monospace}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;
+  background:var(--paper);
+  border-bottom:2px solid var(--ink);
+  box-shadow:0 4px 0 var(--ink);
+}
+.nav::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg, transparent 0 12px, rgba(26,20,16,.05) 12px 13px);
+}
+.wordmark{display:flex;align-items:baseline;gap:8px}
+.wordmark .w1{font-family:'Alfa Slab One',serif;font-size:22px;color:var(--blood);letter-spacing:-.5px}
+.wordmark .w2{font-family:'Yeseva One',serif;font-size:20px;color:var(--ink);font-style:italic}
+.wordmark .dot{width:8px;height:8px;background:var(--mustard);border:1.5px solid var(--ink);border-radius:50%;display:inline-block;margin:0 4px}
+.nav ul{list-style:none;display:flex;gap:26px}
+.nav ul a{color:var(--ink);text-decoration:none;font-family:'Special Elite',monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;border-bottom:2px dashed transparent;padding-bottom:2px;transition:.2s}
+.nav ul a:hover{color:var(--blood);border-bottom-color:var(--blood)}
+.nav .resv{
+  background:var(--ink);color:var(--paper);
+  padding:8px 16px;
+  font-family:'Alfa Slab One',serif;letter-spacing:1px;font-size:12px;
+  border:2px solid var(--ink);
+  box-shadow:3px 3px 0 var(--blood);
+  text-decoration:none;text-transform:uppercase;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.nav .resv:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--blood)}
+@media (max-width:780px){.nav ul{display:none}}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  padding: 70px 28px 110px;
+  overflow:hidden;
+  border-bottom:3px solid var(--ink);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap:40px;
+  max-width:1240px;margin:0 auto;
+  align-items:end;
+}
+.kicker{
+  display:inline-block;
+  font-family:'Special Elite',monospace;
+  font-size:12px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--ink);
+  border:1.5px solid var(--ink);
+  padding:5px 12px 4px;
+  background:var(--paper-3);
+  transform:rotate(-1.5deg);
+  margin-bottom:22px;
+}
+.kicker b{color:var(--blood)}
+.hero h1{
+  font-size: clamp(72px, 12vw, 184px);
+  line-height:.84;
+  letter-spacing:-3px;
+  color:var(--ink);
+}
+.hero h1 .maui{
+  display:block;
+  color:var(--blood);
+  text-shadow: 6px 6px 0 var(--ink);
+  transform: translateX(-6px);
+}
+.hero h1 .amp{
+  display:inline-block;
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:900;
+  color:var(--teal);
+  font-size:.6em;
+  padding:0 14px;
+  transform:translateY(-.18em) rotate(-6deg);
+}
+.hero h1 .brooklyn{
+  display:block;
+  font-family:'Yeseva One',serif;font-style:italic;
+  color:var(--ink);
+  letter-spacing:-2px;
+  padding-left:6vw;
+}
+.hero .tagline{
+  margin-top:34px;
+  font-family:'Special Elite',monospace;
+  font-size:18px;letter-spacing:1.5px;
+  color:var(--ink-soft);
+  max-width:520px;
+}
+.hero .tagline em{color:var(--blood);font-style:normal;text-transform:uppercase;letter-spacing:3px}
+.hero .addr{
+  margin-top:18px;
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Cutive Mono',monospace;font-size:14px;letter-spacing:1px;
+  color:var(--ink);
+  padding:6px 0;
+  border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);
+}
+.hero .ctas{margin-top:30px;display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:14px 22px;
+  font-family:'Alfa Slab One',serif;letter-spacing:1.5px;font-size:15px;text-transform:uppercase;
+  text-decoration:none;
+  border:2.5px solid var(--ink);
+  transition:transform .15s ease, box-shadow .15s ease;
+  cursor:pointer;
+}
+.btn-primary{background:var(--blood);color:var(--paper);box-shadow:6px 6px 0 var(--ink)}
+.btn-primary:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.btn-ghost{background:var(--paper-3);color:var(--ink);box-shadow:6px 6px 0 var(--teal)}
+.btn-ghost:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--teal)}
+
+/* Hero pulp-cover side art */
+.cover{
+  position:relative;
+  aspect-ratio: 3 / 4;
+  background:var(--ink);
+  border:3px solid var(--ink);
+  box-shadow: 14px 14px 0 var(--blood), 14px 14px 0 3px var(--ink);
+  overflow:hidden;
+  transform:rotate(2deg);
+}
+.cover .ph{
+  position:absolute;inset:0;
+  background-image:url("https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=900&q=70");
+  background-size:cover;background-position:center;
+  filter: grayscale(1) contrast(1.25) brightness(.75) sepia(.15);
+  mix-blend-mode:multiply;
+}
+.cover::before{
+  /* duotone red/black wash */
+  content:"";position:absolute;inset:0;
+  background: linear-gradient(180deg, rgba(179,38,30,.55), rgba(26,20,16,.85));
+  mix-blend-mode:multiply;
+}
+.cover::after{
+  /* halftone dot overlay */
+  content:"";position:absolute;inset:0;
+  background-image: radial-gradient(circle, rgba(236,223,196,.18) 1px, transparent 1.6px);
+  background-size: 6px 6px;
+  pointer-events:none;
+}
+.cover .stamp{
+  position:absolute;left:18px;top:18px;z-index:3;
+  color:var(--paper);font-family:'Special Elite',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  border:1.5px solid var(--paper);padding:4px 8px;
+  transform:rotate(-3deg);
+  background:rgba(26,20,16,.4);
+}
+.cover .price-tag{
+  position:absolute;right:-12px;top:30px;z-index:3;
+  background:var(--mustard);color:var(--ink);
+  font-family:'Alfa Slab One',serif;font-size:13px;letter-spacing:1px;
+  padding:6px 14px;
+  border:2px solid var(--ink);
+  transform:rotate(8deg);
+  box-shadow:4px 4px 0 var(--ink);
+}
+.cover .title{
+  position:absolute;left:22px;right:22px;bottom:22px;z-index:3;
+  color:var(--paper-3);
+}
+.cover .title .a{
+  font-family:'Yeseva One',serif;font-style:italic;
+  color:var(--mustard);font-size:18px;letter-spacing:1px;display:block;margin-bottom:6px;
+}
+.cover .title .b{
+  font-family:'Alfa Slab One',serif;font-size:38px;line-height:.9;letter-spacing:-1px;
+  text-shadow:3px 3px 0 var(--blood-dk);
+}
+.cover .title .c{
+  margin-top:10px;
+  font-family:'Special Elite',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--paper);
+  border-top:1px dashed var(--paper);padding-top:8px;
+}
+
+/* floating dingbats */
+.ding{position:absolute;font-family:'Yeseva One',serif;color:var(--ink);opacity:.7;pointer-events:none}
+.ding-1{top:90px;left:5vw;font-size:42px;transform:rotate(-12deg);color:var(--teal)}
+.ding-2{bottom:30px;left:48%;font-size:30px;color:var(--blood);transform:rotate(8deg)}
+.ding-3{top:140px;right:5vw;font-size:36px;color:var(--mustard);transform:rotate(14deg)}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .cover{max-width:380px;margin:20px auto 0}
+  .hero h1 .brooklyn{padding-left:0}
+}
+
+/* ---------- SECTION SHELL ---------- */
+section{position:relative;padding:90px 28px;border-bottom:3px solid var(--ink)}
+.wrap{max-width:1240px;margin:0 auto}
+.section-tag{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Special Elite',monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--ink);
+  margin-bottom:18px;
+}
+.section-tag::before,.section-tag::after{content:"";display:block;width:36px;height:2px;background:var(--ink)}
+.section-title{
+  font-size:clamp(44px,6.5vw,86px);
+  letter-spacing:-1.5px;
+  margin-bottom:30px;
+}
+.section-title .red{color:var(--blood)}
+.section-title .it{font-family:'Playfair Display',serif;font-style:italic;font-weight:900;color:var(--teal)}
+
+/* ---------- ABOUT ---------- */
+.about{background:var(--paper-2);position:relative}
+.about::before{
+  /* halftone gradient wedge */
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(26,20,16,.18) 1px, transparent 1.6px);
+  background-size:9px 9px;
+  mask-image:linear-gradient(135deg, black 0%, transparent 45%);
+  -webkit-mask-image:linear-gradient(135deg, black 0%, transparent 45%);
+  pointer-events:none;
+}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start;position:relative}
+.about p{font-size:17px;line-height:1.75;margin-bottom:22px;color:var(--ink-soft)}
+.about p .drop{
+  float:left;
+  font-family:'Alfa Slab One',serif;
+  font-size:70px;line-height:.85;
+  color:var(--blood);
+  margin: 4px 10px 0 0;
+  text-shadow:3px 3px 0 var(--ink);
+}
+.matchbook{
+  position:relative;
+  background:var(--blood);
+  color:var(--paper-3);
+  padding:30px 26px 26px;
+  border:3px solid var(--ink);
+  box-shadow:8px 8px 0 var(--ink);
+  transform:rotate(-2deg);
+}
+.matchbook::before{
+  content:"";position:absolute;left:0;right:0;top:-3px;height:36px;
+  background:var(--ink);
+  border-bottom:2px dashed var(--paper-3);
+}
+.matchbook .strike{
+  position:absolute;left:14px;right:14px;top:6px;height:18px;
+  background:repeating-linear-gradient(90deg, var(--rust) 0 6px, var(--paper-2) 6px 8px);
+  border:1px solid var(--paper-3);
+}
+.matchbook h3{margin-top:26px;font-size:30px;color:var(--mustard);text-shadow:2px 2px 0 var(--ink)}
+.matchbook .sub{font-family:'Yeseva One',serif;font-style:italic;color:var(--paper-3);margin-top:8px;font-size:16px}
+.matchbook ul{list-style:none;margin-top:18px;font-family:'Cutive Mono',monospace;font-size:14px}
+.matchbook ul li{padding:6px 0;border-bottom:1px dashed rgba(236,223,196,.4);display:flex;justify-content:space-between}
+.matchbook ul li::before{content:"✦";color:var(--mustard);margin-right:8px}
+.matchbook .foot{
+  margin-top:18px;font-family:'Special Elite',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;text-align:right;
+}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}}
+
+/* ---------- COCKTAIL MENU ---------- */
+.menu{background:var(--paper);position:relative}
+.menu::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:34px;
+  background-image:linear-gradient(transparent 50%, var(--ink) 50%);
+  background-size:6px 6px;
+  mask-image:linear-gradient(90deg, black, transparent 70%);
+  -webkit-mask-image:linear-gradient(90deg, black, transparent 70%);
+  opacity:.25;
+}
+.menu-head{
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:46px;
+}
+.menu-head .lede{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:900;
+  color:var(--ink-soft);font-size:22px;max-width:520px;line-height:1.3;
+}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.cocktail{
+  position:relative;
+  background:var(--paper-3);
+  border:2.5px solid var(--ink);
+  padding:24px 24px 22px;
+  box-shadow:6px 6px 0 var(--ink);
+  transition:transform .25s ease, box-shadow .25s ease;
+  overflow:hidden;
+}
+.cocktail::before{
+  content:"";position:absolute;right:-30px;top:-30px;
+  width:120px;height:120px;border-radius:50%;
+  background-image:radial-gradient(circle, var(--ink) 1.2px, transparent 1.8px);
+  background-size:6px 6px;
+  opacity:.45;color:var(--ink);
+  transform:rotate(0);transition:transform .6s ease;
+  pointer-events:none;
+}
+.cocktail:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--blood)}
+.cocktail:hover::before{transform:rotate(45deg) scale(1.1)}
+.cocktail .num{
+  position:absolute;left:-6px;top:-12px;
+  background:var(--ink);color:var(--paper);
+  font-family:'Alfa Slab One',serif;font-size:14px;
+  padding:6px 10px 4px;
+  transform:rotate(-6deg);
+  box-shadow:3px 3px 0 var(--mustard);
+}
+.cocktail .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-bottom:1.5px dashed var(--ink);padding-bottom:8px}
+.cocktail .name{
+  font-family:'Alfa Slab One',serif;font-size:26px;color:var(--ink);letter-spacing:-.5px;
+}
+.cocktail .price{
+  font-family:'Yeseva One',serif;font-style:italic;color:var(--blood);font-size:24px;white-space:nowrap;
+}
+.cocktail .ing{
+  margin-top:12px;
+  font-family:'Cutive Mono',monospace;font-size:13.5px;letter-spacing:.4px;
+  color:var(--ink-soft);
+  text-transform:lowercase;
+}
+.cocktail .ing::before{content:"·  ";color:var(--teal);font-weight:bold}
+.cocktail .tag{
+  margin-top:14px;display:inline-block;
+  font-family:'Special Elite',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal);border:1px solid var(--teal);padding:3px 8px;
+}
+@media (max-width:780px){.menu-grid{grid-template-columns:1fr}}
+
+/* ---------- VIBE ---------- */
+.vibe{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+.vibe::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(236,223,196,.05) 1px, transparent 1.6px);
+  background-size:8px 8px;pointer-events:none;
+}
+.vibe .section-tag{color:var(--mustard)}
+.vibe .section-tag::before,.vibe .section-tag::after{background:var(--mustard)}
+.vibe .section-title{color:var(--paper)}
+.vibe .section-title .red{color:var(--blood)}
+.vibe .section-title .it{color:var(--mustard)}
+.vibe-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:center}
+.vibe p{
+  font-family:'Special Elite',monospace;font-size:17px;line-height:1.7;
+  color:var(--paper-2);margin-bottom:18px;
+}
+.vibe .pull{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:900;
+  color:var(--mustard);font-size:26px;line-height:1.2;
+  border-left:3px solid var(--blood);padding-left:18px;
+  margin:24px 0;
+}
+.vibe-photos{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vibe-photo{
+  aspect-ratio:4/5;
+  background-size:cover;background-position:center;
+  border:2px solid var(--paper-2);
+  filter: sepia(.4) contrast(1.1) saturate(.9);
+  position:relative;overflow:hidden;
+  transition: transform .35s ease, filter .35s ease;
+}
+.vibe-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(15,107,102,.25), rgba(26,20,16,.55));
+  mix-blend-mode:multiply;
+}
+.vibe-photo:nth-child(odd){transform:rotate(-1.2deg)}
+.vibe-photo:nth-child(even){transform:rotate(1.4deg)}
+.vibe-photo:hover{transform:rotate(0) scale(1.03);filter:sepia(.1) contrast(1.15) saturate(1.1)}
+.vibe-photo .cap{
+  position:absolute;left:10px;bottom:10px;z-index:2;
+  background:var(--paper);color:var(--ink);
+  font-family:'Special Elite',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  padding:3px 8px;border:1.5px solid var(--ink);
+}
+@media (max-width:900px){.vibe-grid{grid-template-columns:1fr}}
+
+/* ---------- GALLERY ---------- */
+.gallery{background:var(--paper)}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  grid-auto-rows:170px;
+}
+.gphoto{
+  position:relative;overflow:hidden;
+  background-size:cover;background-position:center;
+  border:2.5px solid var(--ink);
+  box-shadow:5px 5px 0 var(--ink);
+  filter:contrast(1.05) saturate(.85) sepia(.18);
+  transition:transform .3s ease, filter .3s ease, box-shadow .3s ease;
+}
+.gphoto::after{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(26,20,16,.25) 1px, transparent 1.6px);
+  background-size:5px 5px;mix-blend-mode:multiply;opacity:.55;
+  transition:opacity .3s ease;
+}
+.gphoto:hover{filter:contrast(1.1) saturate(1) sepia(.05);transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--blood)}
+.gphoto:hover::after{opacity:.1}
+.gphoto.tall{grid-row:span 2}
+.gphoto.wide{grid-column:span 2}
+@media (max-width:900px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+}
+
+/* ---------- VISIT ---------- */
+.visit{background:var(--paper-2);position:relative}
+.visit::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg, transparent 0 18px, rgba(26,20,16,.04) 18px 19px);
+  pointer-events:none;
+}
+.visit-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px}
+.visit-card{
+  background:var(--paper-3);border:2.5px solid var(--ink);
+  padding:30px 28px;box-shadow:8px 8px 0 var(--ink);
+}
+.visit-card h3{font-size:32px;color:var(--blood);margin-bottom:18px}
+.visit-card .item{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:10px 0;border-bottom:1.5px dashed var(--ink);
+  font-family:'Cutive Mono',monospace;font-size:15px;
+}
+.visit-card .item span:last-child{color:var(--ink-soft)}
+.visit-card .lbl{
+  font-family:'Special Elite',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal);
+}
+.visit-card .contact{
+  margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px;
+}
+.visit-card .contact .k{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px}
+.visit-card .contact .v{font-family:'Yeseva One',serif;font-style:italic;color:var(--ink);font-size:18px}
+
+.visit-poster{
+  position:relative;
+  aspect-ratio: 3 / 4;
+  background:var(--teal);
+  color:var(--paper-3);
+  border:3px solid var(--ink);
+  box-shadow:10px 10px 0 var(--blood), 10px 10px 0 3px var(--ink);
+  padding:30px 26px;
+  overflow:hidden;
+  transform:rotate(-1.5deg);
+}
+.visit-poster::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(236,223,196,.18) 1.4px, transparent 2px);
+  background-size:9px 9px;
+  pointer-events:none;
+}
+.visit-poster .pa{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--mustard)}
+.visit-poster .pb{font-family:'Alfa Slab One',serif;font-size:54px;line-height:.9;color:var(--paper-3);margin-top:12px;text-shadow:4px 4px 0 var(--ink)}
+.visit-poster .pc{font-family:'Yeseva One',serif;font-style:italic;color:var(--mustard);font-size:22px;margin-top:14px}
+.visit-poster .pd{
+  position:absolute;left:26px;right:26px;bottom:26px;
+  font-family:'Cutive Mono',monospace;font-size:13px;color:var(--paper-3);
+  border-top:1.5px dashed var(--paper-3);padding-top:14px;
+}
+.visit-poster .skull{
+  position:absolute;right:20px;bottom:90px;font-size:60px;color:var(--mustard);transform:rotate(12deg);opacity:.85;
+  font-family:'Yeseva One',serif;
+}
+@media (max-width:900px){.visit-grid{grid-template-columns:1fr}.visit-card .contact{grid-template-columns:1fr}}
+
+/* ---------- FOOTER ---------- */
+footer{
+  background:var(--ink);color:var(--paper-2);
+  padding:50px 28px 30px;
+}
+.foot-grid{
+  max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;align-items:start;
+}
+footer h4{font-family:'Alfa Slab One',serif;font-size:22px;color:var(--mustard);margin-bottom:14px}
+footer p, footer a, footer li{font-family:'Cutive Mono',monospace;font-size:14px;color:var(--paper-2);text-decoration:none;line-height:1.8}
+footer a:hover{color:var(--mustard)}
+footer ul{list-style:none}
+.foot-mark{font-family:'Alfa Slab One',serif;font-size:36px;color:var(--blood);text-shadow:3px 3px 0 var(--paper-2)}
+.foot-mark .it{font-family:'Yeseva One',serif;font-style:italic;color:var(--mustard);text-shadow:none;display:block;font-size:24px;margin-top:4px}
+.foot-bottom{
+  max-width:1240px;margin:38px auto 0;padding-top:18px;
+  border-top:1.5px dashed var(--paper-2);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:'Special Elite',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--paper-2);
+}
+@media (max-width:780px){.foot-grid{grid-template-columns:1fr}}
+
+/* ---------- REVEAL MOTION ---------- */
+.reveal{opacity:0;transform:translateY(28px) rotate(-.4deg);transition:opacity .8s ease, transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0) rotate(0)}
+.reveal-delay-1{transition-delay:.08s}
+.reveal-delay-2{transition-delay:.16s}
+.reveal-delay-3{transition-delay:.24s}
+.reveal-delay-4{transition-delay:.32s}
+.reveal-delay-5{transition-delay:.4s}
+.reveal-delay-6{transition-delay:.48s}
+
+/* tiny scribble divider */
+.scribble{
+  height:24px;width:140px;margin:14px 0 0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 24'><path d='M2 14 Q 14 2 26 14 T 50 14 T 74 14 T 98 14 T 122 14 T 138 14' stroke='%231a1410' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat:no-repeat;background-size:contain;
+}
+
+/* selection */
+::selection{background:var(--blood);color:var(--paper-3)}
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="nav">
+  <a href="#" class="wordmark" style="text-decoration:none">
+    <span class="w1">MAUI</span>
+    <span class="dot"></span>
+    <span class="w2">Brooklyn</span>
+  </a>
+  <ul>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#menu">Drinks</a></li>
+    <li><a href="#vibe">Vibe</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a class="resv" href="#visit">Reservation</a>
+</nav>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <span class="ding ding-1">✺</span>
+  <span class="ding ding-2">❖</span>
+  <span class="ding ding-3">✸</span>
+
+  <div class="hero-grid">
+    <div>
+      <span class="kicker reveal">Issue №<b>11</b> · A Tiki Affair · Est. Myrtle Ave</span>
+      <h1 class="reveal reveal-delay-1">
+        <span class="maui">MAUI</span>
+        <span class="brooklyn">in <span class="amp">&amp;</span> Brooklyn</span>
+      </h1>
+      <p class="tagline reveal reveal-delay-2">
+        Caribbean <em>×</em> Hawaiian Tiki Kitchen &amp; Bar.<br/>
+        After dark. After hours. After the rain.
+      </p>
+      <div class="addr reveal reveal-delay-3">
+        ✦ &nbsp; 66-48 Myrtle Ave · Brooklyn NY &nbsp; ✦
+      </div>
+      <div class="ctas reveal reveal-delay-4">
+        <a class="btn btn-primary" href="#visit">Book a Table</a>
+        <a class="btn btn-ghost" href="#menu">See the Menu</a>
+      </div>
+      <div class="scribble reveal reveal-delay-5"></div>
+    </div>
+
+    <div class="cover reveal reveal-delay-2 burn">
+      <div class="ph"></div>
+      <span class="stamp">Vol. 1 · Late Edition</span>
+      <span class="price-tag">$0.25 a Sip</span>
+      <div class="title">
+        <span class="a">A Pulp Account of —</span>
+        <span class="b">RUM,<br/>FIRE &amp;<br/>THE PACIFIC</span>
+        <span class="c">A bar story · told in 8 drinks</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============== ABOUT ============== -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="section-tag">Chapter One — The Setup</span>
+      <h2 class="section-title">Two oceans, <span class="it">one</span> <span class="red">back room.</span></h2>
+      <p>
+        <span class="drop">M</span>aui Brooklyn is what happens when a Port-au-Prince kitchen and a Honolulu beach bar walk into a Bushwick storefront and refuse to leave. We slow-cook the Caribbean — jerk, escovitch, sofrito, scotch bonnet — and pour it shoulder-to-shoulder with the long, syrupy ghosts of Don the Beachcomber and Trader Vic. The result reads like a paperback you couldn't put down: salt, smoke, citrus, and rum dark enough to keep secrets.
+      </p>
+      <p>
+        Step in off Myrtle Avenue and the air changes — bamboo, cane sugar, a fan turning slow overhead. Our cocktails are built one at a time, ingredients hand-cut, ice carved, no shortcuts. The kitchen runs late. The records run later. Bring a friend, an alibi, or both. We open the door at five and we don't ask questions.
+      </p>
+      <div class="scribble"></div>
+    </div>
+
+    <aside class="matchbook reveal reveal-delay-2">
+      <div class="strike"></div>
+      <h3>STRIKE HERE</h3>
+      <div class="sub">— Maui Brooklyn · Light Up the Night —</div>
+      <ul>
+        <li><span>Rums on the shelf</span><span>47</span></li>
+        <li><span>Hours we keep</span><span>Late</span></li>
+        <li><span>Pineapples per week</span><span>~120</span></li>
+        <li><span>House motto</span><span>Aloha, kid.</span></li>
+      </ul>
+      <div class="foot">Compliments of the House · MB</div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============== COCKTAIL MENU ============== -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <div>
+        <span class="section-tag">Chapter Two — The Evidence</span>
+        <h2 class="section-title">Eight <span class="red">cocktails.</span><br/><span class="it">No alibi required.</span></h2>
+      </div>
+      <p class="lede">
+        Read 'em like a confession. Each one's a small crime — committed nightly, in a tiki glass, against a hard week. Garnishes provided. Restraint optional.
+      </p>
+    </div>
+
+    <div class="menu-grid">
+
+      <article class="cocktail reveal">
+        <span class="num">№ 01</span>
+        <div class="row"><h3 class="name">Piña Colada</h3><span class="price">$14</span></div>
+        <p class="ing">rum · coconut · pineapple</p>
+        <span class="tag">House Classic</span>
+      </article>
+
+      <article class="cocktail reveal reveal-delay-1">
+        <span class="num">№ 02</span>
+        <div class="row"><h3 class="name">Brooklyn Mai Tai</h3><span class="price">$16</span></div>
+        <p class="ing">aged rum · orgeat · lime · orange curaçao</p>
+        <span class="tag">Bartender's Pick</span>
+      </article>
+
+      <article class="cocktail reveal reveal-delay-2">
+        <span class="num">№ 03</span>
+        <div class="row"><h3 class="name">Blue Hawaii</h3><span class="price">$15</span></div>
+        <p class="ing">vodka · rum · blue curaçao · pineapple</p>
+        <span class="tag">Photogenic</span>
+      </article>
+
+      <article class="cocktail reveal reveal-delay-3">
+        <span class="num">№ 04</span>
+        <div class="row"><h3 class="name">Lava Flow</h3><span class="price">$15</span></div>
+        <p class="ing">strawberry · coconut rum · pineapple</p>
+        <span class="tag">Frozen</span>
+      </article>
+
+      <article class="cocktail reveal">
+        <span class="num">№ 05</span>
+        <div class="row"><h3 class="name">Pineapple Margarita</h3><span class="price">$15</span></div>
+        <p class="ing">tequila · pineapple · lime · agave</p>
+        <span class="tag">Sour Side</span>
+      </article>
+
+      <article class="cocktail reveal reveal-delay-1">
+        <span class="num">№ 06</span>
+        <div class="row"><h3 class="name">Spicy Mango Paloma</h3><span class="price">$15</span></div>
+        <p class="ing">tequila · mango · grapefruit · jalapeño</p>
+        <span class="tag">Some Heat</span>
+      </article>
+
+      <article class="cocktail reveal reveal-delay-2">
+        <span class="num">№ 07</span>
+        <div class="row"><h3 class="name">Chi Chi</h3><span class="price">$14</span></div>
+        <p class="ing">vodka · coconut · pineapple</p>
+        <span class="tag">Beachy</span>
+      </article>
+
+      <article class="cocktail reveal reveal-delay-3">
+        <span class="num">№ 08</span>
+        <div class="row"><h3 class="name">Painkiller Williamsburg</h3><span class="price">$15</span></div>
+        <p class="ing">dark rum · pineapple · orange · coconut · nutmeg</p>
+        <span class="tag">Cure-All</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== VIBE ============== -->
+<section class="vibe" id="vibe">
+  <div class="wrap">
+    <div class="vibe-grid">
+      <div class="reveal">
+        <span class="section-tag">Chapter Three — The Atmosphere</span>
+        <h2 class="section-title">A <span class="it">dim</span> room <span class="red">with intent.</span></h2>
+        <p>
+          Low light. Wicker. A fan you can hear. Records you can feel. We built Maui Brooklyn for the after-shift crowd and the off-the-clock romantics — the ones who treat a Tuesday like a holiday and a Saturday like a misdemeanor.
+        </p>
+        <div class="pull">
+          “Walked in for a Mai Tai. Walked out three hours later, vaguely engaged.”<br>
+          <span style="font-family:'Special Elite',monospace;font-style:normal;font-size:12px;letter-spacing:3px;color:var(--paper-2);text-transform:uppercase">— Regular, name withheld</span>
+        </div>
+        <p>
+          Live DJ Fridays. Vinyl Sundays. Hot food until close. Bring the date. Bring the band. Just bring something.
+        </p>
+      </div>
+
+      <div class="vibe-photos">
+        <div class="vibe-photo reveal reveal-delay-1" style="background-image:url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=700&q=70')">
+          <span class="cap">Back Bar</span>
+        </div>
+        <div class="vibe-photo reveal reveal-delay-2" style="background-image:url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=700&q=70')">
+          <span class="cap">House Pour</span>
+        </div>
+        <div class="vibe-photo reveal reveal-delay-3" style="background-image:url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=700&q=70')">
+          <span class="cap">10:42 PM</span>
+        </div>
+        <div class="vibe-photo reveal reveal-delay-4" style="background-image:url('https://images.unsplash.com/photo-1485872299712-c22dc9e8e25b?auto=format&fit=crop&w=700&q=70')">
+          <span class="cap">The Booth</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== GALLERY ============== -->
+<section class="gallery">
+  <div class="wrap">
+    <span class="section-tag reveal">Chapter Four — The Photographs</span>
+    <h2 class="section-title reveal">Pictures, <span class="it">mostly</span> <span class="red">circumstantial.</span></h2>
+
+    <div class="gallery-grid">
+      <div class="gphoto tall reveal" style="background-image:url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=700&q=70')"></div>
+      <div class="gphoto reveal reveal-delay-1" style="background-image:url('https://images.unsplash.com/photo-1587223962930-cb7f31384c19?auto=format&fit=crop&w=700&q=70')"></div>
+      <div class="gphoto reveal reveal-delay-2" style="background-image:url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=700&q=70')"></div>
+      <div class="gphoto wide reveal reveal-delay-3" style="background-image:url('https://images.unsplash.com/photo-1546171753-97d7676e4602?auto=format&fit=crop&w=900&q=70')"></div>
+      <div class="gphoto reveal reveal-delay-2" style="background-image:url('https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=70')"></div>
+      <div class="gphoto tall reveal reveal-delay-3" style="background-image:url('https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=700&q=70')"></div>
+      <div class="gphoto reveal reveal-delay-4" style="background-image:url('https://images.unsplash.com/photo-1559526324-c1f275fbfa32?auto=format&fit=crop&w=700&q=70')"></div>
+      <div class="gphoto reveal reveal-delay-5" style="background-image:url('https://images.unsplash.com/photo-1497644083578-611b798c60f3?auto=format&fit=crop&w=700&q=70')"></div>
+      <div class="gphoto wide reveal reveal-delay-4" style="background-image:url('https://images.unsplash.com/photo-1525268323446-0505b6fe7778?auto=format&fit=crop&w=900&q=70')"></div>
+      <div class="gphoto reveal reveal-delay-5" style="background-image:url('https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=700&q=70')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VISIT ============== -->
+<section class="visit" id="visit">
+  <div class="wrap visit-grid">
+    <div class="reveal">
+      <span class="section-tag">Chapter Five — The Address</span>
+      <h2 class="section-title">Find <span class="red">us</span> <span class="it">after dark.</span></h2>
+
+      <div class="visit-card">
+        <h3>Hours of Operation</h3>
+        <div class="item"><span class="lbl">Mon — Thu</span><span>5:00 PM – 12:00 AM</span></div>
+        <div class="item"><span class="lbl">Friday</span><span>5:00 PM –  2:00 AM</span></div>
+        <div class="item"><span class="lbl">Saturday</span><span>12:00 PM –  2:00 AM</span></div>
+        <div class="item"><span class="lbl">Sunday</span><span>12:00 PM – 12:00 AM</span></div>
+
+        <div class="contact">
+          <div>
+            <span class="k">The Address</span>
+            <span class="v">66-48 Myrtle Ave<br/>Brooklyn, NY</span>
+          </div>
+          <div>
+            <span class="k">By Telephone</span>
+            <span class="v">(718) 555-0142</span>
+            <span class="k" style="margin-top:12px">By Letter</span>
+            <span class="v">hello@mauibrooklyn.com</span>
+          </div>
+        </div>
+
+        <div style="margin-top:24px">
+          <a class="btn btn-primary" href="mailto:hello@mauibrooklyn.com">Book a Table</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="visit-poster reveal reveal-delay-2 burn">
+      <div class="pa">— A Public Notice —</div>
+      <div class="pb">DOORS<br/>OPEN<br/>AT FIVE.</div>
+      <div class="pc">Earlier on weekends, friend.</div>
+      <span class="skull">☠</span>
+      <div class="pd">
+        Maui Brooklyn · 66-48 Myrtle Ave<br/>
+        Walk-ins welcome. Trouble, less so.
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-mark">MAUI BROOKLYN<span class="it">— Caribbean × Hawaiian —</span></div>
+      <p style="margin-top:18px;max-width:380px">
+        A Pacific-Caribbean tiki kitchen &amp; bar on Myrtle Avenue. Loud nights, slow drinks, hot food. The whole back of the house says hello.
+      </p>
+    </div>
+    <div>
+      <h4>The Place</h4>
+      <ul>
+        <li>66-48 Myrtle Ave</li>
+        <li>Brooklyn, NY</li>
+        <li>(718) 555-0142</li>
+        <li>hello@mauibrooklyn.com</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Wander Off</h4>
+      <ul>
+        <li><a href="#menu">Cocktail Menu</a></li>
+        <li><a href="#vibe">The Vibe</a></li>
+        <li><a href="#visit">Hours &amp; Visit</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Private Events</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© Maui Brooklyn · MMXXVI</span>
+    <span>Drink responsibly · Tip generously · Stay late</span>
+  </div>
+</footer>
+
+<script>
+/* ===== Reveal on scroll ===== */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(e=>e.classList.add('in')); return;
+  }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(e=>io.observe(e));
+})();
+
+/* ===== Subtle parallax on hero cover ===== */
+(function(){
+  const cover = document.querySelector('.cover');
+  const dings = document.querySelectorAll('.ding');
+  if(!cover) return;
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    if(y < 900){
+      cover.style.transform = `rotate(${2 - y*0.004}deg) translateY(${y*0.06}px)`;
+      dings.forEach((d,i)=>{
+        d.style.transform = `translateY(${y * (0.04 + i*0.02)}px) rotate(${(i%2?1:-1)*(8 + y*0.01)}deg)`;
+      });
+    }
+  }, {passive:true});
+})();
+
+/* ===== Cocktail card tilt on mouse-move ===== */
+(function(){
+  document.querySelectorAll('.cocktail').forEach(c=>{
+    c.addEventListener('mousemove', (e)=>{
+      const r = c.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - .5;
+      const y = (e.clientY - r.top)/r.height - .5;
+      c.style.transform = `translate(${-x*4}px, ${-y*4 - 3}px) rotate(${x*.6}deg)`;
+    });
+    c.addEventListener('mouseleave', ()=>{
+      c.style.transform = '';
+    });
+  });
+})();
+
+/* ===== Smooth scroll for nav anchors ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href');
+    if(id.length>1){
+      const el = document.querySelector(id);
+      if(el){e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'});}
+    }
+  });
+});
+</script>
+</body>
+</html>
