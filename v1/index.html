@@ -124,15 +124,10 @@
     background:linear-gradient(135deg,var(--orange),var(--pink) 50%,var(--ocean));
     box-shadow:0 40px 80px -30px rgba(0,0,0,.7);
   }
-  .about-visual::before{
-    content:"";position:absolute;inset:0;
-    background:
-      radial-gradient(circle at 30% 30%,rgba(242,199,68,.4),transparent 50%),
-      radial-gradient(circle at 70% 70%,rgba(27,154,170,.4),transparent 50%);
-  }
+  .about-visual img{width:100%;height:100%;object-fit:cover;display:block}
   .about-visual::after{
-    content:"🌺";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-size:200px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.4));
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.5));
   }
 
   /* PILLARS */
@@ -171,15 +166,33 @@
     text-align:center;
   }
   .vibe-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
-  @media(max-width:760px){.vibe-photos{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:900px){.vibe-photos{grid-template-columns:repeat(2,1fr)}}
   .vibe-photo{
-    aspect-ratio:1;border-radius:16px;
+    aspect-ratio:1;border-radius:16px;overflow:hidden;position:relative;
     background:linear-gradient(135deg,var(--pink),var(--orange));
-    display:flex;align-items:center;justify-content:center;font-size:64px;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.55);
   }
-  .vibe-photo:nth-child(2){background:linear-gradient(135deg,var(--teal),var(--ocean))}
-  .vibe-photo:nth-child(3){background:linear-gradient(135deg,var(--yellow),var(--orange))}
-  .vibe-photo:nth-child(4){background:linear-gradient(135deg,var(--green),var(--teal))}
+  .vibe-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+  .vibe-photo:hover img{transform:scale(1.06)}
+  .vibe-photo .cap{
+    position:absolute;left:14px;bottom:14px;
+    font-family:'Satisfy',cursive;font-size:22px;color:#fff;
+    text-shadow:0 2px 12px rgba(0,0,0,.65);
+  }
+
+  /* gallery — wide */
+  .gallery{background:#0d0e1a;padding:120px 32px}
+  .gal-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:160px;gap:14px;margin-top:48px;
+  }
+  @media(max-width:900px){.gal-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
+  .gal{position:relative;overflow:hidden;border-radius:14px;background:#1a1a2e}
+  .gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+  .gal:hover img{transform:scale(1.05)}
+  .gal.tall{grid-row:span 2}
+  .gal.wide{grid-column:span 2}
+  .gal.big{grid-column:span 2;grid-row:span 2}
 
   /* CONTACT */
   .contact{background:#0d0e1a;text-align:center}
@@ -251,7 +264,7 @@
       <p class="lead">Maui Brooklyn brings together the smoky, citrus-forward soul of the Caribbean and the sweet, savory richness of Hawaii under one tropical roof. Think jerk-glazed kalua pork, plantain poke, and rum-laced tiki cocktails poured next to ice-cold Hawaiian lagers.</p>
       <p class="lead">Every plate is built for sharing. Every drink is built for the long, slow sunset that never actually sets in Brooklyn.</p>
     </div>
-    <div class="about-visual"></div>
+    <div class="about-visual"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80&auto=format&fit=crop" alt="Caribbean Hawaiian plate"></div>
   </div>
 </section>
 
@@ -294,8 +307,24 @@
       <div class="dish"><div class="meta"><span>Raw Bar</span><span>$22</span></div><div class="name">Plantain Poke Bowl</div><div class="desc">Ahi tuna, soy-citrus marinade, sweet plantain chips, mango, scotch bonnet aioli.</div></div>
       <div class="dish"><div class="meta"><span>Large Plate</span><span>$34</span></div><div class="name">Jerk-Glazed Whole Snapper</div><div class="desc">Coconut rice, charred pineapple salsa, fried sweet plantain, lime.</div></div>
       <div class="dish"><div class="meta"><span>Skewers</span><span>$18</span></div><div class="name">Huli Huli Chicken Skewers</div><div class="desc">Caribbean spice rub, pineapple-soy glaze, scotch bonnet honey.</div></div>
-      <div class="dish"><div class="meta"><span>Cocktail</span><span>$16</span></div><div class="name">Brooklyn Mai Tai</div><div class="desc">Aged rhum agricole, Jamaican overproof, orgeat, fresh lime, dark float.</div></div>
-      <div class="dish"><div class="meta"><span>Cocktail</span><span>$15</span></div><div class="name">Painkiller, Williamsburg</div><div class="desc">Pusser's rum, pineapple, coconut cream, fresh nutmeg, served in a tiki mug.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="bar" style="padding-top:60px">
+  <div class="container">
+    <span class="tag">From the Bar</span>
+    <h2>Tropical drinks. <span class="accent">Done right.</span></h2>
+    <p class="lead">Tiki classics, Caribbean coolers, and tequila-forward originals. Fresh-pressed juice, scratch syrups, hand-cut ice — and yes, real coconut cream in the piña coladas.</p>
+    <div class="menu-grid">
+      <div class="dish"><div class="meta"><span>Tiki Classic</span><span>$14</span></div><div class="name">Piña Colada</div><div class="desc">Aged rum, fresh pineapple, real coconut cream, served in a carved pineapple.</div></div>
+      <div class="dish"><div class="meta"><span>Tiki Classic</span><span>$16</span></div><div class="name">Brooklyn Mai Tai</div><div class="desc">Aged rhum agricole, Jamaican overproof, orgeat, fresh lime, dark float.</div></div>
+      <div class="dish"><div class="meta"><span>Hawaiian</span><span>$15</span></div><div class="name">Blue Hawaii</div><div class="desc">Light rum, vodka, pineapple, blue curaçao, fresh lime — the original Honolulu pour.</div></div>
+      <div class="dish"><div class="meta"><span>Hawaiian</span><span>$15</span></div><div class="name">Lava Flow</div><div class="desc">Strawberry-banana rum colada, layered. The most Instagrammed drink on the menu.</div></div>
+      <div class="dish"><div class="meta"><span>Tequila</span><span>$15</span></div><div class="name">Pineapple Margarita</div><div class="desc">Reposado tequila, fresh-pressed pineapple, lime, smoked Tajín salt rim.</div></div>
+      <div class="dish"><div class="meta"><span>Tequila</span><span>$15</span></div><div class="name">Spicy Mango Paloma</div><div class="desc">Tequila blanco, mango purée, jalapeño, lime, grapefruit soda.</div></div>
+      <div class="dish"><div class="meta"><span>Vodka</span><span>$14</span></div><div class="name">Chi Chi</div><div class="desc">Vodka, pineapple, coconut cream — the lighter cousin of the Piña Colada.</div></div>
+      <div class="dish"><div class="meta"><span>Caribbean</span><span>$15</span></div><div class="name">Painkiller, Williamsburg</div><div class="desc">Pusser's rum, pineapple, coconut cream, fresh nutmeg, served in a tiki mug.</div></div>
     </div>
   </div>
 </section>
@@ -306,10 +335,29 @@
     <h2>Tiki bar by night. <span class="accent">Backyard luau by day.</span></h2>
     <p class="lead" style="margin-left:auto;margin-right:auto">Lush interiors, warm wood, low-lit booths, and a bar built around the rum. By 11 the music turns up, the room turns over, and Maui becomes a destination.</p>
     <div class="vibe-photos">
-      <div class="vibe-photo">🍍</div>
-      <div class="vibe-photo">🌊</div>
-      <div class="vibe-photo">🔥</div>
-      <div class="vibe-photo">🌴</div>
+      <div class="vibe-photo"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop" alt="Tropical cocktail"><div class="cap">Mai Tai</div></div>
+      <div class="vibe-photo"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop" alt="Poke bowl"><div class="cap">Poke</div></div>
+      <div class="vibe-photo"><img src="https://images.unsplash.com/photo-1605270012917-bf357a1fae9e?w=800&q=80&auto=format&fit=crop" alt="Tiki cocktail"><div class="cap">Tiki Mug</div></div>
+      <div class="vibe-photo"><img src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?w=800&q=80&auto=format&fit=crop" alt="Tropical leaves"><div class="cap">The Room</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <span class="tag">The Look</span>
+    <h2>Inside the <span class="accent">room.</span></h2>
+    <p class="lead">Lush plants. Warm wood. Low light. Big drinks. A grid from inside the kitchen, behind the bar, and around the room.</p>
+    <div class="gal-grid">
+      <div class="gal big"><img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1400&q=80&auto=format&fit=crop" alt="Bar shelf"></div>
+      <div class="gal tall"><img src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=900&q=80&auto=format&fit=crop" alt="Pina Colada"></div>
+      <div class="gal"><img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600&q=80&auto=format&fit=crop" alt="Pineapple"></div>
+      <div class="gal"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80&auto=format&fit=crop" alt="Plate"></div>
+      <div class="gal"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80&auto=format&fit=crop" alt="Margarita"></div>
+      <div class="gal wide"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop" alt="Beach"></div>
+      <div class="gal"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80&auto=format&fit=crop" alt="Whole fish"></div>
+      <div class="gal"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80&auto=format&fit=crop" alt="Sunset palm"></div>
+      <div class="gal wide"><img src="https://images.unsplash.com/photo-1571805341302-f857810a2ce5?w=1200&q=80&auto=format&fit=crop" alt="Tropical bar"></div>
     </div>
   </div>
 </section>
