@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maui Brooklyn — Cycle Through Concepts</title>
-<meta name="description" content="Maui Brooklyn — cycle through 4 site concept variants.">
+<meta name="description" content="Maui Brooklyn — cycle through 8 site concept variants.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -143,14 +143,14 @@
 <div class="bar">
   <div class="brand">Maui<span>Brooklyn</span></div>
   <div class="meta">
-    <div class="label">Concept <span id="idx">1</span> / 4</div>
+    <div class="label">Concept <span id="idx">1</span> / 8</div>
     <div class="title" id="title">Sunset Beach</div>
   </div>
   <div class="spacer"></div>
   <div class="dots" id="dots"></div>
   <div class="spacer"></div>
   <div class="ctrl">
-    <button class="btn play on" id="play" aria-label="auto-advance toggle"><span id="playLabel">Auto · 8s</span></button>
+    <button class="btn play" id="play" aria-label="auto-advance toggle"><span id="playLabel">Auto · Off</span></button>
     <a class="btn open" id="open" href="v1/" target="_blank" rel="noopener" aria-label="open current in new tab">Open ↗</a>
   </div>
 </div>
@@ -162,19 +162,23 @@
   <div class="slide" data-idx="1"><iframe data-src="../v2/" title="v2 Tiki After Dark" loading="lazy"></iframe></div>
   <div class="slide" data-idx="2"><iframe data-src="../v3/" title="v3 Island Market" loading="lazy"></iframe></div>
   <div class="slide" data-idx="3"><iframe data-src="../v4/" title="v4 Editorial Aloha" loading="lazy"></iframe></div>
+  <div class="slide" data-idx="4"><iframe data-src="../v5/" title="v5 Pacific Modern" loading="lazy"></iframe></div>
+  <div class="slide" data-idx="5"><iframe data-src="../v6/" title="v6 Polaroid Zine" loading="lazy"></iframe></div>
+  <div class="slide" data-idx="6"><iframe data-src="../v7/" title="v7 Brutalist Aloha" loading="lazy"></iframe></div>
+  <div class="slide" data-idx="7"><iframe data-src="../v8/" title="v8 Speakeasy Lanai" loading="lazy"></iframe></div>
 </div>
 
 <button class="edge prev" id="prev" aria-label="previous concept">‹</button>
 <button class="edge next" id="next" aria-label="next concept">›</button>
 
 <div class="hint">
-  <kbd>←</kbd> <kbd>→</kbd> switch · <kbd>Space</kbd> pause · <kbd>1</kbd>–<kbd>4</kbd> jump
+  <kbd>←</kbd> <kbd>→</kbd> switch · <kbd>Space</kbd> pause · <kbd>1</kbd>–<kbd>8</kbd> jump
 </div>
 
 <script>
 (function(){
-  const names = ['Sunset Beach','Tiki After Dark','Island Market','Editorial Aloha'];
-  const paths = ['../v1/','../v2/','../v3/','../v4/'];
+  const names = ['Sunset Beach','Tiki After Dark','Island Market','Editorial Aloha','Pacific Modern','Polaroid Zine','Brutalist Aloha','Speakeasy Lanai'];
+  const paths = ['../v1/','../v2/','../v3/','../v4/','../v5/','../v6/','../v7/','../v8/'];
   const slides = document.querySelectorAll('.slide');
   const iframes = document.querySelectorAll('.slide iframe');
   const dotsHost = document.getElementById('dots');
@@ -186,13 +190,14 @@
   const openLink = document.getElementById('open');
   const DURATION = 8000;
   let current = 0;
-  let playing = true;
+  let playing = false;
   let timer = null;
   let ticker = null;
   let progress = 0;
 
   // build dots
-  for (let i = 0; i < 4; i++) {
+  const COUNT = 8;
+  for (let i = 0; i < COUNT; i++) {
     const b = document.createElement('button');
     b.className = 'dot' + (i === 0 ? ' active' : '');
     b.setAttribute('aria-label', 'Go to ' + names[i]);
@@ -211,7 +216,7 @@
 
   function go(i, userInitiated) {
     if (i === current) return;
-    i = ((i % 4) + 4) % 4;
+    i = ((i % COUNT) + COUNT) % COUNT;
     slides[current].classList.remove('active');
     dots[current].classList.remove('active');
     current = i;
@@ -228,8 +233,8 @@
     else if (playing) resetTimer();
   }
 
-  function next() { go((current + 1) % 4); }
-  function prev() { go((current - 1 + 4) % 4); }
+  function next() { go((current + 1) % COUNT); }
+  function prev() { go((current - 1 + COUNT) % COUNT); }
 
   function startTimer() {
     stopTimer();
@@ -257,7 +262,7 @@
       startTimer();
     } else {
       playBtn.classList.remove('on');
-      playLabel.textContent = 'Paused';
+      playLabel.textContent = 'Auto · Off';
       stopTimer();
       fillEl.style.width = '0%';
     }
@@ -272,7 +277,7 @@
     if (e.key === 'ArrowRight') { next(); resetTimer(); }
     else if (e.key === 'ArrowLeft') { prev(); resetTimer(); }
     else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
-    else if (e.key >= '1' && e.key <= '4') { go(parseInt(e.key, 10) - 1, true); }
+    else if (e.key >= '1' && e.key <= '8') { go(parseInt(e.key, 10) - 1, true); }
   });
 
   // pause when tab not visible to save resources
@@ -280,8 +285,6 @@
     if (document.hidden && playing) stopTimer();
     else if (!document.hidden && playing) startTimer();
   });
-
-  startTimer();
 })();
 </script>
 
