@@ -90,6 +90,28 @@
     width:100%;height:100%;border:0;display:block;background:var(--ink);
   }
 
+  /* swipe rails — transparent edge zones above iframe, mobile only */
+  .rail{
+    position:absolute;top:0;bottom:0;width:0;z-index:6;
+    background:transparent;touch-action:pan-y;cursor:pointer;
+  }
+  .rail.l{left:0}
+  .rail.r{right:0}
+  @media(max-width:760px){
+    .rail{width:44px}
+  }
+  /* swipe hint chevron — subtle, mobile only */
+  .swipe-hint{
+    position:fixed;bottom:18px;right:18px;z-index:8;
+    background:rgba(13,15,31,.75);backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.15);border-radius:18px;
+    padding:8px 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(255,248,240,.85);pointer-events:none;
+    display:none;
+  }
+  @media(max-width:760px){.swipe-hint{display:block}}
+  .swipe-hint.fade{opacity:0;transition:opacity .8s ease}
+
   /* edge nav arrows */
   .edge{
     position:fixed;top:50%;transform:translateY(-50%);z-index:8;
@@ -158,6 +180,8 @@
 <div class="progress"><div class="fill" id="fill"></div></div>
 
 <div class="stage" id="stage">
+  <div class="rail l" id="railL" aria-label="swipe or tap previous"></div>
+  <div class="rail r" id="railR" aria-label="swipe or tap next"></div>
   <div class="slide active" data-idx="0"><iframe data-src="../v1/" title="v1 Sunset Beach" loading="eager"></iframe></div>
   <div class="slide" data-idx="1"><iframe data-src="../v2/" title="v2 Tiki After Dark" loading="lazy"></iframe></div>
   <div class="slide" data-idx="2"><iframe data-src="../v3/" title="v3 Island Market" loading="lazy"></iframe></div>
@@ -170,6 +194,8 @@
 
 <button class="edge prev" id="prev" aria-label="previous concept">‹</button>
 <button class="edge next" id="next" aria-label="next concept">›</button>
+
+<div class="swipe-hint" id="swipeHint">‹ Swipe edges to switch ›</div>
 
 <div class="hint">
   <kbd>←</kbd> <kbd>→</kbd> switch · <kbd>Space</kbd> pause · <kbd>1</kbd>–<kbd>8</kbd> jump
@@ -271,6 +297,61 @@
   document.getElementById('prev').addEventListener('click', () => { prev(); resetTimer(); });
   document.getElementById('next').addEventListener('click', () => { next(); resetTimer(); });
   playBtn.addEventListener('click', togglePlay);
+
+  // touch: swipe on edge rails, tap also advances
+  const railL = document.getElementById('railL');
+  const railR = document.getElementById('railR');
+  let touchStartX = 0, touchStartY = 0, touchStartT = 0;
+  const SWIPE_MIN = 40;   // px horizontal threshold
+  const TAP_MAX = 12;     // px movement still counts as tap
+  const TAP_MS = 350;     // max ms for tap
+
+  function attachSwipe(el, edgeDir) {
+    el.addEventListener('touchstart', (e) => {
+      const t = e.changedTouches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touchStartT = Date.now();
+    }, { passive: true });
+    el.addEventListener('touchend', (e) => {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      const dt = Date.now() - touchStartT;
+      const absX = Math.abs(dx), absY = Math.abs(dy);
+      // tap on rail → advance in the edge's direction
+      if (absX < TAP_MAX && absY < TAP_MAX && dt < TAP_MS) {
+        if (edgeDir === 'l') prev(); else next();
+        resetTimer();
+        return;
+      }
+      // horizontal swipe
+      if (absX > SWIPE_MIN && absX > absY * 1.4) {
+        if (dx > 0) prev(); else next();
+        resetTimer();
+      }
+    }, { passive: true });
+    // mouse click on rail (non-touch devices) — also advance
+    el.addEventListener('click', () => {
+      if (edgeDir === 'l') prev(); else next();
+      resetTimer();
+    });
+  }
+  attachSwipe(railL, 'l');
+  attachSwipe(railR, 'r');
+
+  // fade swipe hint after first interaction
+  const swipeHint = document.getElementById('swipeHint');
+  let hintHidden = false;
+  function hideHint() {
+    if (hintHidden) return;
+    hintHidden = true;
+    swipeHint.classList.add('fade');
+    setTimeout(() => { swipeHint.style.display = 'none'; }, 900);
+  }
+  railL.addEventListener('touchstart', hideHint, { passive: true });
+  railR.addEventListener('touchstart', hideHint, { passive: true });
+  setTimeout(hideHint, 6000);
 
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
