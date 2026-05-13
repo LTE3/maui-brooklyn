@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maui Brooklyn — Cycle Through Concepts</title>
+<meta name="description" content="Maui Brooklyn — cycle through 4 site concept variants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --yellow:#F2C744;--teal:#1B9AAA;--pink:#E84B8A;
+    --coral:#FF6B6B;--ocean:#0077B6;--orange:#F4845F;
+    --cream:#FFF8F0;--ink:#0d0f1f;
+  }
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:'Inter',sans-serif;background:var(--ink);color:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* top bar */
+  .bar{
+    position:fixed;top:0;left:0;right:0;z-index:10;
+    display:flex;align-items:center;gap:18px;
+    padding:12px 18px;background:rgba(13,15,31,.85);backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    height:64px;
+  }
+  .brand{
+    font-family:'Permanent Marker',cursive;font-size:26px;color:var(--yellow);
+    text-shadow:0 0 18px rgba(242,199,68,.4);line-height:1;
+    flex-shrink:0;
+  }
+  .brand span{font-family:'Satisfy',cursive;font-size:18px;color:var(--teal);margin-left:6px}
+  .meta{
+    display:flex;flex-direction:column;gap:2px;line-height:1.2;
+    margin-left:6px;flex-shrink:0;
+  }
+  .meta .label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,248,240,.55)}
+  .meta .title{font-size:14px;font-weight:600;color:var(--cream)}
+
+  .spacer{flex:1}
+
+  .dots{display:flex;gap:6px;align-items:center}
+  .dot{
+    width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.4);
+    background:transparent;cursor:pointer;padding:0;transition:all .25s ease;
+  }
+  .dot.active{background:var(--yellow);border-color:var(--yellow);width:28px;border-radius:5px;box-shadow:0 0 12px rgba(242,199,68,.6)}
+  .dot:hover{border-color:var(--yellow)}
+
+  .ctrl{
+    display:flex;gap:6px;align-items:center;flex-shrink:0;
+  }
+  .btn{
+    border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);
+    color:var(--cream);width:36px;height:36px;border-radius:8px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all .2s ease;font-size:18px;
+  }
+  .btn:hover{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+  .btn.play{width:auto;padding:0 14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .btn.play.on{background:var(--teal);color:var(--ink);border-color:var(--teal)}
+  .btn.open{width:auto;padding:0 14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+
+  /* progress bar */
+  .progress{
+    position:fixed;top:64px;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:9;
+  }
+  .progress .fill{
+    height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--yellow),var(--pink));
+    box-shadow:0 0 10px rgba(242,199,68,.6);transition:width .15s linear;
+  }
+
+  /* stage */
+  .stage{
+    position:absolute;top:64px;left:0;right:0;bottom:0;
+    overflow:hidden;background:var(--ink);
+  }
+  .slide{
+    position:absolute;inset:0;
+    opacity:0;pointer-events:none;
+    transition:opacity .5s ease;
+  }
+  .slide.active{opacity:1;pointer-events:auto}
+  .slide iframe{
+    width:100%;height:100%;border:0;display:block;background:var(--ink);
+  }
+
+  /* edge nav arrows */
+  .edge{
+    position:fixed;top:50%;transform:translateY(-50%);z-index:8;
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(13,15,31,.7);backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.18);
+    color:var(--cream);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    font-size:28px;font-weight:300;
+    transition:all .25s ease;
+    box-shadow:0 8px 24px rgba(0,0,0,.4);
+  }
+  .edge:hover{background:var(--yellow);color:var(--ink);border-color:var(--yellow);transform:translateY(-50%) scale(1.08)}
+  .edge.prev{left:18px}
+  .edge.next{right:18px}
+
+  /* mobile bar */
+  @media(max-width:760px){
+    .bar{padding:10px 12px;gap:10px;height:60px}
+    .brand{font-size:22px}
+    .brand span{display:none}
+    .meta{display:none}
+    .progress{top:60px}
+    .stage{top:60px}
+    .edge{width:44px;height:44px;font-size:22px}
+    .edge.prev{left:8px}.edge.next{right:8px}
+    .btn.play span{display:none}
+    .btn.open{padding:0 10px;font-size:10px}
+    .dots{gap:4px}
+    .dot{width:8px;height:8px}
+    .dot.active{width:22px}
+  }
+
+  /* keyboard hint */
+  .hint{
+    position:fixed;bottom:14px;left:50%;transform:translateX(-50%);
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    color:rgba(255,248,240,.4);z-index:7;pointer-events:none;
+    background:rgba(13,15,31,.6);padding:6px 14px;border-radius:20px;
+    backdrop-filter:blur(8px);
+  }
+  .hint kbd{
+    font-family:inherit;background:rgba(255,255,255,.08);padding:2px 6px;border-radius:3px;
+    border:1px solid rgba(255,255,255,.15);color:var(--cream);font-size:10px;margin:0 2px;
+  }
+  @media(max-width:760px){.hint{display:none}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand">Maui<span>Brooklyn</span></div>
+  <div class="meta">
+    <div class="label">Concept <span id="idx">1</span> / 4</div>
+    <div class="title" id="title">Sunset Beach</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="dots" id="dots"></div>
+  <div class="spacer"></div>
+  <div class="ctrl">
+    <button class="btn play on" id="play" aria-label="auto-advance toggle"><span id="playLabel">Auto · 8s</span></button>
+    <a class="btn open" id="open" href="v1/" target="_blank" rel="noopener" aria-label="open current in new tab">Open ↗</a>
+  </div>
+</div>
+
+<div class="progress"><div class="fill" id="fill"></div></div>
+
+<div class="stage" id="stage">
+  <div class="slide active" data-idx="0"><iframe data-src="../v1/" title="v1 Sunset Beach" loading="eager"></iframe></div>
+  <div class="slide" data-idx="1"><iframe data-src="../v2/" title="v2 Tiki After Dark" loading="lazy"></iframe></div>
+  <div class="slide" data-idx="2"><iframe data-src="../v3/" title="v3 Island Market" loading="lazy"></iframe></div>
+  <div class="slide" data-idx="3"><iframe data-src="../v4/" title="v4 Editorial Aloha" loading="lazy"></iframe></div>
+</div>
+
+<button class="edge prev" id="prev" aria-label="previous concept">‹</button>
+<button class="edge next" id="next" aria-label="next concept">›</button>
+
+<div class="hint">
+  <kbd>←</kbd> <kbd>→</kbd> switch · <kbd>Space</kbd> pause · <kbd>1</kbd>–<kbd>4</kbd> jump
+</div>
+
+<script>
+(function(){
+  const names = ['Sunset Beach','Tiki After Dark','Island Market','Editorial Aloha'];
+  const paths = ['../v1/','../v2/','../v3/','../v4/'];
+  const slides = document.querySelectorAll('.slide');
+  const iframes = document.querySelectorAll('.slide iframe');
+  const dotsHost = document.getElementById('dots');
+  const idxEl = document.getElementById('idx');
+  const titleEl = document.getElementById('title');
+  const fillEl = document.getElementById('fill');
+  const playBtn = document.getElementById('play');
+  const playLabel = document.getElementById('playLabel');
+  const openLink = document.getElementById('open');
+  const DURATION = 8000;
+  let current = 0;
+  let playing = true;
+  let timer = null;
+  let ticker = null;
+  let progress = 0;
+
+  // build dots
+  for (let i = 0; i < 4; i++) {
+    const b = document.createElement('button');
+    b.className = 'dot' + (i === 0 ? ' active' : '');
+    b.setAttribute('aria-label', 'Go to ' + names[i]);
+    b.addEventListener('click', () => go(i, true));
+    dotsHost.appendChild(b);
+  }
+  const dots = dotsHost.querySelectorAll('.dot');
+
+  // load first iframe immediately, others lazy on activation
+  iframes[0].src = iframes[0].dataset.src;
+
+  function ensureLoaded(i) {
+    const f = iframes[i];
+    if (!f.src) f.src = f.dataset.src;
+  }
+
+  function go(i, userInitiated) {
+    if (i === current) return;
+    i = ((i % 4) + 4) % 4;
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    ensureLoaded(current);
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    idxEl.textContent = (current + 1);
+    titleEl.textContent = names[current];
+    openLink.href = paths[current];
+    openLink.setAttribute('aria-label', 'open ' + names[current] + ' in new tab');
+    progress = 0;
+    fillEl.style.width = '0%';
+    if (userInitiated && playing) resetTimer();
+    else if (playing) resetTimer();
+  }
+
+  function next() { go((current + 1) % 4); }
+  function prev() { go((current - 1 + 4) % 4); }
+
+  function startTimer() {
+    stopTimer();
+    progress = 0;
+    fillEl.style.width = '0%';
+    ticker = setInterval(() => {
+      progress += 100;
+      fillEl.style.width = Math.min(100, (progress / DURATION) * 100) + '%';
+    }, 100);
+    timer = setTimeout(next, DURATION);
+  }
+  function stopTimer() {
+    if (timer) clearTimeout(timer);
+    if (ticker) clearInterval(ticker);
+    timer = null; ticker = null;
+  }
+  function resetTimer() {
+    if (playing) startTimer();
+  }
+  function togglePlay() {
+    playing = !playing;
+    if (playing) {
+      playBtn.classList.add('on');
+      playLabel.textContent = 'Auto · 8s';
+      startTimer();
+    } else {
+      playBtn.classList.remove('on');
+      playLabel.textContent = 'Paused';
+      stopTimer();
+      fillEl.style.width = '0%';
+    }
+  }
+
+  document.getElementById('prev').addEventListener('click', () => { prev(); resetTimer(); });
+  document.getElementById('next').addEventListener('click', () => { next(); resetTimer(); });
+  playBtn.addEventListener('click', togglePlay);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight') { next(); resetTimer(); }
+    else if (e.key === 'ArrowLeft') { prev(); resetTimer(); }
+    else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+    else if (e.key >= '1' && e.key <= '4') { go(parseInt(e.key, 10) - 1, true); }
+  });
+
+  // pause when tab not visible to save resources
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && playing) stopTimer();
+    else if (!document.hidden && playing) startTimer();
+  });
+
+  startTimer();
+})();
+</script>
+
+</body>
+</html>
