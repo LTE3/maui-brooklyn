@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maui Brooklyn · Logo · Lobster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Lobster&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#0e5a64;--mid:#168088;--deep:#063e45;
+    --yellow:#F2C744;--teal:#1B9AAA;--cream:#FFF8F0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:system-ui,sans-serif;color:var(--cream);
+    background:var(--primary);min-height:100vh;
+    overflow:hidden;position:relative;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:24px;
+  }
+  .bg-mesh{
+    position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(ellipse 60% 50% at 15% 20%, rgba(27,154,170,.55), transparent 70%),
+      radial-gradient(ellipse 50% 60% at 85% 30%, rgba(22,128,136,.5), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 80%, rgba(6,62,69,.6), transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 95%, rgba(242,199,68,.18), transparent 70%),
+      linear-gradient(180deg, var(--deep) 0%, var(--primary) 40%, var(--mid) 100%);
+    animation: meshShift 18s ease-in-out infinite;
+    background-size:200% 200%;
+  }
+  @keyframes meshShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+  .bg-waves{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5}
+  .bg-waves svg{position:absolute;left:0;width:200%;height:100%}
+  .bg-waves .w1{animation:drift 28s linear infinite}
+  .bg-waves .w2{animation:drift 42s linear infinite reverse;opacity:.6}
+  @keyframes drift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/></svg>");
+    opacity:.05;mix-blend-mode:overlay;
+  }
+  .logo{position:relative;z-index:2}
+  .maui{
+    font-family:'Permanent Marker',cursive;
+    font-size:clamp(120px,18vw,260px);color:var(--yellow);
+    line-height:.85;letter-spacing:-.01em;
+    text-shadow:0 8px 70px rgba(242,199,68,.55),0 3px 6px rgba(0,0,0,.5),0 0 140px rgba(242,199,68,.2);
+  }
+  .brooklyn{
+    font-family:Lobster, cursive;
+    font-size:clamp(56px,8vw,108px);
+    color:var(--teal);margin-top:-12px;
+    text-shadow:0 2px 22px rgba(27,154,170,.5),0 1px 4px rgba(0,0,0,.4);
+    line-height:1;
+  }
+  .label{
+    position:fixed;left:50%;bottom:30px;transform:translateX(-50%);
+    z-index:5;background:rgba(6,62,69,.55);backdrop-filter:blur(10px);
+    padding:10px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,248,240,.85);
+  }
+  .label b{color:var(--yellow);font-weight:700;margin-left:8px;letter-spacing:.2em}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+<div class="bg-waves">
+  <svg class="w1" viewBox="0 0 2000 800" preserveAspectRatio="none">
+    <path d="M0 400 Q 250 320 500 400 T 1000 400 T 1500 400 T 2000 400 L 2000 800 L 0 800 Z" fill="rgba(27,154,170,.22)"/>
+    <path d="M0 480 Q 250 420 500 480 T 1000 480 T 1500 480 T 2000 480 L 2000 800 L 0 800 Z" fill="rgba(22,128,136,.22)"/>
+  </svg>
+  <svg class="w2" viewBox="0 0 2000 800" preserveAspectRatio="none">
+    <path d="M0 360 Q 200 280 400 360 T 800 360 T 1200 360 T 1600 360 T 2000 360 L 2000 800 L 0 800 Z" fill="rgba(6,62,69,.35)"/>
+  </svg>
+</div>
+<div class="logo">
+  <div class="maui">Maui</div>
+  <div class="brooklyn">Brooklyn</div>
+</div>
+<div class="label">Brooklyn font<b>Lobster</b></div>
+</body>
+</html>
