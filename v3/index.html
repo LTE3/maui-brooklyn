@@ -129,7 +129,25 @@
   .fusion-card.alt{box-shadow:10px 10px 0 var(--teal)}
   .fusion-card.alt h3{color:var(--orange)}
   .fusion-card p{font-size:16px;line-height:1.7;color:#3a3a4a}
-  .fusion-card .ico{font-size:48px;margin-bottom:14px}
+  .fusion-card .ico{width:100%;aspect-ratio:16/10;margin-bottom:18px;overflow:hidden;border:2px solid var(--dark)}
+  .fusion-card .ico img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* cocktails grid */
+  .cock-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin-top:48px;border:2px solid var(--cream)}
+  .cock{padding:24px 22px;border-right:2px solid var(--cream);border-bottom:2px solid var(--cream);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .cock .nm{font-family:'Playfair Display',serif;font-size:20px;color:var(--cream);font-weight:700;line-height:1.2;margin-bottom:4px}
+  .cock .nt{font-size:12px;color:rgba(255,248,240,.7);letter-spacing:.04em}
+  .cock .pr{font-family:'Permanent Marker',cursive;font-size:26px;color:var(--yellow);line-height:1}
+
+  /* gallery */
+  .gallery{background:var(--cream);position:relative}
+  .gallery::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(90deg,var(--green) 0 14%,var(--yellow) 14% 28%,var(--orange) 28% 42%,var(--pink) 42% 56%,var(--coral) 56% 70%,var(--teal) 70% 84%,var(--ocean) 84% 100%)}
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:48px;border:2px solid var(--dark);padding:4px;background:var(--dark)}
+  @media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
+  .gal-grid img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:all .3s ease}
+  .gal-grid img:hover{transform:scale(1.03);filter:saturate(1.15)}
+  .gal-grid .wide{grid-column:span 2;aspect-ratio:2/1}
+  @media(max-width:900px){.gal-grid .wide{grid-column:span 2}}
 
   /* menu */
   .menu{background:var(--cream)}
@@ -184,6 +202,7 @@
     <li><a href="#fusion">Fusion</a></li>
     <li><a href="#kitchen">Kitchen</a></li>
     <li><a href="#bar">Bar</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#visit">Visit</a></li>
   </ul>
   <a href="#visit" class="cta">Reserve</a>
@@ -219,12 +238,12 @@
     <p class="lead">Maui Brooklyn isn't fusion for the sake of it. It's the natural pairing of two food cultures that share the same DNA: bright citrus, slow-smoked meats, fresh fish off the boat, sweet tropical fruit, and a love of cooking over open fire. Caribbean fire. Hawaiian sun. Brooklyn table.</p>
     <div class="fusion-grid">
       <div class="fusion-card">
-        <div class="ico">🌶️</div>
+        <div class="ico"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop" alt="Caribbean jerk dish"></div>
         <h3>Caribbean</h3>
         <p>Jerk, curry, scotch bonnet, allspice, slow-pit smoke. Trinidad doubles, Jamaican oxtail, Haitian griot, Bajan flying fish — the whole island chain on one menu.</p>
       </div>
       <div class="fusion-card alt">
-        <div class="ico">🌺</div>
+        <div class="ico"><img src="https://images.unsplash.com/photo-1605270012917-bf357a1fae9e?w=800&q=80&auto=format&fit=crop" alt="Hawaiian poke bowl"></div>
         <h3>Hawaiian</h3>
         <p>Kalua pig, poke, loco moco, spam musubi, huli huli, shave ice. Pacific bounty served the way Hawai'i actually eats it — generous, savory-sweet, built for sharing.</p>
       </div>
@@ -258,13 +277,45 @@
 <section class="bar" id="bar">
   <div class="container">
     <span class="tag">The Tiki Bar</span>
-    <h2>Rum is <span class="accent">religion.</span></h2>
-    <p class="lead">200+ rums from across the Caribbean and Hawai'i. Fresh-pressed juice, scratch syrups, hand-cut ice. Tiki classics done right and originals built around the rum.</p>
+    <h2>Rum, tequila, <span class="accent">island fire.</span></h2>
+    <p class="lead" style="margin:0 auto 36px">200+ rums, top-shelf tequila, fresh-pressed juice, scratch syrups, hand-cut ice. Tiki classics done right and originals built around the spirit.</p>
     <div class="pour">
       <div><div class="num">200+</div><div class="l">Rums Behind the Bar</div></div>
       <div><div class="num">12</div><div class="l">Tiki Classics on Menu</div></div>
       <div><div class="num">8</div><div class="l">House Originals</div></div>
       <div><div class="num">2am</div><div class="l">Last Call, Weekends</div></div>
+    </div>
+    <div class="cock-grid">
+      <div class="cock"><div><div class="nm">Piña Colada</div><div class="nt">Rum &middot; coconut cream &middot; pineapple</div></div><div class="pr">$14</div></div>
+      <div class="cock"><div><div class="nm">Brooklyn Mai Tai</div><div class="nt">Aged rum &middot; orgeat &middot; lime</div></div><div class="pr">$16</div></div>
+      <div class="cock"><div><div class="nm">Blue Hawaii</div><div class="nt">Rum &middot; vodka &middot; blue curaçao</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Lava Flow</div><div class="nt">Rum &middot; strawberry &middot; coconut</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Pineapple Margarita</div><div class="nt">Tequila reposado &middot; pineapple &middot; lime</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Spicy Mango Paloma</div><div class="nt">Tequila blanco &middot; mango &middot; chile</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Chi Chi</div><div class="nt">Vodka &middot; coconut &middot; pineapple</div></div><div class="pr">$14</div></div>
+      <div class="cock"><div><div class="nm">Painkiller, Williamsburg</div><div class="nt">Pusser's rum &middot; orange &middot; nutmeg</div></div><div class="pr">$15</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <span class="tag">The Room</span>
+    <h2>Inside the <span class="accent">market.</span></h2>
+    <p class="lead">Plates, glassware, palms, light. The room as it lives.</p>
+    <div class="gal-grid">
+      <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop" alt="Tiki cocktail">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80&auto=format&fit=crop" alt="Bar interior">
+      <img src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=800&q=80&auto=format&fit=crop" alt="Caribbean plate">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80&auto=format&fit=crop" alt="Cocktail garnish">
+      <img class="wide" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop" alt="Sunset palm">
+      <img src="https://images.unsplash.com/photo-1605270012917-bf357a1fae9e?w=800&q=80&auto=format&fit=crop" alt="Hawaiian poke">
+      <img src="https://images.unsplash.com/photo-1571805341302-f857810a2ce5?w=800&q=80&auto=format&fit=crop" alt="Tropical cocktail">
+      <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80&auto=format&fit=crop" alt="Beach palm">
+      <img src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?w=800&q=80&auto=format&fit=crop" alt="Coconut">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop" alt="Caribbean dish">
+      <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80&auto=format&fit=crop" alt="Rum bottles">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80&auto=format&fit=crop" alt="Tropical beach">
     </div>
   </div>
 </section>

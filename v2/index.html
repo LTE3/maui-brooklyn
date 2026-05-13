@@ -178,13 +178,51 @@
   .rum-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
   @media(max-width:900px){.rum-grid{grid-template-columns:1fr}}
   .bottle{
-    aspect-ratio:3/4;border-radius:8px;
-    background:
-      linear-gradient(160deg,rgba(255,224,102,.12),rgba(232,75,138,.18) 50%,rgba(27,154,170,.18));
+    aspect-ratio:3/4;border-radius:8px;overflow:hidden;
     border:1px solid rgba(255,224,102,.3);
-    display:flex;align-items:center;justify-content:center;font-size:140px;
     box-shadow:0 0 60px rgba(255,224,102,.18),inset 0 0 60px rgba(0,0,0,.3);
+    position:relative;
   }
+  .bottle img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.85)}
+  .bottle::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(160deg,rgba(255,224,102,.18),transparent 40%,rgba(232,75,138,.22));
+    mix-blend-mode:overlay;
+  }
+
+  /* cocktails */
+  .cocktails{
+    background:
+      radial-gradient(ellipse at 30% 20%,rgba(232,75,138,.10),transparent 55%),
+      radial-gradient(ellipse at 80% 80%,rgba(27,154,170,.10),transparent 55%),
+      linear-gradient(180deg,#0d0f23 0%,#06060f 100%);
+  }
+  .cock-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0;margin-top:48px;border:1px solid rgba(255,255,255,.07)}
+  .cock{
+    padding:30px 26px;border-right:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid rgba(255,255,255,.07);
+    transition:background .3s ease;display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  }
+  .cock:hover{background:rgba(255,224,102,.04)}
+  .cock .nm{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--cream);margin-bottom:6px}
+  .cock .nt{font-size:12px;color:rgba(255,248,240,.55);letter-spacing:.05em}
+  .cock .pr{font-family:'Bebas Neue',sans-serif;letter-spacing:.15em;font-size:22px;color:var(--neon-yellow);text-shadow:0 0 10px rgba(255,224,102,.45)}
+
+  /* gallery */
+  .gallery{background:#06060f}
+  .gal-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:48px;
+  }
+  @media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
+  .gal-grid img{
+    width:100%;aspect-ratio:1;object-fit:cover;display:block;
+    filter:saturate(.9) brightness(.85);transition:all .35s ease;
+    border:1px solid rgba(255,224,102,.08);
+  }
+  .gal-grid img:hover{filter:saturate(1.1) brightness(1);transform:scale(1.02);border-color:rgba(255,224,102,.35);box-shadow:0 0 30px rgba(255,224,102,.25)}
+  .gal-grid .tall{aspect-ratio:1/1.4}
+  .gal-grid .wide{grid-column:span 2;aspect-ratio:2/1}
+  @media(max-width:900px){.gal-grid .wide{grid-column:span 2}}
   .rum-list{display:flex;flex-direction:column;gap:14px}
   .rum-row{
     display:flex;justify-content:space-between;align-items:baseline;
@@ -218,7 +256,9 @@
   <a class="brand" href="#top">Maui</a>
   <ul>
     <li><a href="#program">Program</a></li>
+    <li><a href="#cocktails">Cocktails</a></li>
     <li><a href="#rum">Rum Bar</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#late">Late</a></li>
     <li><a href="#visit">Visit</a></li>
   </ul>
@@ -272,12 +312,30 @@
   </div>
 </section>
 
+<section class="cocktails" id="cocktails">
+  <div class="container">
+    <span class="tag">Tiki Cocktails</span>
+    <h2>The drink <span class="accent">list.</span></h2>
+    <p class="lead">Tequila, rum, vodka — built for the late room. Every cocktail under fifteen minutes, every glass under sixteen bucks.</p>
+    <div class="cock-grid">
+      <div class="cock"><div><div class="nm">Piña Colada</div><div class="nt">Rum &middot; coconut cream &middot; pineapple</div></div><div class="pr">$14</div></div>
+      <div class="cock"><div><div class="nm">Brooklyn Mai Tai</div><div class="nt">Aged rum &middot; orgeat &middot; lime</div></div><div class="pr">$16</div></div>
+      <div class="cock"><div><div class="nm">Blue Hawaii</div><div class="nt">Rum &middot; vodka &middot; blue curaçao</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Lava Flow</div><div class="nt">Rum &middot; strawberry &middot; coconut</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Pineapple Margarita</div><div class="nt">Tequila reposado &middot; pineapple &middot; lime</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Spicy Mango Paloma</div><div class="nt">Tequila blanco &middot; mango &middot; chile</div></div><div class="pr">$15</div></div>
+      <div class="cock"><div><div class="nm">Chi Chi</div><div class="nt">Vodka &middot; coconut &middot; pineapple</div></div><div class="pr">$14</div></div>
+      <div class="cock"><div><div class="nm">Painkiller, Williamsburg</div><div class="nt">Pusser's rum &middot; orange &middot; nutmeg</div></div><div class="pr">$15</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="rum" id="rum">
   <div class="container">
     <span class="tag">The Rum Bar</span>
     <h2>200+ rums. <span class="accent">One mission.</span></h2>
     <div class="rum-grid">
-      <div class="bottle">🍾</div>
+      <div class="bottle"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80&auto=format&fit=crop" alt="Rum bottle on bar"></div>
       <div class="rum-list">
         <p class="lead" style="margin-bottom:8px">A Caribbean-led rum program from across every island chain — Jamaica, Martinique, Barbados, Cuba, Trinidad, Haiti, Hawai'i. Built for sipping straight or stirred into the best tiki cocktails in the borough.</p>
         <div class="rum-row"><div><div class="nm">Hampden Estate 8yr</div><div class="nt">Jamaica · Heavy pot still</div></div><div class="pr">$24</div></div>
@@ -286,6 +344,28 @@
         <div class="rum-row"><div><div class="nm">Koloa Kaua'i Reserve</div><div class="nt">Hawaii · Single-batch aged</div></div><div class="pr">$18</div></div>
         <div class="rum-row"><div><div class="nm">Rhum Barbancourt 15yr</div><div class="nt">Haiti · Cane-juice aged</div></div><div class="pr">$22</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <span class="tag">The Room</span>
+    <h2>After <span class="accent">midnight.</span></h2>
+    <p class="lead">Booths, bar, neon, palm shadows. The dining room becomes the late room.</p>
+    <div class="gal-grid">
+      <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop" alt="Tiki cocktail">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80&auto=format&fit=crop" alt="Bar interior night">
+      <img src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=800&q=80&auto=format&fit=crop" alt="Hawaiian dish">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80&auto=format&fit=crop" alt="Cocktail garnish">
+      <img class="wide" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop" alt="Sunset palm">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop" alt="Caribbean plate">
+      <img src="https://images.unsplash.com/photo-1571805341302-f857810a2ce5?w=800&q=80&auto=format&fit=crop" alt="Tropical cocktail">
+      <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80&auto=format&fit=crop" alt="Beach palm">
+      <img src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?w=800&q=80&auto=format&fit=crop" alt="Coconut">
+      <img src="https://images.unsplash.com/photo-1605270012917-bf357a1fae9e?w=800&q=80&auto=format&fit=crop" alt="Hawaiian poke">
+      <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80&auto=format&fit=crop" alt="Rum bottles">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80&auto=format&fit=crop" alt="Tropical beach">
     </div>
   </div>
 </section>

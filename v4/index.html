@@ -82,24 +82,56 @@
   .btn-sec:hover{background:var(--ink);color:var(--paper)}
 
   .hero-visual{
-    aspect-ratio:4/5;position:relative;
-    background:linear-gradient(160deg,var(--orange),var(--pink) 45%,var(--ocean));
-    overflow:hidden;
+    aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--ink);
   }
-  .hero-visual::before{
-    content:"";position:absolute;inset:0;
-    background:radial-gradient(circle at 30% 30%,rgba(242,199,68,.45),transparent 55%),radial-gradient(circle at 70% 75%,rgba(27,154,170,.4),transparent 55%);
+  .hero-visual img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   }
   .hero-visual::after{
-    content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-    width:80%;height:80%;
-    background:radial-gradient(circle,rgba(242,199,68,.6) 0%,rgba(244,132,95,.3) 40%,transparent 70%);
-    filter:blur(30px);
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 50%,rgba(27,26,31,.4) 100%),
+      radial-gradient(circle at 30% 30%,rgba(242,199,68,.2),transparent 55%);
+    pointer-events:none;
   }
   .hero-visual .tag{
-    position:absolute;bottom:24px;left:24px;
+    position:absolute;bottom:24px;left:24px;z-index:2;
     font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--paper);
-    background:rgba(27,26,31,.6);padding:8px 14px;backdrop-filter:blur(8px);
+    background:rgba(27,26,31,.65);padding:8px 14px;backdrop-filter:blur(8px);
+  }
+
+  /* bar section - editorial cocktails */
+  .bar{background:var(--paper);border-top:1px solid var(--ink)}
+  .bar-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px;border-top:1px solid var(--ink)}
+  @media(max-width:760px){.bar-grid{grid-template-columns:1fr}}
+  .drink{padding:24px 0;border-bottom:1px solid var(--ink);padding-right:24px;display:flex;flex-direction:column;gap:6px}
+  .drink:nth-child(2n){padding-left:24px;padding-right:0;border-left:1px solid var(--ink)}
+  @media(max-width:760px){.drink:nth-child(2n){padding-left:0;border-left:none}}
+  .drink .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+  .drink .nm{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.15}
+  .drink .pr{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--orange);font-weight:700;white-space:nowrap}
+  .drink .nt{font-size:13px;color:#4a4a55;line-height:1.55}
+  .drink .cat{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);font-weight:700}
+
+  /* gallery - editorial */
+  .gallery{background:var(--cream);border-top:1px solid var(--ink)}
+  .gal-grid{
+    display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:120px;gap:8px;margin-top:48px;
+  }
+  @media(max-width:900px){.gal-grid{grid-template-columns:repeat(6,1fr)}}
+  .gal-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .3s ease;filter:saturate(.92)}
+  .gal-grid img:hover{filter:saturate(1.1)}
+  .gal-grid .s1{grid-column:span 4;grid-row:span 2}
+  .gal-grid .s2{grid-column:span 4;grid-row:span 3}
+  .gal-grid .s3{grid-column:span 4;grid-row:span 2}
+  .gal-grid .s4{grid-column:span 6;grid-row:span 2}
+  .gal-grid .s5{grid-column:span 6;grid-row:span 2}
+  .gal-grid .s6{grid-column:span 3;grid-row:span 2}
+  .gal-grid .s7{grid-column:span 3;grid-row:span 2}
+  .gal-grid .s8{grid-column:span 3;grid-row:span 2}
+  .gal-grid .s9{grid-column:span 3;grid-row:span 2}
+  @media(max-width:900px){
+    .gal-grid .s1,.gal-grid .s2,.gal-grid .s3,.gal-grid .s4,.gal-grid .s5{grid-column:span 6;grid-row:span 2}
+    .gal-grid .s6,.gal-grid .s7,.gal-grid .s8,.gal-grid .s9{grid-column:span 3;grid-row:span 2}
   }
 
   /* rule */
@@ -176,6 +208,8 @@
   <div class="r">
     <a href="#concept">Concept</a>
     <a href="#kitchen">Kitchen</a>
+    <a href="#bar">Bar</a>
+    <a href="#gallery">Gallery</a>
     <a href="#visit">Visit</a>
     <a href="#visit" class="cta">Reserve</a>
   </div>
@@ -199,6 +233,7 @@
       </div>
     </div>
     <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=1000&q=80&auto=format&fit=crop" alt="Sunset tiki cocktail">
       <div class="tag">Cover &mdash; Sunset Pour</div>
     </div>
   </div>
@@ -262,15 +297,52 @@
         <p class="desc">Coconut rice, charred pineapple salsa, fried sweet plantain, scotch bonnet honey, lime.</p>
       </div>
       <div class="item">
-        <div class="cat">Cocktail</div>
-        <div class="row"><div class="name">Brooklyn Mai Tai</div><div class="pr">$16</div></div>
-        <p class="desc">Aged rhum agricole, Jamaican overproof, orgeat, fresh lime, dark float, mint crown.</p>
+        <div class="cat">Fusion &middot; Skewer</div>
+        <div class="row"><div class="name">Huli Huli Chicken</div><div class="pr">$18</div></div>
+        <p class="desc">Caribbean spice rub, pineapple-soy glaze, scotch bonnet honey, charred scallion.</p>
       </div>
       <div class="item">
-        <div class="cat">Cocktail</div>
-        <div class="row"><div class="name">Painkiller, Williamsburg</div><div class="pr">$15</div></div>
-        <p class="desc">Pusser's Navy rum, pineapple, coconut cream, fresh nutmeg, served in a tiki mug.</p>
+        <div class="cat">Both &middot; Side</div>
+        <div class="row"><div class="name">Coconut Rice &amp; Peas</div><div class="pr">$8</div></div>
+        <p class="desc">Long-grain rice, coconut milk, kidney beans, thyme, allspice, scotch bonnet.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="bar" id="bar">
+  <div class="container">
+    <div class="kicker">From the Bar</div>
+    <h2>Tiki cocktails, <em>built</em> <span class="accent">around the spirit.</span></h2>
+    <p class="lead">Rum from across the Caribbean and Hawai'i. Reposado and blanco tequila from Jalisco. Fresh-pressed juice, scratch syrups, hand-cut ice. Every drink under sixteen.</p>
+    <div class="bar-grid">
+      <div class="drink"><div class="cat">House</div><div class="row"><div class="nm">Piña Colada</div><div class="pr">$14</div></div><div class="nt">Rum, coconut cream, pineapple, fresh nutmeg.</div></div>
+      <div class="drink"><div class="cat">House</div><div class="row"><div class="nm">Brooklyn Mai Tai</div><div class="pr">$16</div></div><div class="nt">Aged rhum agricole, Jamaican overproof, orgeat, lime, dark float.</div></div>
+      <div class="drink"><div class="cat">Classic</div><div class="row"><div class="nm">Blue Hawaii</div><div class="pr">$15</div></div><div class="nt">Rum, vodka, blue curaçao, pineapple, lemon.</div></div>
+      <div class="drink"><div class="cat">House</div><div class="row"><div class="nm">Lava Flow</div><div class="pr">$15</div></div><div class="nt">Rum, strawberry, coconut cream, banana, pineapple.</div></div>
+      <div class="drink"><div class="cat">Tequila</div><div class="row"><div class="nm">Pineapple Margarita</div><div class="pr">$15</div></div><div class="nt">Tequila reposado, fresh pineapple, lime, agave.</div></div>
+      <div class="drink"><div class="cat">Tequila</div><div class="row"><div class="nm">Spicy Mango Paloma</div><div class="pr">$15</div></div><div class="nt">Tequila blanco, mango, grapefruit, chile, lime, salt.</div></div>
+      <div class="drink"><div class="cat">Classic</div><div class="row"><div class="nm">Chi Chi</div><div class="pr">$14</div></div><div class="nt">Vodka, coconut cream, pineapple, fresh lime.</div></div>
+      <div class="drink"><div class="cat">House</div><div class="row"><div class="nm">Painkiller, Williamsburg</div><div class="pr">$15</div></div><div class="nt">Pusser's Navy rum, pineapple, coconut, orange, nutmeg.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="kicker">The Room</div>
+    <h2>An <em>editorial</em> <span class="accent">portrait.</span></h2>
+    <p class="lead">Plates from the kitchen, glassware from the bar, light from the room. Brooklyn, slow read.</p>
+    <div class="gal-grid">
+      <img class="s1" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=900&q=80&auto=format&fit=crop" alt="Tiki cocktail">
+      <img class="s2" src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=900&q=80&auto=format&fit=crop" alt="Bar interior">
+      <img class="s3" src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=900&q=80&auto=format&fit=crop" alt="Caribbean plate">
+      <img class="s4" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80&auto=format&fit=crop" alt="Sunset palm">
+      <img class="s5" src="https://images.unsplash.com/photo-1605270012917-bf357a1fae9e?w=1200&q=80&auto=format&fit=crop" alt="Hawaiian poke">
+      <img class="s6" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80&auto=format&fit=crop" alt="Cocktail garnish">
+      <img class="s7" src="https://images.unsplash.com/photo-1571805341302-f857810a2ce5?w=800&q=80&auto=format&fit=crop" alt="Tropical cocktail">
+      <img class="s8" src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?w=800&q=80&auto=format&fit=crop" alt="Coconut">
+      <img class="s9" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop" alt="Caribbean dish">
     </div>
   </div>
 </section>
@@ -304,6 +376,8 @@
   <div class="nav-foot">
     <a href="#concept">Concept</a>
     <a href="#kitchen">Kitchen</a>
+    <a href="#bar">Bar</a>
+    <a href="#gallery">Gallery</a>
     <a href="#visit">Visit</a>
   </div>
   <div class="small">66-48 Myrtle Ave &middot; Brooklyn, NY &middot; Caribbean + Hawaiian Kitchen + Tiki Bar</div>
