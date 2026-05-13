@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maui Brooklyn — Tiki After Dark</title>
+<meta name="description" content="Maui Brooklyn — Caribbean and Hawaiian tiki bar in Brooklyn, NY. Late-night kitchen, rum program, DJ nights.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Pacifico&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --yellow:#F2C744;--neon-yellow:#FFE066;
+    --teal:#1B9AAA;--neon-teal:#5DEFFF;
+    --pink:#E84B8A;--neon-pink:#FF4FA3;
+    --coral:#FF6B6B;--orange:#F4845F;
+    --green:#2D6A4F;--ocean:#0077B6;
+    --cream:#FFF8F0;--ink:#06060f;--midnight:#0d0f23;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;color:var(--cream);
+    background:var(--ink);
+    -webkit-font-smoothing:antialiased;line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* nav */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 36px;background:rgba(6,6,15,.7);backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .nav .brand{
+    font-family:'Permanent Marker',cursive;font-size:30px;color:var(--neon-yellow);
+    text-shadow:0 0 14px rgba(255,224,102,.65),0 0 30px rgba(242,199,68,.35);
+  }
+  .nav ul{display:flex;gap:30px;list-style:none}
+  .nav ul a{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,248,240,.75)}
+  .nav ul a:hover{color:var(--neon-teal);text-shadow:0 0 12px var(--neon-teal)}
+  .nav .cta{
+    background:transparent;color:var(--neon-yellow);
+    border:1px solid var(--neon-yellow);padding:10px 22px;
+    border-radius:0;letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:600;
+    box-shadow:0 0 18px rgba(255,224,102,.25),inset 0 0 18px rgba(255,224,102,.08);
+    transition:all .25s ease;
+  }
+  .nav .cta:hover{background:var(--neon-yellow);color:var(--ink);box-shadow:0 0 28px rgba(255,224,102,.7)}
+  @media(max-width:760px){.nav ul{display:none}.nav{padding:14px 20px}}
+
+  /* hero */
+  .hero{
+    min-height:100vh;position:relative;overflow:hidden;display:flex;
+    flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:140px 24px 100px;
+    background:
+      radial-gradient(ellipse at 30% 30%,rgba(232,75,138,.18),transparent 55%),
+      radial-gradient(ellipse at 70% 70%,rgba(27,154,170,.22),transparent 55%),
+      radial-gradient(ellipse at 50% 100%,rgba(244,132,95,.15),transparent 60%),
+      linear-gradient(180deg,#06060f 0%,#0d0f23 60%,#1a0f2a 100%);
+  }
+  /* neon palm silhouettes */
+  .palm{
+    position:absolute;bottom:0;color:#000;opacity:.92;pointer-events:none;
+    filter:drop-shadow(0 0 18px rgba(27,154,170,.35));
+  }
+  .palm.l{left:-30px;width:360px;transform:scaleX(-1)}
+  .palm.r{right:-30px;width:360px}
+  /* moon */
+  .moon{
+    position:absolute;top:14%;right:14%;width:160px;height:160px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#fff 0%,#f0e8d8 40%,#a99878 80%);
+    box-shadow:0 0 80px rgba(242,199,68,.35),inset -20px -20px 40px rgba(0,0,0,.25);
+  }
+  .stars{
+    position:absolute;inset:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 8%,#fff,transparent),
+      radial-gradient(1px 1px at 28% 18%,rgba(255,255,255,.7),transparent),
+      radial-gradient(2px 2px at 58% 6%,#fff,transparent),
+      radial-gradient(1px 1px at 82% 14%,rgba(255,255,255,.6),transparent),
+      radial-gradient(1.5px 1.5px at 92% 30%,#fff,transparent),
+      radial-gradient(1px 1px at 6% 28%,rgba(255,255,255,.5),transparent);
+    background-size:100% 60%;background-repeat:no-repeat;opacity:.85;
+  }
+  .hero-content{position:relative;z-index:3;max-width:1100px}
+  .pre{
+    display:inline-flex;gap:14px;align-items:center;
+    font-size:11px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--neon-teal);margin-bottom:24px;
+    text-shadow:0 0 10px rgba(93,239,255,.6);
+  }
+  .pre::before,.pre::after{content:"";width:36px;height:1px;background:var(--neon-teal);box-shadow:0 0 10px var(--neon-teal)}
+  .hero h1{
+    font-family:'Permanent Marker',cursive;font-size:clamp(120px,18vw,260px);
+    color:var(--neon-yellow);line-height:.82;
+    text-shadow:
+      0 0 20px rgba(255,224,102,.7),
+      0 0 60px rgba(242,199,68,.5),
+      0 0 120px rgba(242,199,68,.25),
+      0 4px 6px rgba(0,0,0,.6);
+  }
+  .hero .brooklyn{
+    font-family:'Satisfy',cursive;font-size:clamp(40px,6vw,72px);
+    color:var(--neon-pink);margin-top:-6px;
+    text-shadow:0 0 22px rgba(255,79,163,.6),0 0 40px rgba(232,75,138,.35);
+  }
+  .stripe{
+    width:200px;height:3px;border-radius:0;margin:30px auto 22px;
+    background:linear-gradient(90deg,var(--neon-pink),var(--orange),var(--neon-yellow),var(--neon-teal));
+    box-shadow:0 0 18px rgba(255,224,102,.4);
+  }
+  .hero .tagline{
+    font-family:'Bebas Neue',sans-serif;letter-spacing:.18em;font-size:clamp(20px,2.4vw,30px);
+    color:var(--cream);margin-bottom:14px;text-shadow:0 0 10px rgba(0,0,0,.5);
+  }
+  .hero .loc{font-size:12px;letter-spacing:.45em;text-transform:uppercase;color:rgba(255,248,240,.7);margin-bottom:46px}
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    padding:16px 32px;font-weight:700;font-size:12px;letter-spacing:.25em;text-transform:uppercase;
+    border:1px solid;cursor:pointer;transition:all .25s ease;border-radius:0;
+  }
+  .btn-pri{background:var(--neon-yellow);color:var(--ink);border-color:var(--neon-yellow);box-shadow:0 0 28px rgba(255,224,102,.5)}
+  .btn-pri:hover{box-shadow:0 0 50px rgba(255,224,102,.85)}
+  .btn-sec{background:transparent;color:var(--neon-teal);border-color:var(--neon-teal);box-shadow:0 0 18px rgba(93,239,255,.25)}
+  .btn-sec:hover{background:var(--neon-teal);color:var(--ink);box-shadow:0 0 36px rgba(93,239,255,.7)}
+
+  /* marquee */
+  .marquee{
+    border-top:1px solid rgba(255,224,102,.25);border-bottom:1px solid rgba(255,224,102,.25);
+    background:#08081a;overflow:hidden;padding:18px 0;
+  }
+  .marquee-track{display:flex;gap:60px;white-space:nowrap;animation:slide 35s linear infinite}
+  .marquee span{
+    font-family:'Bebas Neue',sans-serif;letter-spacing:.3em;font-size:22px;color:var(--neon-yellow);
+    text-shadow:0 0 12px rgba(255,224,102,.55);
+  }
+  .marquee span::after{content:"✦";margin-left:60px;color:var(--neon-pink);text-shadow:0 0 10px var(--neon-pink)}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* sections */
+  section{padding:120px 32px;position:relative;overflow:hidden}
+  .container{max-width:1200px;margin:0 auto}
+  .tag{
+    display:inline-block;padding:6px 16px;border:1px solid var(--neon-pink);
+    color:var(--neon-pink);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    font-weight:600;margin-bottom:18px;text-shadow:0 0 8px rgba(255,79,163,.5);
+  }
+  h2{
+    font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;
+    font-size:clamp(48px,7vw,96px);line-height:1;color:var(--cream);margin-bottom:24px;
+  }
+  h2 .accent{font-family:'Permanent Marker',cursive;color:var(--neon-yellow);text-shadow:0 0 20px rgba(255,224,102,.6)}
+  .lead{font-size:17px;line-height:1.7;color:rgba(255,248,240,.7);max-width:680px;margin-bottom:24px}
+
+  /* program */
+  .program{background:#08081a}
+  .prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;margin-top:48px;border:1px solid rgba(255,255,255,.07)}
+  .prog{
+    padding:36px 28px;border-right:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid rgba(255,255,255,.07);
+    transition:background .3s ease;
+  }
+  .prog:hover{background:rgba(255,224,102,.04)}
+  .prog .day{font-family:'Bebas Neue',sans-serif;letter-spacing:.2em;font-size:14px;color:var(--neon-teal);text-shadow:0 0 8px rgba(93,239,255,.5);margin-bottom:6px}
+  .prog .what{font-family:'Permanent Marker',cursive;font-size:32px;color:var(--neon-yellow);margin-bottom:10px}
+  .prog p{color:rgba(255,248,240,.65);font-size:14px;line-height:1.6}
+
+  /* rum */
+  .rum{
+    background:
+      radial-gradient(ellipse at 70% 30%,rgba(244,132,95,.12),transparent 60%),
+      linear-gradient(180deg,#08081a 0%,#0d0f23 100%);
+  }
+  .rum-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  @media(max-width:900px){.rum-grid{grid-template-columns:1fr}}
+  .bottle{
+    aspect-ratio:3/4;border-radius:8px;
+    background:
+      linear-gradient(160deg,rgba(255,224,102,.12),rgba(232,75,138,.18) 50%,rgba(27,154,170,.18));
+    border:1px solid rgba(255,224,102,.3);
+    display:flex;align-items:center;justify-content:center;font-size:140px;
+    box-shadow:0 0 60px rgba(255,224,102,.18),inset 0 0 60px rgba(0,0,0,.3);
+  }
+  .rum-list{display:flex;flex-direction:column;gap:14px}
+  .rum-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:16px 0;border-bottom:1px dashed rgba(255,255,255,.12);
+  }
+  .rum-row .nm{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream)}
+  .rum-row .nt{font-size:13px;color:rgba(255,248,240,.55)}
+  .rum-row .pr{font-family:'Bebas Neue',sans-serif;letter-spacing:.15em;font-size:18px;color:var(--neon-yellow)}
+
+  /* late */
+  .late{background:#06060f;text-align:center}
+  .clock{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,180px);letter-spacing:.05em;color:var(--neon-pink);text-shadow:0 0 30px rgba(255,79,163,.6);line-height:1;margin-bottom:14px}
+  .late .small{letter-spacing:.4em;text-transform:uppercase;color:rgba(255,248,240,.55);font-size:13px;margin-bottom:32px}
+
+  /* contact */
+  .contact{background:#08081a;text-align:center}
+  .ccards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:44px;max-width:840px;margin-left:auto;margin-right:auto}
+  .ccard{padding:28px 20px;background:transparent;border:1px solid rgba(255,224,102,.25);box-shadow:inset 0 0 30px rgba(255,224,102,.04)}
+  .ccard .l{font-family:'Bebas Neue',sans-serif;letter-spacing:.3em;color:var(--neon-teal);font-size:13px;margin-bottom:8px;text-shadow:0 0 8px rgba(93,239,255,.45)}
+  .ccard .v{font-family:'Playfair Display',serif;font-size:20px;color:var(--cream);font-weight:700}
+
+  footer{padding:60px 32px 50px;text-align:center;background:var(--ink);border-top:1px solid rgba(255,255,255,.06)}
+  footer .brand{font-family:'Permanent Marker',cursive;font-size:48px;color:var(--neon-yellow);text-shadow:0 0 18px rgba(255,224,102,.55)}
+  footer .b{font-family:'Satisfy',cursive;font-size:24px;color:var(--neon-pink);text-shadow:0 0 14px rgba(255,79,163,.5);margin-bottom:18px}
+  footer .small{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,248,240,.45)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="#top">Maui</a>
+  <ul>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#rum">Rum Bar</a></li>
+    <li><a href="#late">Late</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="#visit" class="cta">Reserve</a>
+</nav>
+
+<section class="hero" id="top">
+  <div class="stars"></div>
+  <div class="moon"></div>
+  <svg class="palm l" viewBox="0 0 200 400" fill="currentColor"><path d="M100 400 C95 300 80 240 60 180 C70 200 85 215 100 220 C90 200 78 175 70 145 C82 165 95 175 110 178 C95 150 90 120 92 90 C100 110 110 122 122 125 C108 90 110 60 120 30 C125 60 135 80 150 90 C140 65 145 40 160 20 C155 50 160 75 175 95 C160 90 150 105 145 130 C160 120 178 118 195 128 C175 130 160 140 150 158 C168 158 185 168 195 188 C175 178 158 180 145 195 C160 200 175 215 178 240 C162 218 145 215 130 222 C140 240 145 265 142 295 C130 270 115 258 100 258 C100 300 100 350 100 400 Z"/></svg>
+  <svg class="palm r" viewBox="0 0 200 400" fill="currentColor"><path d="M100 400 C95 300 80 240 60 180 C70 200 85 215 100 220 C90 200 78 175 70 145 C82 165 95 175 110 178 C95 150 90 120 92 90 C100 110 110 122 122 125 C108 90 110 60 120 30 C125 60 135 80 150 90 C140 65 145 40 160 20 C155 50 160 75 175 95 C160 90 150 105 145 130 C160 120 178 118 195 128 C175 130 160 140 150 158 C168 158 185 168 195 188 C175 178 158 180 145 195 C160 200 175 215 178 240 C162 218 145 215 130 222 C140 240 145 265 142 295 C130 270 115 258 100 258 C100 300 100 350 100 400 Z"/></svg>
+
+  <div class="hero-content">
+    <div class="pre">Open Late · Brooklyn</div>
+    <h1>Maui</h1>
+    <div class="brooklyn">Brooklyn</div>
+    <div class="stripe"></div>
+    <div class="tagline">Caribbean &middot; Hawaiian &middot; Tiki Bar</div>
+    <div class="loc">After-Dark Kitchen &middot; Rum Program &middot; DJ Nights</div>
+    <div class="hero-ctas">
+      <a class="btn btn-pri" href="#visit">Book a Booth</a>
+      <a class="btn btn-sec" href="#rum">The Rum List</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Tiki After Dark</span><span>Caribbean Kitchen</span><span>Rum Library</span>
+    <span>Live DJs Thu-Sun</span><span>Brooklyn, NY</span><span>Open Til 4</span>
+    <span>Tiki After Dark</span><span>Caribbean Kitchen</span><span>Rum Library</span>
+    <span>Live DJs Thu-Sun</span><span>Brooklyn, NY</span><span>Open Til 4</span>
+  </div>
+</div>
+
+<section class="program" id="program">
+  <div class="container">
+    <span class="tag">Weekly Program</span>
+    <h2>Seven nights. <span class="accent">One island.</span></h2>
+    <p class="lead">A different shape every night of the week — from low-key island dinners to high-energy afterparty rooms. Same kitchen, same bar, same rum.</p>
+    <div class="prog-grid">
+      <div class="prog"><div class="day">Mon</div><div class="what">Locals Night</div><p>Half-off pupu menu. Quiet rum tastings at the bar.</p></div>
+      <div class="prog"><div class="day">Tue</div><div class="what">Reggae Tuesdays</div><p>Live vinyl sets. Caribbean dinner specials all night.</p></div>
+      <div class="prog"><div class="day">Wed</div><div class="what">Tiki Lab</div><p>Bartender takeovers. New rum cocktails poured tableside.</p></div>
+      <div class="prog"><div class="day">Thu</div><div class="what">Sunset DJ</div><p>Open decks 8pm-close. Dub, soca, baile, island house.</p></div>
+      <div class="prog"><div class="day">Fri</div><div class="what">Friday Steam</div><p>Full kitchen til 2. DJ set til 4. Booth-only after midnight.</p></div>
+      <div class="prog"><div class="day">Sat</div><div class="what">Saturday Heat</div><p>Headlining DJs. Late-night menu. Reservations strongly advised.</p></div>
+      <div class="prog"><div class="day">Sun</div><div class="what">Aloha Sunday</div><p>Brunch service. Island roasts. Live percussion sets at sundown.</p></div>
+      <div class="prog"><div class="day">Always</div><div class="what">Private Events</div><p>Buyouts, corporate dinners, after-parties, birthdays. Inquire below.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="rum" id="rum">
+  <div class="container">
+    <span class="tag">The Rum Bar</span>
+    <h2>200+ rums. <span class="accent">One mission.</span></h2>
+    <div class="rum-grid">
+      <div class="bottle">🍾</div>
+      <div class="rum-list">
+        <p class="lead" style="margin-bottom:8px">A Caribbean-led rum program from across every island chain — Jamaica, Martinique, Barbados, Cuba, Trinidad, Haiti, Hawai'i. Built for sipping straight or stirred into the best tiki cocktails in the borough.</p>
+        <div class="rum-row"><div><div class="nm">Hampden Estate 8yr</div><div class="nt">Jamaica · Heavy pot still</div></div><div class="pr">$24</div></div>
+        <div class="rum-row"><div><div class="nm">Rhum Clément XO</div><div class="nt">Martinique · Rhum agricole</div></div><div class="pr">$28</div></div>
+        <div class="rum-row"><div><div class="nm">Foursquare Probitas</div><div class="nt">Barbados · Blended white</div></div><div class="pr">$14</div></div>
+        <div class="rum-row"><div><div class="nm">Koloa Kaua'i Reserve</div><div class="nt">Hawaii · Single-batch aged</div></div><div class="pr">$18</div></div>
+        <div class="rum-row"><div><div class="nm">Rhum Barbancourt 15yr</div><div class="nt">Haiti · Cane-juice aged</div></div><div class="pr">$22</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="late" id="late">
+  <div class="container">
+    <span class="tag">After Hours</span>
+    <h2>The room <span class="accent">turns over.</span></h2>
+    <div class="clock">11:00 PM</div>
+    <div class="small">Lights down. Volume up.</div>
+    <p class="lead" style="margin:0 auto">Past 11, the dining room becomes the bar. Tables clear, the booth sets start, and a late-night menu of small plates, skewers, and tiki bites runs til close. Brooklyn's only Caribbean-Hawaiian after-dark room.</p>
+  </div>
+</section>
+
+<section class="contact" id="visit">
+  <div class="container">
+    <span class="tag">Visit</span>
+    <h2>Find us in <span class="accent">Brooklyn.</span></h2>
+    <p class="lead" style="margin:0 auto">Reservations, private events, press, partnerships. We answer fast.</p>
+    <div class="ccards">
+      <div class="ccard"><div class="l">Address</div><div class="v">66-48 Myrtle Ave<br>Brooklyn, NY</div></div>
+      <div class="ccard"><div class="l">Reservations</div><div class="v">hello@mauibrooklyn.com</div></div>
+      <div class="ccard"><div class="l">Events</div><div class="v">events@mauibrooklyn.com</div></div>
+      <div class="ccard"><div class="l">Follow</div><div class="v">@mauibrooklyn</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Maui</div>
+  <div class="b">Brooklyn</div>
+  <div class="small">66-48 Myrtle Ave &middot; Brooklyn, NY &middot; Open Late</div>
+</footer>
+
+</body>
+</html>
