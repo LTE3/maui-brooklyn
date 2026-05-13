@@ -1,446 +1,399 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Maui Brooklyn — Bodega Edition · Caribbean & Hawaiian Kitchen + Tiki Bar</title>
-<meta name="description" content="Maui Brooklyn: a Caribbean & Hawaiian corner-bodega kitchen and tiki bar on Myrtle Ave. Hand-painted, deeply Brooklyn.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maui Brooklyn — Caribbean & Hawaiian Kitchen + Tiki Bar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Bebas+Neue&family=Caveat:wght@400;700&family=Kalam:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 :root{
-  --awning-red:#cc2b2b;
-  --awning-blue:#1f6dba;
-  --awning-yellow:#f5c518;
-  --brick:#a14a3a;
-  --mortar:#e8e1d3;
-  --cream:#FFF8F0;
-  --tile:#fafafa;
-  --ink:#1a1410;
-  --yellow:#F2C744;
+  --mustard:#d99838;
+  --burnt:#c45a2c;
+  --coral:#e96b5c;
   --teal:#1B9AAA;
+  --deep-teal:#0d5a66;
+  --cream:#f6ecd6;
+  --bone:#fff8e7;
+  --ink:#1d1d1b;
+  --yellow:#F2C744;
   --pink:#E84B8A;
-  --orange:#F4845F;
-  --green:#2D6A4F;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--cream);
-  color:var(--ink);
-  -webkit-font-smoothing:antialiased;
-  line-height:1.55;
-  overflow-x:hidden;
-}
+html,body{background:var(--bone);color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
-/* ===== AWNING STRIPES ===== */
-.awning{
-  height:34px;
-  background:repeating-linear-gradient(
-    90deg,
-    var(--awning-red) 0 38px,
-    var(--cream) 38px 76px,
-    var(--awning-blue) 76px 114px,
-    var(--cream) 114px 152px,
-    var(--awning-yellow) 152px 190px,
-    var(--cream) 190px 228px
-  );
+/* ============ NAV ============ */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:var(--cream);
+  border-bottom:2px solid var(--teal);
+  padding:18px 36px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav::after{
+  content:"";position:absolute;left:0;right:0;bottom:-6px;
+  height:2px;background:var(--teal);opacity:.35;
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:22px;letter-spacing:.5px;
+  color:var(--ink);
+}
+.nav-logo .amp{color:var(--coral);font-style:normal;padding:0 4px}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{
+  font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink);
+  padding:6px 0;
+  border-bottom:1px solid transparent;
+  transition:border-color .25s ease;
+}
+.nav-links a:hover{border-bottom-color:var(--coral)}
+.nav-cta{
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  background:var(--coral);color:var(--bone);
+  padding:10px 18px;border:2px solid var(--ink);
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;overflow:hidden;
+  min-height:92vh;
+  background:linear-gradient(180deg,var(--mustard) 0%,var(--mustard) 35%,var(--coral) 60%,var(--teal) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:80px 24px 100px;
+  border-bottom:3px solid var(--ink);
+}
+
+/* Sun disc */
+.hero-sun{
+  position:absolute;top:14%;left:50%;transform:translateX(-50%);
+  width:260px;height:260px;border-radius:50%;
+  background:var(--yellow);
+  box-shadow:0 0 0 14px rgba(242,199,68,.25);
+  opacity:.55;
+}
+
+/* Geometric palm silhouettes — CSS shapes */
+.palm{position:absolute;pointer-events:none}
+.palm-trunk{
+  position:absolute;bottom:0;width:14px;
+  background:var(--deep-teal);
+  transform-origin:bottom center;
+}
+.palm-frond{
+  position:absolute;
+  width:120px;height:24px;
+  background:var(--deep-teal);
+  border-radius:60% 6% 60% 6% / 100% 6% 100% 6%;
+  transform-origin:0% 50%;
+}
+
+/* Left palm */
+.palm-left{left:2%;bottom:0;width:200px;height:70%;}
+.palm-left .palm-trunk{left:90px;height:62%;transform:rotate(-6deg)}
+.palm-left .f1{top:30%;left:90px;transform:rotate(-65deg)}
+.palm-left .f2{top:28%;left:96px;transform:rotate(-30deg)}
+.palm-left .f3{top:30%;left:96px;transform:rotate(15deg);width:130px}
+.palm-left .f4{top:32%;left:96px;transform:rotate(55deg);width:110px}
+.palm-left .f5{top:30%;left:90px;transform:rotate(-110deg);width:100px}
+
+/* Right palm */
+.palm-right{right:2%;bottom:0;width:200px;height:80%;}
+.palm-right .palm-trunk{right:90px;height:70%;transform:rotate(8deg)}
+.palm-right .f1{top:22%;right:90px;transform:rotate(-115deg) scaleX(-1)}
+.palm-right .f2{top:20%;right:96px;transform:rotate(-150deg) scaleX(-1);width:130px}
+.palm-right .f3{top:22%;right:96px;transform:rotate(165deg) scaleX(-1);width:120px}
+.palm-right .f4{top:24%;right:96px;transform:rotate(125deg) scaleX(-1);width:110px}
+.palm-right .f5{top:22%;right:90px;transform:rotate(-70deg) scaleX(-1);width:100px}
+
+/* Distant triangle mountains */
+.hero-mountains{
+  position:absolute;bottom:0;left:0;right:0;height:30%;
+  pointer-events:none;
+}
+.mtn{
+  position:absolute;bottom:0;
+  width:0;height:0;
+  border-left:120px solid transparent;
+  border-right:120px solid transparent;
+  border-bottom:160px solid var(--deep-teal);
+  opacity:.7;
+}
+.mtn.m1{left:18%;border-bottom-width:200px;opacity:.5}
+.mtn.m2{left:38%;border-bottom-width:140px;opacity:.6}
+.mtn.m3{right:30%;border-bottom-width:180px;opacity:.55}
+
+.hero-content{position:relative;z-index:5;max-width:900px}
+.hero-toprule{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:.4em;color:var(--ink);
+  margin-bottom:14px;
+}
+.hero-toprule .rule{height:1px;width:60px;background:var(--ink)}
+.hero-title{
+  display:flex;align-items:baseline;justify-content:center;gap:18px;flex-wrap:wrap;
+  margin:8px 0 10px;
+}
+.hero-title .maui{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(72px,12vw,160px);
+  color:var(--yellow);
+  text-shadow:4px 4px 0 var(--ink);
+  line-height:.95;
+}
+.hero-title .brooklyn{
+  font-family:'Satisfy',cursive;
+  font-size:clamp(54px,9vw,120px);
+  color:var(--teal);
+  text-shadow:3px 3px 0 var(--ink);
+  line-height:.95;
+}
+.hero-tagline{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:400;
+  font-size:clamp(20px,2.4vw,28px);
+  color:var(--ink);
+  margin-top:18px;
+}
+.hero-sub{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:24px auto 0;max-width:560px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;letter-spacing:.3em;color:var(--ink);
+}
+.hero-sub .rule{flex:1;height:1px;background:var(--ink)}
+.hero-buttons{
+  display:flex;gap:18px;justify-content:center;flex-wrap:wrap;
+  margin-top:36px;
+}
+.btn{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16px;letter-spacing:.25em;
+  padding:14px 32px;
+  border:2px solid var(--ink);
+  cursor:pointer;
+  transition:transform .2s ease, background .25s ease;
+}
+.btn-solid{background:var(--coral);color:var(--bone)}
+.btn-solid:hover{background:var(--burnt)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);position:relative}
+.btn-outline::before{
+  content:"";position:absolute;inset:4px;border:1px solid var(--ink);pointer-events:none;
+}
+.btn-outline:hover{background:var(--teal);color:var(--bone)}
+.btn:hover{transform:translateY(-2px)}
+
+/* ============ CONCEPT ============ */
+.concept{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:3px solid var(--ink);
+}
+.concept-block{
+  padding:80px 56px;
+  position:relative;
+  border-right:2px solid var(--ink);
+}
+.concept-block:last-child{border-right:none}
+.concept-block.mustard{background:var(--mustard);color:var(--ink)}
+.concept-block.teal{background:var(--teal);color:var(--bone)}
+.concept-eyebrow{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:.35em;
+  margin-bottom:14px;
+}
+.concept-h{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:clamp(34px,4.4vw,54px);
+  line-height:1.05;
+  margin-bottom:20px;
+}
+.concept-body{
+  font-family:'Cormorant Garamond',serif;
+  font-size:19px;line-height:1.65;
+  max-width:42ch;
+}
+.concept-icon{
+  width:120px;height:120px;margin-top:36px;
+}
+
+/* ============ MENU ============ */
+.menu{
+  background:var(--bone);
+  padding:100px 36px;
+  border-bottom:3px solid var(--ink);
+}
+.menu-inner{max-width:980px;margin:0 auto}
+.section-eyebrow{
+  text-align:center;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;letter-spacing:.45em;color:var(--burnt);
+  margin-bottom:10px;
+}
+.section-title{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:clamp(40px,5.5vw,68px);
+  color:var(--ink);
+  margin-bottom:14px;
+}
+.section-orn{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:var(--burnt);
+  font-size:18px;letter-spacing:.2em;
+  margin-bottom:54px;
+}
+.menu-list{
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+  padding:8px 0;
+}
+.menu-row{
+  display:flex;align-items:baseline;
+  padding:18px 8px;
+  border-bottom:1px solid rgba(29,29,27,.18);
+  gap:14px;
+}
+.menu-row:last-child{border-bottom:none}
+.menu-name{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:22px;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.menu-desc{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:rgba(29,29,27,.7);
+  font-size:16px;
+  margin-left:6px;
+  flex-shrink:1;
+  min-width:0;
+}
+.menu-dots{
+  flex:1;
+  border-bottom:2px dotted rgba(29,29,27,.4);
+  margin:0 6px 6px;
+  min-width:30px;
+}
+.menu-price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;letter-spacing:.08em;
+  color:var(--burnt);
+  white-space:nowrap;
+}
+
+/* ============ COCKTAILS ============ */
+.cocktails{
+  background:var(--cream);
+  padding:0 0 100px;
+  border-bottom:3px solid var(--ink);
+}
+.cocktail-banner{
+  background:var(--coral);
+  color:var(--bone);
+  text-align:center;
+  padding:34px 24px;
   border-bottom:3px solid var(--ink);
   position:relative;
 }
-.awning::after{
-  content:"";
-  position:absolute;left:0;right:0;bottom:-14px;
-  height:14px;
-  background:
-    radial-gradient(circle at 12px 0, transparent 12px, var(--ink) 12px 14px, transparent 14px) 0 0/24px 14px repeat-x;
+.cocktail-banner::before,
+.cocktail-banner::after{
+  content:"";position:absolute;left:0;right:0;height:2px;background:var(--bone);
 }
-.awning-bottom{margin-top:14px}
-
-/* ===== NAV ===== */
-.nav-wrap{
-  background:var(--cream);
-  padding:28px 28px 18px;
-  border-bottom:2px dashed #c9b896;
-  position:sticky;top:0;z-index:50;
-}
-.nav-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-}
-.brand{
-  font-family:'Permanent Marker',cursive;
-  font-size:34px;line-height:1;
-  color:var(--ink);
-  letter-spacing:1px;
-}
-.brand .b1{color:var(--yellow);text-shadow:2px 2px 0 var(--ink)}
-.brand .b2{color:var(--teal);font-family:'Satisfy',cursive;margin-left:6px;font-size:30px}
-.brand-sub{
+.cocktail-banner::before{top:8px}
+.cocktail-banner::after{bottom:8px}
+.cocktail-banner-eyebrow{
   font-family:'Bebas Neue',sans-serif;
-  letter-spacing:3px;font-size:11px;color:#6b5b4a;display:block;margin-top:4px;
-}
-.nav-links{display:flex;gap:8px;flex-wrap:wrap}
-.nav-links a{
-  background:#fff;
-  border:2px solid var(--ink);
-  padding:8px 14px;
-  border-radius:999px;
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:2px;
-  font-size:13px;
-  box-shadow:2px 2px 0 var(--ink);
-  transition:transform .15s, box-shadow .15s;
-}
-.nav-links a:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
-.nav-links a.cta{background:var(--awning-red);color:#fff;border-color:var(--ink)}
-
-/* ===== HERO ===== */
-.hero{
-  position:relative;
-  padding:110px 28px 140px;
-  overflow:hidden;
-  background:
-    linear-gradient(90deg, transparent 0 calc(50% - 1px), rgba(232,225,211,.6) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) 0 0/120px 60px,
-    linear-gradient(0deg, transparent 0 calc(50% - 1px), rgba(232,225,211,.6) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) 0 0/120px 60px,
-    repeating-linear-gradient(0deg, transparent 0 60px, rgba(0,0,0,.15) 60px 62px),
-    repeating-linear-gradient(90deg, transparent 0 120px, rgba(0,0,0,.15) 120px 122px),
-    radial-gradient(ellipse at 20% 30%, #b25543 0%, transparent 40%),
-    radial-gradient(ellipse at 70% 60%, #8e3f31 0%, transparent 50%),
-    var(--brick);
-}
-.hero::before{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(255,248,240,.18) 0 2px, transparent 2px) 0 0/40px 40px,
-    radial-gradient(circle at 80% 70%, rgba(0,0,0,.2) 0 1px, transparent 1px) 0 0/30px 30px;
-  pointer-events:none;
-  opacity:.7;
-}
-.hero-wall{
-  position:relative;
-  max-width:1100px;margin:0 auto;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(0,0,0,.04) 0 30px, transparent 30px),
-    radial-gradient(circle at 80% 70%, rgba(0,0,0,.06) 0 40px, transparent 40px),
-    linear-gradient(180deg, #fff5e3 0%, #f3e4c8 100%);
-  border:4px solid var(--ink);
-  box-shadow:12px 12px 0 var(--ink), inset 0 0 80px rgba(110,80,40,.18);
-  padding:80px 40px 90px;
-  text-align:center;
-}
-.hero-tag{
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:6px;
-  font-size:14px;
-  color:var(--awning-red);
+  font-size:14px;letter-spacing:.5em;
   margin-bottom:8px;
 }
-.hero-main{
-  font-family:'Permanent Marker',cursive;
-  font-size:clamp(80px,15vw,200px);
-  line-height:.9;
-  color:var(--yellow);
-  -webkit-text-stroke:3px var(--ink);
-  text-shadow:6px 6px 0 var(--ink), 12px 12px 0 rgba(0,0,0,.15);
-  transform:rotate(-2deg);
-  margin:0;
-}
-.hero-sub{
-  font-family:'Satisfy',cursive;
-  font-size:clamp(50px,9vw,110px);
-  color:var(--teal);
-  line-height:.9;
-  margin-top:-10px;
-  text-shadow:3px 3px 0 var(--ink);
-  transform:rotate(1deg);
-}
-.hero-meta{
-  display:flex;justify-content:center;align-items:center;gap:24px;margin-top:36px;flex-wrap:wrap;
-}
-.hours-paint{
-  font-family:'Permanent Marker',cursive;
-  font-size:22px;
-  color:var(--ink);
-  background:var(--awning-yellow);
-  padding:10px 22px;
-  border:3px solid var(--ink);
-  transform:rotate(-1.5deg);
-  box-shadow:4px 4px 0 var(--ink);
-  letter-spacing:2px;
-}
-.stamp{
-  width:130px;height:130px;border-radius:50%;
-  background:var(--awning-red);
-  color:#fff8f0;
-  display:flex;align-items:center;justify-content:center;flex-direction:column;
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:2px;
-  border:4px double #fff8f0;
-  box-shadow:0 0 0 3px var(--awning-red), 5px 5px 0 var(--ink);
-  transform:rotate(8deg);
-  font-size:13px;line-height:1.1;
-}
-.stamp b{font-size:34px;display:block}
-.cta-row{margin-top:42px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.deli-sticker{
-  display:inline-block;
-  background:var(--awning-red);
-  color:#fff8f0;
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:4px;
-  font-size:22px;
-  padding:18px 38px;
-  border:4px solid var(--ink);
-  border-radius:8px;
-  box-shadow:6px 6px 0 var(--ink);
-  transform:rotate(-1deg);
-  transition:transform .15s, box-shadow .15s;
-  cursor:pointer;
-}
-.deli-sticker:hover{transform:rotate(-1deg) translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
-.deli-sticker.alt{background:var(--cream);color:var(--ink)}
-.tape{
-  position:absolute;
-  width:90px;height:24px;
-  background:rgba(245,197,24,.7);
-  border:1px dashed rgba(0,0,0,.2);
-}
-.tape.tl{top:-12px;left:30px;transform:rotate(-8deg)}
-.tape.tr{top:-12px;right:30px;transform:rotate(7deg)}
-
-/* ===== SECTIONS ===== */
-section{padding:90px 28px;position:relative}
-.container{max-width:1200px;margin:0 auto}
-.section-eyebrow{
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:6px;
-  font-size:14px;
-  color:var(--awning-red);
-  display:inline-block;
-  background:var(--cream);
-  padding:4px 10px;
-  border:2px solid var(--ink);
-  transform:rotate(-1deg);
-}
-.section-title{
-  font-family:'Permanent Marker',cursive;
-  font-size:clamp(40px,6vw,72px);
+.cocktail-banner-title{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:900;
+  font-size:clamp(36px,5vw,56px);
   line-height:1;
-  margin:14px 0 12px;
-  color:var(--ink);
-  -webkit-text-stroke:1px var(--ink);
 }
-.section-title em{
-  font-style:normal;
-  font-family:'Satisfy',cursive;
-  color:var(--teal);
-  -webkit-text-stroke:0;
-}
-.section-sub{
-  font-family:'Caveat',cursive;
-  font-size:24px;color:#6b5b4a;
-  max-width:640px;margin-bottom:36px;
-}
-
-/* ===== ABOUT ===== */
-.about{background:var(--cream)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:30px}
-@media(max-width:880px){.about-grid{grid-template-columns:1fr}}
-.deli-card{
-  position:relative;
-  background:var(--tile);
-  border:4px solid var(--ink);
-  padding:34px 30px 30px;
-  box-shadow:10px 10px 0 var(--ink);
-  background-image:
-    linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
-  background-size:60px 30px;
-}
-.deli-card:nth-child(2){transform:rotate(1deg)}
-.deli-card:nth-child(1){transform:rotate(-1deg)}
-.polaroid{
-  position:relative;
-  background:#fff;
-  padding:10px 10px 36px;
-  border:1px solid #ddd;
-  width:230px;
-  margin:0 auto 22px;
-  box-shadow:4px 6px 14px rgba(0,0,0,.25);
-  transform:rotate(-3deg);
-}
-.polaroid img{width:100%;aspect-ratio:1;object-fit:cover}
-.polaroid figcaption{
-  font-family:'Caveat',cursive;
-  text-align:center;
-  font-size:20px;
-  margin-top:8px;color:#444;
-}
-.deli-card h3{
-  font-family:'Permanent Marker',cursive;
-  font-size:36px;
-  color:var(--awning-red);
-  text-align:center;
-  -webkit-text-stroke:1px var(--ink);
-  margin-bottom:14px;
-}
-.deli-card.b h3{color:var(--teal)}
-.deli-card p{font-size:15px;color:#3a2d1f}
-.deli-card .pin{
-  position:absolute;
-  width:22px;height:22px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, #ff7676, #b50000);
-  border:2px solid #5a0000;
-  top:-12px;
-  box-shadow:0 4px 6px rgba(0,0,0,.3);
-}
-.deli-card .pin.l{left:24px}
-.deli-card .pin.r{right:24px;background:radial-gradient(circle at 30% 30%, #7ad9ff, #007aa3);border-color:#003547}
-
-/* ===== MENU BOARD ===== */
-.menu-section{
-  background:
-    repeating-linear-gradient(0deg, transparent 0 60px, rgba(0,0,0,.08) 60px 62px),
-    repeating-linear-gradient(90deg, transparent 0 120px, rgba(0,0,0,.08) 120px 122px),
-    var(--brick);
-  color:var(--cream);
-}
-.menu-section .section-eyebrow{background:var(--awning-yellow)}
-.menu-section .section-title{color:var(--cream);-webkit-text-stroke:1px var(--ink);text-shadow:4px 4px 0 var(--ink)}
-.menu-section .section-sub{color:var(--mortar)}
-.menu-board{
-  background:var(--cream);
-  border:6px solid var(--ink);
-  padding:46px 40px;
-  box-shadow:12px 12px 0 rgba(0,0,0,.4);
-  position:relative;
-}
-.menu-board::before{
-  content:"DAILY";
-  position:absolute;top:-22px;left:50%;transform:translateX(-50%) rotate(-2deg);
-  background:var(--awning-red);
-  color:#fff8f0;
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:8px;
-  padding:8px 26px;
-  border:3px solid var(--ink);
+.cocktail-banner-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  margin-top:8px;
   font-size:18px;
 }
-.menu-board h4{
-  font-family:'Permanent Marker',cursive;
-  font-size:26px;
-  text-align:center;
-  margin-bottom:24px;
-  color:var(--awning-red);
-  -webkit-text-stroke:.5px var(--ink);
-}
-.menu-rows{list-style:none}
-.menu-rows li{
-  display:flex;align-items:baseline;gap:12px;padding:14px 0;
-  border-bottom:2px dashed #d3c6a8;
-}
-.menu-rows li:last-child{border-bottom:none}
-.dish{
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:3px;
-  font-size:22px;
-  color:var(--ink);
-  white-space:nowrap;
-}
-.leaders{
-  flex:1;
-  overflow:hidden;
-  border-bottom:3px dotted #8e6f3f;
-  margin:0 6px;
-  transform:translateY(-6px);
-  min-width:30px;
-}
-.dish-desc{
-  display:block;
-  font-family:'Caveat',cursive;
-  font-size:18px;
-  letter-spacing:0;
-  color:#7a6749;
-  font-weight:normal;
-  margin-top:2px;
-}
-.price{
-  font-family:'Permanent Marker',cursive;
-  color:var(--awning-red);
-  font-size:24px;
-  -webkit-text-stroke:.5px var(--ink);
-  white-space:nowrap;
-}
-
-/* ===== CHALKBOARD COCKTAILS ===== */
-.bar-section{
-  background:var(--cream);
-}
-.chalkboard{
-  background:
-    radial-gradient(ellipse at 20% 30%, rgba(255,255,255,.04) 0 30%, transparent 60%),
-    radial-gradient(ellipse at 75% 80%, rgba(255,255,255,.03) 0 30%, transparent 60%),
-    #1f3a2b;
-  border:14px solid;
-  border-image:repeating-linear-gradient(45deg, #8b5a2b 0 6px, #6b3f1c 6px 12px) 14;
-  padding:50px 40px;
-  color:#f4f1e6;
-  position:relative;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
-}
-.chalkboard h4{
-  font-family:'Permanent Marker',cursive;
-  text-align:center;
-  font-size:42px;
-  color:#fff;
-  margin-bottom:6px;
-  text-shadow:2px 2px 0 rgba(0,0,0,.3);
-}
-.chalkboard .sub{
-  text-align:center;
-  font-family:'Caveat',cursive;
-  font-size:24px;
-  color:#f5c518;
-  margin-bottom:34px;
-}
+.cocktail-inner{max-width:1080px;margin:0 auto;padding:64px 36px 0}
 .cocktail-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:28px 60px;
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:0;
+  border:2px solid var(--ink);
+  background:var(--bone);
 }
-@media(max-width:780px){.cocktail-grid{grid-template-columns:1fr}}
-.cocktail{
-  border-bottom:1px dashed rgba(255,255,255,.25);
-  padding-bottom:14px;
+.cocktail-card{
+  padding:28px 28px;
+  border-right:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+  position:relative;
 }
-.cocktail-head{
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+.cocktail-card:nth-child(2n){border-right:none}
+.cocktail-card:nth-last-child(-n+2){border-bottom:none}
+.cocktail-num{
+  position:absolute;top:14px;right:18px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;letter-spacing:.2em;
+  color:var(--coral);
 }
 .cocktail-name{
-  font-family:'Kalam',cursive;
-  font-size:24px;font-weight:700;
-  color:#fff;
-}
-.cocktail-price{
-  font-family:'Permanent Marker',cursive;
-  color:#f5c518;
-  font-size:22px;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:26px;
+  color:var(--ink);
+  margin-bottom:6px;
 }
 .cocktail-spec{
-  font-family:'Caveat',cursive;
-  font-size:18px;
-  color:#cfe5d8;
-  margin-top:2px;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:17px;
+  color:rgba(29,29,27,.72);
+  margin-bottom:14px;
+}
+.cocktail-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px dashed rgba(29,29,27,.35);
+  padding-top:10px;
+}
+.cocktail-foot .lbl{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;letter-spacing:.3em;
+  color:var(--teal);
+}
+.cocktail-foot .price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;letter-spacing:.08em;
+  color:var(--burnt);
 }
 
-/* ===== GALLERY ===== */
-.gallery-section{background:var(--cream)}
-.gal-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:120px;grid-auto-flow:dense;gap:10px;margin-top:48px;padding:14px;background:var(--brick);border:6px solid var(--cream)}
-.gal-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;border:3px solid var(--cream)}
-.gal-grid img:hover{transform:scale(1.02) rotate(-1deg)}
+/* ============ GALLERY ============ */
+.gallery{
+  background:var(--cream);
+  padding:90px 36px 100px;
+  border-bottom:3px solid var(--ink);
+}
+.gallery-inner{max-width:1280px;margin:0 auto}
+.gal-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:120px;grid-auto-flow:dense;gap:10px;margin-top:48px;padding:14px;background:var(--mustard);border:2px solid var(--ink)}
+.gal-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;filter:saturate(1.08) contrast(1.04)}
+.gal-grid img:hover{transform:scale(1.02)}
 .gal-grid .s1{grid-column:span 6;grid-row:span 2}
 .gal-grid .s2{grid-column:span 3;grid-row:span 3}
 .gal-grid .s3{grid-column:span 3;grid-row:span 2}
@@ -455,382 +408,448 @@ section{padding:90px 28px;position:relative}
 .gal-grid .s12{grid-column:span 12;grid-row:span 1}
 @media(max-width:900px){.gal-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:90px}.gal-grid img{grid-column:span 3 !important}.gal-grid .s1,.gal-grid .s12{grid-column:span 6 !important}}
 
-.gallery-frame{
-  position:relative;
-}
-.gallery-frame::before{
-  content:"FRESH FROM THE KITCHEN";
-  position:absolute;
-  top:-24px;left:30px;
-  background:var(--awning-yellow);
-  color:var(--ink);
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:4px;
-  padding:8px 16px;
-  border:3px solid var(--ink);
-  z-index:2;
-  transform:rotate(-2deg);
-}
-
-/* ===== VISIT - BULLETIN BOARD ===== */
+/* ============ VISIT ============ */
 .visit{
-  background:
-    repeating-linear-gradient(0deg, transparent 0 60px, rgba(0,0,0,.06) 60px 62px),
-    repeating-linear-gradient(90deg, transparent 0 120px, rgba(0,0,0,.06) 120px 122px),
-    #b25543;
-  color:var(--cream);
+  background:var(--bone);
+  padding:100px 36px;
+  border-bottom:3px solid var(--ink);
 }
-.visit .section-title{color:var(--cream);text-shadow:4px 4px 0 var(--ink)}
-.visit .section-eyebrow{background:var(--awning-yellow)}
-.bulletin{
-  background:#7d4d2d;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(0,0,0,.2) 0 1px, transparent 1px),
-    radial-gradient(circle at 70% 80%, rgba(255,255,255,.05) 0 1px, transparent 1px);
-  background-size:8px 8px, 12px 12px;
-  border:10px solid #4a2d18;
-  padding:60px 40px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+.visit-inner{max-width:1080px;margin:0 auto}
+.postcard{
   position:relative;
-}
-@media(max-width:980px){.bulletin{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.bulletin{grid-template-columns:1fr}}
-.index-card{
   background:var(--cream);
-  border:1px solid #ccc;
-  padding:24px 20px;
-  color:var(--ink);
-  position:relative;
-  box-shadow:4px 6px 12px rgba(0,0,0,.35);
-  background-image:
-    linear-gradient(180deg, transparent 56px, var(--awning-red) 56px 58px, transparent 58px),
-    repeating-linear-gradient(180deg, transparent 0 28px, rgba(31,109,186,.25) 28px 29px);
-  min-height:200px;
+  border:3px solid var(--ink);
+  padding:0;
+  display:grid;grid-template-columns:1.1fr 1fr;
+  box-shadow:10px 10px 0 var(--ink);
+  margin-top:36px;
 }
-.index-card:nth-child(1){transform:rotate(-2deg)}
-.index-card:nth-child(2){transform:rotate(1.5deg)}
-.index-card:nth-child(3){transform:rotate(-1deg)}
-.index-card:nth-child(4){transform:rotate(2deg)}
-.index-card .tape{
-  position:absolute;
-  width:60px;height:18px;
-  background:rgba(245,197,24,.85);
-  top:-9px;left:50%;
-  transform:translateX(-50%) rotate(-4deg);
-  border:1px dashed rgba(0,0,0,.2);
+.postcard-left{
+  padding:48px 44px;
+  border-right:2px dashed var(--ink);
+  background:var(--bone);
 }
-.index-card h5{
-  font-family:'Permanent Marker',cursive;
-  font-size:24px;
-  color:var(--awning-red);
-  margin-bottom:14px;
-  -webkit-text-stroke:.5px var(--ink);
-}
-.index-card p, .index-card a{
-  font-family:'Kalam',cursive;
-  font-size:17px;
-  line-height:1.6;
-  color:#2a1f12;
-}
-.index-card a{display:block;text-decoration:underline}
-
-/* ===== FOOTER ===== */
-.footer{
-  background:var(--ink);
-  color:var(--cream);
-  padding:60px 28px 28px;
+.postcard-stamp{
+  position:absolute;top:22px;right:22px;
+  width:88px;height:108px;
+  background:var(--mustard);
+  border:2px solid var(--ink);
+  padding:6px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
 }
-.footer .brand{color:#fff}
-.footer .brand .b1{color:var(--yellow)}
-.footer .brand .b2{color:var(--teal)}
-.footer p{margin-top:14px;font-family:'Caveat',cursive;font-size:20px;color:#c6b9a3}
-.footer small{display:block;margin-top:22px;font-family:'Bebas Neue',sans-serif;letter-spacing:4px;color:#7d6e58}
-.footer-awning{
-  height:24px;
-  background:repeating-linear-gradient(
-    90deg,
-    var(--awning-red) 0 30px,
-    var(--cream) 30px 60px,
-    var(--awning-blue) 60px 90px,
-    var(--cream) 90px 120px,
-    var(--awning-yellow) 120px 150px,
-    var(--cream) 150px 180px
-  );
-  border-top:3px solid var(--cream);
-  border-bottom:3px solid var(--cream);
+.postcard-stamp .inner{
+  width:100%;height:100%;border:1px dashed var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;color:var(--ink);
+  padding:4px;
+}
+.postcard-stamp .inner .big{font-size:22px;line-height:1}
+.postcard-stamp .inner .sm{font-size:9px;letter-spacing:.18em;margin-top:4px}
+.postcard-right{
+  padding:48px 44px;
+  background:var(--cream);
+}
+.postcard-eyebrow{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:.35em;
+  color:var(--burnt);
+  margin-bottom:10px;
+}
+.postcard-h{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-style:italic;
+  font-size:42px;line-height:1;
+  margin-bottom:22px;
+}
+.postcard-line{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;line-height:1.5;
+  margin-bottom:14px;
+}
+.postcard-line .lbl{
+  display:block;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;letter-spacing:.3em;
+  color:var(--teal);
+  margin-bottom:2px;
+}
+.postcard-orn{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;color:var(--burnt);
+  text-align:center;margin:18px 0;letter-spacing:.15em;
+}
+
+/* ============ FOOTER ============ */
+.footer{
+  background:var(--teal);
+  color:var(--bone);
+  padding:80px 36px 40px;
+  text-align:center;
+  position:relative;
+}
+.footer::before{
+  content:"";position:absolute;top:14px;left:14px;right:14px;bottom:14px;
+  border:2px solid var(--bone);
+  pointer-events:none;
+}
+.footer-inner{position:relative;z-index:2;max-width:1000px;margin:0 auto}
+.footer-fly{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,6vw,72px);
+  letter-spacing:.18em;
+  color:var(--yellow);
+  margin-bottom:14px;
+}
+.footer-tag{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:400;
+  font-size:22px;
+  margin-bottom:32px;
+}
+.footer-rule{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:24px auto;max-width:480px;
+}
+.footer-rule .r{flex:1;height:1px;background:var(--bone)}
+.footer-rule .star{color:var(--yellow);font-size:14px;letter-spacing:.3em}
+.footer-meta{
+  font-family:'Inter',sans-serif;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  margin-top:18px;opacity:.85;
+}
+.footer-brand{
+  font-family:'Playfair Display',serif;font-weight:900;font-style:italic;
+  font-size:28px;color:var(--bone);
+}
+.footer-brand .amp{color:var(--coral);font-style:normal;padding:0 4px}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:900px){
+  .nav{padding:14px 18px;flex-wrap:wrap;gap:10px}
+  .nav-links{gap:18px;width:100%;justify-content:center;order:3}
+  .nav-cta{padding:8px 14px}
+  .concept{grid-template-columns:1fr}
+  .concept-block{padding:60px 28px;border-right:none;border-bottom:2px solid var(--ink)}
+  .concept-block:last-child{border-bottom:none}
+  .cocktail-grid{grid-template-columns:1fr}
+  .cocktail-card{border-right:none !important;border-bottom:1px solid var(--ink) !important}
+  .cocktail-card:last-child{border-bottom:none !important}
+  .postcard{grid-template-columns:1fr}
+  .postcard-left{border-right:none;border-bottom:2px dashed var(--ink)}
+  .menu-row{flex-wrap:wrap}
+  .menu-desc{flex-basis:100%;margin-left:0;margin-top:4px;order:3}
+  .menu-dots{display:none}
+  .palm-left,.palm-right{display:none}
+  .hero-sun{width:180px;height:180px;top:8%}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== AWNING TOP ===== -->
-<div class="awning"></div>
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Maui<span class="amp">&amp;</span>Brooklyn</a>
+  <ul class="nav-links">
+    <li><a href="#concept">Concept</a></li>
+    <li><a href="#menu">Kitchen</a></li>
+    <li><a href="#cocktails">Tiki Bar</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="#visit" class="nav-cta">Reserve</a>
+</nav>
 
-<!-- ===== NAV ===== -->
-<header class="nav-wrap">
-  <div class="nav-inner">
-    <div>
-      <div class="brand"><span class="b1">Maui</span><span class="b2">Brooklyn</span></div>
-      <span class="brand-sub">Caribbean & Hawaiian Kitchen + Tiki Bar</span>
-    </div>
-    <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#menu">Kitchen</a>
-      <a href="#cocktails">Bar</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#visit">Visit</a>
-      <a href="#visit" class="cta">Reserve</a>
-    </nav>
-  </div>
-</header>
-
-<!-- ===== HERO ===== -->
+<!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero-wall">
-    <span class="tape tl"></span>
-    <span class="tape tr"></span>
-    <div class="hero-tag">CORNER OF MYRTLE & WYCKOFF</div>
-    <h1 class="hero-main">Maui</h1>
-    <div class="hero-sub">Brooklyn</div>
-    <div class="hero-meta">
-      <div class="hours-paint">OPEN 11AM TIL LATE</div>
-      <div class="stamp">EST<b>2025</b>BK NY</div>
+  <div class="hero-sun"></div>
+
+  <div class="palm palm-left">
+    <div class="palm-trunk"></div>
+    <div class="palm-frond f1"></div>
+    <div class="palm-frond f2"></div>
+    <div class="palm-frond f3"></div>
+    <div class="palm-frond f4"></div>
+    <div class="palm-frond f5"></div>
+  </div>
+  <div class="palm palm-right">
+    <div class="palm-trunk"></div>
+    <div class="palm-frond f1"></div>
+    <div class="palm-frond f2"></div>
+    <div class="palm-frond f3"></div>
+    <div class="palm-frond f4"></div>
+    <div class="palm-frond f5"></div>
+  </div>
+
+  <div class="hero-mountains">
+    <div class="mtn m1"></div>
+    <div class="mtn m2"></div>
+    <div class="mtn m3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-toprule">
+      <span class="rule"></span>
+      <span>Pacific Air Service</span>
+      <span class="rule"></span>
     </div>
-    <div class="cta-row">
-      <a href="#visit" class="deli-sticker">RESERVE A TABLE</a>
-      <a href="#menu" class="deli-sticker alt">SEE THE MENU</a>
+    <h1 class="hero-title">
+      <span class="maui">Maui</span>
+      <span class="brooklyn">Brooklyn</span>
+    </h1>
+    <p class="hero-tagline">Caribbean &amp; Hawaiian Kitchen + Tiki Bar</p>
+    <div class="hero-sub">
+      <span class="rule"></span>
+      <span>EST. 2025 · Brooklyn, N.Y.</span>
+      <span class="rule"></span>
+    </div>
+    <div class="hero-buttons">
+      <a href="#visit" class="btn btn-solid">Reserve a Table</a>
+      <a href="#menu" class="btn btn-outline">View the Menu</a>
     </div>
   </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
-<section class="about" id="about">
-  <div class="container">
-    <span class="section-eyebrow">FROM THE COUNTER</span>
-    <h2 class="section-title">Two islands. <em>One corner store.</em></h2>
-    <p class="section-sub">A scrappy little bodega kitchen run by cooks from Port-au-Prince, Kingston, Honolulu and Bed-Stuy — pulling shifts together, painting signs together, feeding the block.</p>
+<!-- ============ CONCEPT ============ -->
+<section class="concept" id="concept">
+  <div class="concept-block mustard">
+    <div class="concept-eyebrow">CHAPTER ONE · THE ISLANDS</div>
+    <h2 class="concept-h">From shoreline<br>to Myrtle Avenue.</h2>
+    <p class="concept-body">
+      A passport in plate form. We sail from the volcanic kitchens of Hawaii to the spice-warmed pots of the Caribbean, gathering huli huli smoke, jerk perfume, and salt-cured fish along the way. Each dish carries a stamp from somewhere warmer than Brooklyn.
+    </p>
+    <svg class="concept-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M60 12 C40 18 28 38 30 60 C42 50 54 50 60 60 C66 50 78 50 90 60 C92 38 80 18 60 12 Z" fill="#1d1d1b"/>
+      <path d="M60 60 L60 108" stroke="#1d1d1b" stroke-width="4" fill="none"/>
+      <circle cx="60" cy="60" r="4" fill="#e96b5c"/>
+    </svg>
+  </div>
+  <div class="concept-block teal">
+    <div class="concept-eyebrow">CHAPTER TWO · THE BAR</div>
+    <h2 class="concept-h">A tiki bar with<br>a borough address.</h2>
+    <p class="concept-body">
+      Aged rums in cut crystal. Orgeat from real almonds. Pineapple shaken hard enough to wake the neighbors. Our bar is a 1962 lounge that learned to mix with a Brooklyn accent — refined, generous, never kitsch.
+    </p>
+    <svg class="concept-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 30 L100 30 L80 70 L70 100 L50 100 L40 70 Z" fill="#f6ecd6" stroke="#1d1d1b" stroke-width="3"/>
+      <circle cx="55" cy="50" r="4" fill="#e96b5c"/>
+      <path d="M70 38 Q85 28 95 35" stroke="#e96b5c" stroke-width="3" fill="none"/>
+      <path d="M50 100 L70 100" stroke="#1d1d1b" stroke-width="3"/>
+    </svg>
+  </div>
+</section>
 
-    <div class="about-grid">
-      <div class="deli-card a">
-        <span class="pin l"></span>
-        <span class="pin r"></span>
-        <figure class="polaroid">
-          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80&auto=format&fit=crop" alt="Caribbean plate">
-          <figcaption>Auntie's oxtail recipe</figcaption>
-        </figure>
-        <h3>The Caribbean Side</h3>
-        <p>Slow-cooked oxtail, jerk-rubbed snapper, rice and peas the way Tante used to make it on Sunday. Scotch bonnet heat, allspice smoke, plantains crackling in the back. The flavors that ride the J train.</p>
+<!-- ============ MENU ============ -->
+<section class="menu" id="menu">
+  <div class="menu-inner">
+    <div class="section-eyebrow">BILL OF FARE</div>
+    <h2 class="section-title">The Kitchen</h2>
+    <div class="section-orn">· ✦ · island provisions, brooklyn hands · ✦ ·</div>
+
+    <div class="menu-list">
+      <div class="menu-row">
+        <span class="menu-name">Trinidad Doubles</span>
+        <span class="menu-desc">curried chickpeas, tamarind, scotch bonnet, bara</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$12</span>
       </div>
-
-      <div class="deli-card b">
-        <span class="pin l"></span>
-        <span class="pin r"></span>
-        <figure class="polaroid">
-          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80&auto=format&fit=crop" alt="Hawaiian plate">
-          <figcaption>From Hilo with love</figcaption>
-        </figure>
-        <h3>The Hawaiian Side</h3>
-        <p>Kalua pig steamed til it falls, ahi poke layered with crisp veg, huli-huli chicken kissed by the grill. Aloha through and through, plated on enamel diner ware. Tropical heart, Brooklyn hustle.</p>
+      <div class="menu-row">
+        <span class="menu-name">Spam Musubi Elevated</span>
+        <span class="menu-desc">glazed Spam, koshihikari rice, furikake, nori</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$14</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== MENU BOARD ===== -->
-<section class="menu-section" id="menu">
-  <div class="container">
-    <span class="section-eyebrow">THE KITCHEN</span>
-    <h2 class="section-title">Today's <em>plates</em></h2>
-    <p class="section-sub">Hand-written on the board every morning. Cash, card, and a smile all welcome.</p>
-
-    <div class="menu-board">
-      <h4>— SERVED ALL DAY —</h4>
-      <ul class="menu-rows">
-        <li>
-          <div>
-            <div class="dish">TRINIDAD DOUBLES</div>
-            <span class="dish-desc">curried chickpeas, bara, tamarind, cilantro</span>
-          </div>
-          <span class="leaders"></span><span class="price">$12</span>
-        </li>
-        <li>
-          <div>
-            <div class="dish">SPAM MUSUBI ELEVATED</div>
-            <span class="dish-desc">teriyaki glaze, furikake, sushi-grade nori</span>
-          </div>
-          <span class="leaders"></span><span class="price">$14</span>
-        </li>
-        <li>
-          <div>
-            <div class="dish">PLANTAIN POKE BOWL</div>
-            <span class="dish-desc">ahi tuna, crispy plantain, mango, ponzu</span>
-          </div>
-          <span class="leaders"></span><span class="price">$22</span>
-        </li>
-        <li>
-          <div>
-            <div class="dish">JAMAICAN OXTAIL STEW</div>
-            <span class="dish-desc">butter beans, allspice, six-hour braise</span>
-          </div>
-          <span class="leaders"></span><span class="price">$36</span>
-        </li>
-        <li>
-          <div>
-            <div class="dish">KALUA PIG PLATE</div>
-            <span class="dish-desc">slow-roasted pork, mac salad, two scoops rice</span>
-          </div>
-          <span class="leaders"></span><span class="price">$32</span>
-        </li>
-        <li>
-          <div>
-            <div class="dish">JERK-GLAZED WHOLE SNAPPER</div>
-            <span class="dish-desc">pimento smoke, lime, fried festival bread</span>
-          </div>
-          <span class="leaders"></span><span class="price">$38</span>
-        </li>
-        <li>
-          <div>
-            <div class="dish">HULI HULI CHICKEN</div>
-            <span class="dish-desc">pineapple-soy glaze, charred over kiawe</span>
-          </div>
-          <span class="leaders"></span><span class="price">$18</span>
-        </li>
-        <li>
-          <div>
-            <div class="dish">COCONUT RICE & PEAS</div>
-            <span class="dish-desc">kidney bean, scotch bonnet, thyme, coconut milk</span>
-          </div>
-          <span class="leaders"></span><span class="price">$8</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COCKTAILS ===== -->
-<section class="bar-section" id="cocktails">
-  <div class="container">
-    <span class="section-eyebrow">THE TIKI BAR</span>
-    <h2 class="section-title">Cocktails <em>from the board</em></h2>
-    <p class="section-sub">Chalk on slate, ice in the rocks glass. Our bartenders learned in Kingston, San Juan and Honolulu — then ended up here on Myrtle.</p>
-
-    <div class="chalkboard">
-      <h4>~ COCKTAILS ~</h4>
-      <div class="sub">tropical drinks · made by hand · two for the table</div>
-      <div class="cocktail-grid">
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Pina Colada</span><span class="cocktail-price">$14</span></div>
-          <div class="cocktail-spec">rum · coconut · pineapple</div>
-        </div>
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Brooklyn Mai Tai</span><span class="cocktail-price">$16</span></div>
-          <div class="cocktail-spec">aged rum · orgeat · lime</div>
-        </div>
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Blue Hawaii</span><span class="cocktail-price">$15</span></div>
-          <div class="cocktail-spec">rum · vodka · blue curacao</div>
-        </div>
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Lava Flow</span><span class="cocktail-price">$15</span></div>
-          <div class="cocktail-spec">rum · strawberry · coconut</div>
-        </div>
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Pineapple Margarita</span><span class="cocktail-price">$15</span></div>
-          <div class="cocktail-spec">tequila reposado · pineapple · lime</div>
-        </div>
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Spicy Mango Paloma</span><span class="cocktail-price">$15</span></div>
-          <div class="cocktail-spec">tequila blanco · mango · chile</div>
-        </div>
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Chi Chi</span><span class="cocktail-price">$14</span></div>
-          <div class="cocktail-spec">vodka · coconut · pineapple</div>
-        </div>
-        <div class="cocktail">
-          <div class="cocktail-head"><span class="cocktail-name">Painkiller Williamsburg</span><span class="cocktail-price">$15</span></div>
-          <div class="cocktail-spec">Pusser's rum · orange · nutmeg</div>
-        </div>
+      <div class="menu-row">
+        <span class="menu-name">Plantain Poke Bowl</span>
+        <span class="menu-desc">ahi tuna, sesame, sweet plantains, avocado</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$22</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Jamaican Oxtail Stew</span>
+        <span class="menu-desc">slow braised, butter beans, scotch bonnet, rice</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$36</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Kalua Pig Plate</span>
+        <span class="menu-desc">imu-smoked pork, cabbage, sea salt, mac salad</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$32</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Jerk-Glazed Whole Snapper</span>
+        <span class="menu-desc">pimento wood smoke, citrus, charred lime</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$38</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Huli Huli Chicken</span>
+        <span class="menu-desc">rotisserie, pineapple-soy, ginger, scallion</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$18</span>
+      </div>
+      <div class="menu-row">
+        <span class="menu-name">Coconut Rice &amp; Peas</span>
+        <span class="menu-desc">jasmine rice, coconut milk, kidney bean, thyme</span>
+        <span class="menu-dots"></span>
+        <span class="menu-price">$8</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== GALLERY ===== -->
-<section class="gallery-section" id="gallery">
-  <div class="container">
-    <span class="section-eyebrow">THE WALL</span>
-    <h2 class="section-title">Photos taped <em>behind the counter</em></h2>
-    <p class="section-sub">Every cook, every plate, every regular. We tape the polaroids up and never take them down.</p>
-
-    <div class="gallery-frame">
-      <div class="gal-grid">
-        <img class="s1" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s2" src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s3" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s4" src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s5" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s6" src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s7" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s8" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s9" src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s10" src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s11" src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80&auto=format&fit=crop" alt="">
-        <img class="s12" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80&auto=format&fit=crop" alt="">
+<!-- ============ COCKTAILS ============ -->
+<section class="cocktails" id="cocktails">
+  <div class="cocktail-banner">
+    <div class="cocktail-banner-eyebrow">THE TIKI BAR · SERVED NIGHTLY</div>
+    <div class="cocktail-banner-title">Cocktail Programme</div>
+    <div class="cocktail-banner-sub">eight signatures, shaken with intention</div>
+  </div>
+  <div class="cocktail-inner">
+    <div class="cocktail-grid">
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 01</div>
+        <div class="cocktail-name">Piña Colada</div>
+        <div class="cocktail-spec">aged rum · coconut cream · pineapple</div>
+        <div class="cocktail-foot"><span class="lbl">CLASSIC</span><span class="price">$14</span></div>
+      </div>
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 02</div>
+        <div class="cocktail-name">Brooklyn Mai Tai</div>
+        <div class="cocktail-spec">aged rum · house orgeat · lime · float</div>
+        <div class="cocktail-foot"><span class="lbl">HOUSE</span><span class="price">$16</span></div>
+      </div>
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 03</div>
+        <div class="cocktail-name">Blue Hawaii</div>
+        <div class="cocktail-spec">rum · vodka · blue curaçao · pineapple</div>
+        <div class="cocktail-foot"><span class="lbl">TROPICAL</span><span class="price">$15</span></div>
+      </div>
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 04</div>
+        <div class="cocktail-name">Lava Flow</div>
+        <div class="cocktail-spec">white rum · strawberry · coconut · banana</div>
+        <div class="cocktail-foot"><span class="lbl">FROZEN</span><span class="price">$15</span></div>
+      </div>
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 05</div>
+        <div class="cocktail-name">Pineapple Margarita</div>
+        <div class="cocktail-spec">tequila reposado · pineapple · lime · salt</div>
+        <div class="cocktail-foot"><span class="lbl">AGAVE</span><span class="price">$15</span></div>
+      </div>
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 06</div>
+        <div class="cocktail-name">Spicy Mango Paloma</div>
+        <div class="cocktail-spec">tequila blanco · mango · chile · grapefruit</div>
+        <div class="cocktail-foot"><span class="lbl">SPICED</span><span class="price">$15</span></div>
+      </div>
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 07</div>
+        <div class="cocktail-name">Chi Chi</div>
+        <div class="cocktail-spec">vodka · coconut cream · pineapple · cherry</div>
+        <div class="cocktail-foot"><span class="lbl">CREAMY</span><span class="price">$14</span></div>
+      </div>
+      <div class="cocktail-card">
+        <div class="cocktail-num">№ 08</div>
+        <div class="cocktail-name">Painkiller Williamsburg</div>
+        <div class="cocktail-spec">Pusser's rum · orange · pineapple · nutmeg</div>
+        <div class="cocktail-foot"><span class="lbl">SIGNATURE</span><span class="price">$15</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== VISIT - BULLETIN BOARD ===== -->
+<!-- ============ GALLERY ============ -->
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <div class="section-eyebrow">DEPARTURES &amp; ARRIVALS</div>
+    <h2 class="section-title">A Field Guide</h2>
+    <div class="section-orn">· ✦ · scenes from the dining room &amp; kitchen · ✦ ·</div>
+
+    <div class="gal-grid">
+      <img class="s1" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s2" src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s3" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s4" src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s5" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s6" src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s7" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s8" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s9" src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s10" src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s11" src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80&auto=format&fit=crop" alt="">
+      <img class="s12" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80&auto=format&fit=crop" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
 <section class="visit" id="visit">
-  <div class="container">
-    <span class="section-eyebrow">PIN IT UP</span>
-    <h2 class="section-title">Come <em>find us</em></h2>
-    <p class="section-sub" style="color:#f1e6d6">On the bulletin board behind the register: address, reservation line, what's coming up, where to find us online.</p>
+  <div class="visit-inner">
+    <div class="section-eyebrow">CORRESPONDENCE</div>
+    <h2 class="section-title">Pay Us a Visit</h2>
+    <div class="section-orn">· ✦ · open seven days, sunset 'til late · ✦ ·</div>
 
-    <div class="bulletin">
-      <div class="index-card">
-        <span class="tape"></span>
-        <h5>The Spot</h5>
-        <p>66-48 Myrtle Ave</p>
-        <p>Brooklyn, NY</p>
-        <p>M Train to Forest Ave</p>
+    <div class="postcard">
+      <div class="postcard-stamp">
+        <div class="inner">
+          <span class="big">MB</span>
+          <span class="sm">NY · 11385</span>
+        </div>
       </div>
-      <div class="index-card">
-        <span class="tape"></span>
-        <h5>Reservations</h5>
-        <p>Open Tue – Sun</p>
-        <p>11am til late</p>
-        <a href="#">book@mauibrooklyn.nyc</a>
-        <a href="#">(347) 555-0188</a>
+      <div class="postcard-left">
+        <div class="postcard-eyebrow">FROM THE HOUSE OF</div>
+        <h3 class="postcard-h">Maui<br>Brooklyn</h3>
+        <p class="postcard-line" style="font-style:italic;">
+          "Wishing you were here. The rum is good, the snapper is whole, and the band starts at nine."
+        </p>
+        <div class="postcard-orn">· ✦ · ✦ · ✦ ·</div>
+        <p class="postcard-line" style="font-size:17px;">
+          A Caribbean &amp; Hawaiian kitchen with a tiki bar attached, hidden in plain sight on Myrtle Avenue.
+        </p>
       </div>
-      <div class="index-card">
-        <span class="tape"></span>
-        <h5>Coming Up</h5>
-        <p>Reggae Sunday brunch</p>
-        <p>Tiki Tuesdays half-off</p>
-        <p>Late-night DJ Fridays</p>
-      </div>
-      <div class="index-card">
-        <span class="tape"></span>
-        <h5>The 'Gram</h5>
-        <a href="#">@mauibrooklyn</a>
-        <a href="#">@mauibrooklyn.bar</a>
-        <p>tag us, we repost</p>
+      <div class="postcard-right">
+        <div class="postcard-line">
+          <span class="lbl">ADDRESS</span>
+          66-48 Myrtle Ave<br>Brooklyn, NY
+        </div>
+        <div class="postcard-line">
+          <span class="lbl">RESERVATIONS</span>
+          reservations@mauibrooklyn.com
+        </div>
+        <div class="postcard-line">
+          <span class="lbl">PRIVATE EVENTS</span>
+          events@mauibrooklyn.com
+        </div>
+        <div class="postcard-line">
+          <span class="lbl">SOCIAL</span>
+          @mauibrooklyn
+        </div>
+        <div class="postcard-line">
+          <span class="lbl">HOURS</span>
+          Tue – Sun · 5pm to late<br>Closed Mondays
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
-<div class="awning awning-bottom"></div>
+<!-- ============ FOOTER ============ -->
 <footer class="footer">
-  <div class="brand"><span class="b1">Maui</span><span class="b2">Brooklyn</span></div>
-  <p>Caribbean & Hawaiian kitchen, tiki bar, bodega heart — Myrtle Ave, BK.</p>
-  <small>EST 2025 · MADE WITH SUN AND CONCRETE</small>
+  <div class="footer-inner">
+    <div class="footer-fly">FLY TO MAUI BROOKLYN</div>
+    <div class="footer-tag">non-stop service from your front door, nightly</div>
+    <div class="footer-rule">
+      <span class="r"></span>
+      <span class="star">✦</span>
+      <span class="r"></span>
+    </div>
+    <div class="footer-brand">Maui<span class="amp">&amp;</span>Brooklyn</div>
+    <div class="footer-meta">EST. 2025 · 66-48 MYRTLE AVE · BROOKLYN N.Y.</div>
+    <div class="footer-meta" style="margin-top:8px;opacity:.7;">© Maui Brooklyn — Caribbean &amp; Hawaiian Kitchen + Tiki Bar</div>
+  </div>
 </footer>
-<div class="footer-awning"></div>
 
 </body>
 </html>
