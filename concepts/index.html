@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maui Brooklyn — Site Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --yellow:#F2C744;--gold:#D4A843;--green:#2D6A4F;--teal:#1B9AAA;
+    --pink:#E84B8A;--coral:#FF6B6B;--ocean:#0077B6;--orange:#F4845F;
+    --cream:#FFF8F0;--dark:#1A1A2E;
+  }
+  html,body{height:100%}
+  body{
+    font-family:'Inter',sans-serif;
+    background:radial-gradient(ellipse at top,#1f2545 0%,#0d0f1f 70%);
+    color:var(--cream);min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:80px 32px 120px}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.35em;font-size:12px;
+    color:rgba(255,248,240,.6);margin-bottom:18px;text-align:center;
+  }
+  h1.title{
+    font-family:'Permanent Marker',cursive;
+    font-size:clamp(96px,16vw,220px);
+    color:var(--yellow);text-align:center;line-height:.85;
+    text-shadow:0 6px 60px rgba(242,199,68,.5),0 2px 4px rgba(0,0,0,.6),0 0 120px rgba(242,199,68,.18);
+  }
+  .brooklyn{
+    font-family:'Satisfy',cursive;font-size:clamp(32px,5vw,56px);
+    color:var(--teal);text-align:center;margin-top:-8px;
+    text-shadow:0 2px 20px rgba(27,154,170,.4);
+  }
+  .wave{
+    width:160px;height:4px;margin:24px auto 18px;border-radius:2px;
+    background:linear-gradient(90deg,var(--pink),var(--orange),var(--yellow),var(--teal));
+  }
+  .tagline{
+    text-align:center;font-family:'Satisfy',cursive;font-size:26px;
+    color:rgba(255,248,240,.92);margin-bottom:8px;
+  }
+  .sub{text-align:center;color:rgba(255,248,240,.55);font-size:15px;margin-bottom:36px}
+  .cycle-cta{
+    display:flex;justify-content:center;margin-bottom:56px;
+  }
+  .cycle-cta a{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:18px 32px;border-radius:60px;
+    background:linear-gradient(135deg,var(--orange),var(--pink) 60%,var(--ocean));
+    color:var(--cream);text-decoration:none;font-weight:700;
+    font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 12px 40px -10px rgba(232,75,138,.5),0 0 0 1px rgba(255,255,255,.04) inset;
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .cycle-cta a:hover{transform:translateY(-2px);box-shadow:0 18px 50px -8px rgba(242,199,68,.55)}
+  .cycle-cta .arrow{
+    display:inline-flex;width:22px;height:22px;border-radius:50%;
+    background:rgba(255,255,255,.18);align-items:center;justify-content:center;
+    font-size:14px;
+  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+  .card{
+    position:relative;border-radius:20px;overflow:hidden;
+    background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.08);
+    padding:36px 28px 28px;text-decoration:none;color:inherit;
+    transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+    display:flex;flex-direction:column;gap:14px;min-height:240px;
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(242,199,68,.4);box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+  .card .num{
+    font-family:'Permanent Marker',cursive;font-size:48px;color:var(--yellow);
+    line-height:1;letter-spacing:.02em;
+  }
+  .card h3{font-size:22px;font-weight:700;color:var(--cream)}
+  .card p{font-size:14px;line-height:1.55;color:rgba(255,248,240,.65)}
+  .card .pill{
+    margin-top:auto;font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--teal);font-weight:600;
+  }
+  .card.v1{background-image:linear-gradient(160deg,rgba(244,132,95,.18),rgba(232,75,138,.06))}
+  .card.v2{background-image:linear-gradient(160deg,rgba(15,20,40,.8),rgba(27,154,170,.12))}
+  .card.v3{background-image:linear-gradient(160deg,rgba(45,106,79,.18),rgba(242,199,68,.08))}
+  .card.v4{background-image:linear-gradient(160deg,rgba(255,248,240,.08),rgba(255,248,240,.02))}
+  .card.v5{background-image:linear-gradient(160deg,rgba(255,255,255,.10),rgba(27,154,170,.06))}
+  .card.v6{background-image:linear-gradient(160deg,rgba(255,46,147,.18),rgba(15,240,252,.10))}
+  .card.v7{background-image:linear-gradient(160deg,rgba(217,152,56,.18),rgba(27,154,170,.12))}
+  .card.v8{background-image:linear-gradient(160deg,rgba(17,48,42,.45),rgba(201,163,58,.10))}
+  .card.v9{background-image:linear-gradient(160deg,rgba(27,154,170,.16),rgba(255,248,240,.04))}
+  .card.v1l{background-image:linear-gradient(160deg,rgba(14,90,100,.35),rgba(27,154,170,.12))}
+  .card.v11{background-image:linear-gradient(160deg,rgba(10,34,49,.65),rgba(242,199,68,.16))}
+  footer{margin-top:80px;text-align:center;color:rgba(255,248,240,.4);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">11 Site Concepts &middot; Work in Progress</div>
+  <h1 class="title">Maui</h1>
+  <div class="brooklyn">Brooklyn</div>
+  <div class="wave"></div>
+  <div class="tagline">Caribbean &amp; Hawaiian Kitchen + Tiki Bar</div>
+  <div class="sub">66-48 Myrtle Ave, Brooklyn NY &nbsp;&bull;&nbsp; Maui Queens at Swan Marina, Jamaica NY</div>
+
+  <div class="cycle-cta">
+    <a href="../cycle/">Cycle Through All 11 <span class="arrow">&rarr;</span></a>
+  </div>
+
+  <div class="grid">
+    <a class="card v1" href="../v1/">
+      <div class="num">01</div>
+      <h3>Sunset Beach</h3>
+      <p>Vibrant tropical hero with full sunset gradient, palm fronds, big paintbrush logo. Warm and inviting.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v2" href="../v2/">
+      <div class="num">02</div>
+      <h3>Tiki After Dark</h3>
+      <p>Moody nightlife mode. Glowing torches, neon palms, late-night cocktail bar energy.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v3" href="../v3/">
+      <div class="num">03</div>
+      <h3>Island Market</h3>
+      <p>Bright Caribbean-Hawaiian fusion. Pattern blocks, steel drums energy, food-forward layout.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v4" href="../v4/">
+      <div class="num">04</div>
+      <h3>Editorial Aloha</h3>
+      <p>Magazine-style layout. Restrained palette, oversized paintbrush title, refined typography.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v5" href="../v5/">
+      <div class="num">05</div>
+      <h3>Pacific Modern</h3>
+      <p>Apple-clean minimal. Generous whitespace, premium product-page feel, restrained color.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v6" href="../v6/">
+      <div class="num">06</div>
+      <h3>Neon Wave</h3>
+      <p>Synthwave tropical. Magenta + cyan glow, grid horizon, chrome headlines, retro-future Miami at 2am.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v7" href="../v7/">
+      <div class="num">07</div>
+      <h3>Mid-Century Hawaiian</h3>
+      <p>1960s Pan Am travel poster. Mustard + coral + teal flat blocks, geometric palm silhouettes, refined serif type.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v8" href="../v8/">
+      <div class="num">08</div>
+      <h3>Speakeasy Lanai</h3>
+      <p>Dark luxe Art Deco. Brass, gold, midnight green. 1920s Pacific lounge mood.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v9" href="../v9/">
+      <div class="num">09</div>
+      <h3>Editorial Teal</h3>
+      <p>The Editorial layout in a restrained teal palette. Magazine grid, oversized brush title.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v1l" href="../v1l/">
+      <div class="num">10</div>
+      <h3>Tabbed Ocean</h3>
+      <p>Sunset Beach rebuilt with a tabbed layout over real ocean footage. Cocktails, gallery, vision, visit.</p>
+      <div class="pill">View Concept &rarr;</div>
+    </a>
+    <a class="card v11" href="../">
+      <div class="num">11</div>
+      <h3>Maui Queens &times; Swan Marina</h3>
+      <p>The second venue, not a variant. Dockside raw bar at Swan Marina, Queens. This is the live site.</p>
+      <div class="pill">Open the Site &rarr;</div>
+    </a>
+  </div>
+
+  <footer>Maui Brooklyn &middot; Concept Deck &middot; 8 Variants</footer>
+</div>
+</body>
+</html>
