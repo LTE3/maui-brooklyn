@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maui Brooklyn — All 39 Variants</title>
+<style>
+  :root{
+    --bg:#0b1114;
+    --panel:#121b1f;
+    --line:#1f2d33;
+    --ink:#e6f0f0;
+    --dim:#7d949b;
+    --teal:#2fb3a8;
+    --tile-w:420px;
+    --frame-w:1440px;
+    --frame-h:1750px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:400 14px/1.5 ui-sans-serif,-apple-system,"Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    position:sticky;top:0;z-index:20;
+    background:rgba(11,17,20,.86);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    padding:18px 28px;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;
+  }
+  h1{margin:0;font-size:17px;letter-spacing:-.01em;font-weight:600}
+  header .sub{color:var(--dim);font-size:13px}
+  nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  nav a{
+    color:var(--dim);text-decoration:none;font-size:12px;
+    padding:5px 11px;border:1px solid var(--line);border-radius:99px;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  nav a:hover{color:var(--ink);border-color:var(--teal)}
+
+  section{padding:34px 28px 8px}
+  h2{
+    margin:0 0 4px;font-size:13px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--teal);
+  }
+  .note{margin:0 0 20px;color:var(--dim);font-size:13px;max-width:64ch}
+
+  .grid{
+    display:grid;gap:22px;
+    grid-template-columns:repeat(auto-fill,minmax(var(--tile-w),1fr));
+  }
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    overflow:hidden;transition:border-color .15s ease,transform .15s ease;
+  }
+  .card:hover{border-color:var(--teal);transform:translateY(-2px)}
+  .shot{
+    position:relative;height:520px;overflow:hidden;background:#000;
+    border-bottom:1px solid var(--line);
+  }
+  .shot iframe{
+    position:absolute;top:0;left:0;
+    width:var(--frame-w);height:var(--frame-h);
+    border:0;transform-origin:0 0;pointer-events:none;
+  }
+  /* scale set per-tile in JS so it always fits the tile width */
+  .shot .veil{position:absolute;inset:0;cursor:pointer}
+  .shot .ph{
+    position:absolute;inset:0;display:grid;place-items:center;
+    color:#31434a;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .meta{display:flex;align-items:center;gap:10px;padding:12px 14px}
+  .tag{
+    font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    background:#0b1114;border:1px solid var(--line);color:var(--teal);
+    padding:5px 8px;border-radius:6px;
+  }
+  .name{font-size:13px;color:var(--ink)}
+  .desc{font-size:12px;color:var(--dim)}
+  .open{
+    margin-left:auto;color:var(--dim);text-decoration:none;font-size:12px;
+    border:1px solid var(--line);padding:5px 10px;border-radius:6px;
+  }
+  .open:hover{color:var(--ink);border-color:var(--teal)}
+  .star{color:#e8b64c}
+  footer{padding:40px 28px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);margin-top:40px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Maui Brooklyn</h1>
+  <span class="sub">39 variants · contact sheet</span>
+  <nav>
+    <a href="#concepts">Concepts</a>
+    <a href="#v1fam">v1 backgrounds</a>
+    <a href="#v3fam">v3 palettes</a>
+    <a href="#v4fam">v4 palettes</a>
+  </nav>
+</header>
+
+<section id="concepts">
+  <h2>Base concepts</h2>
+  <p class="note">Nine distinct design directions. v1&ndash;v8 are the ones in the original picker; v9 was added later.</p>
+  <div class="grid" id="g-concepts"></div>
+</section>
+
+<section id="v1fam">
+  <h2>v1 &mdash; background / palette variants</h2>
+  <p class="note">All Sunset&nbsp;Beach structure. a&ndash;j vary the background wash; k&ndash;r are the teal/blue paper palettes. <span class="star">&#9733;</span> v1l is the one with the tabbed layout + real ocean video.</p>
+  <div class="grid" id="g-v1"></div>
+</section>
+
+<section id="v3fam">
+  <h2>v3 &mdash; palette variants</h2>
+  <p class="note">Island Market structure, three palette passes.</p>
+  <div class="grid" id="g-v3"></div>
+</section>
+
+<section id="v4fam">
+  <h2>v4 &mdash; palette variants</h2>
+  <p class="note">Editorial Aloha structure. a&ndash;c original passes; d&ndash;i reskinned to blue/teal paper.</p>
+  <div class="grid" id="g-v4"></div>
+</section>
+
+<footer>
+  Tiles are live iframes scaled down, not screenshots &mdash; click any tile to open it full-size in a new tab.
+  Generated for review; not committed.
+</footer>
+
+<script>
+const CONCEPTS = [
+  ['v1','Sunset Beach','vibrant tropical hero, sunset gradient'],
+  ['v2','Tiki After Dark','moody nightlife, neon palms'],
+  ['v3','Island Market','bright Caribbean-Hawaiian fusion'],
+  ['v4','Editorial Aloha','magazine layout, oversized brush title'],
+  ['v5','Pacific Modern','restrained, Myrtle Ave eyebrow'],
+  ['v6','Neon Wave','neon-wave tiki'],
+  ['v7','Mid-Century Hawaiian','replaced Bodega Brooklyn'],
+  ['v8','Speakeasy Lanai','a Pacific hideaway'],
+  ['v9','Editorial Teal','Issue No. 09'],
+];
+const V1 = 'abcdefghijklmnopqr'.split('').map(c => ['v1'+c, 'v1'+c, c<='j' ? 'background wash' : 'teal/blue paper']);
+const V3 = ['a','b','c'].map(c => ['v3'+c,'v3'+c,'palette pass']);
+const V4 = ['a','b','c','d','e','f','g','h','i'].map(c => ['v4'+c,'v4'+c, c<='c' ? 'palette pass' : 'blue/teal paper reskin']);
+
+const io = new IntersectionObserver(es => {
+  for (const e of es) {
+    if (!e.isIntersecting) continue;
+    const f = e.target.querySelector('iframe');
+    if (f && !f.src) { f.src = f.dataset.src; f.addEventListener('load', () => e.target.querySelector('.ph')?.remove()); }
+    io.unobserve(e.target);
+  }
+}, {rootMargin:'400px'});
+
+function card([slug,name,desc]) {
+  const starred = slug === 'v1l';
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.innerHTML = `
+    <div class="shot">
+      <div class="ph">loading ${slug}</div>
+      <iframe data-src="${slug}/index.html" scrolling="no" loading="lazy" title="${slug}"></iframe>
+      <a class="veil" href="${slug}/index.html" target="_blank" rel="noopener" aria-label="Open ${slug}"></a>
+    </div>
+    <div class="meta">
+      <span class="tag">${slug}</span>
+      <div>
+        <div class="name">${starred ? '<span class="star">&#9733;</span> ' : ''}${name}</div>
+        <div class="desc">${desc}</div>
+      </div>
+      <a class="open" href="${slug}/index.html" target="_blank" rel="noopener">Open &#8599;</a>
+    </div>`;
+  const shot = el.querySelector('.shot');
+  const scale = () => {
+    const w = shot.clientWidth;
+    el.querySelector('iframe').style.transform = `scale(${w / 1440})`;
+  };
+  requestAnimationFrame(scale);
+  addEventListener('resize', scale);
+  io.observe(shot);
+  return el;
+}
+
+const fill = (id, list) => list.forEach(v => document.getElementById(id).appendChild(card(v)));
+fill('g-concepts', CONCEPTS);
+fill('g-v1', V1);
+fill('g-v3', V3);
+fill('g-v4', V4);
+</script>
+</body>
+</html>

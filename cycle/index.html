@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maui Brooklyn — Cycle Through Concepts</title>
-<meta name="description" content="Maui Brooklyn — cycle through 8 site concept variants.">
+<meta name="description" content="Maui Brooklyn: cycle through 11 site concepts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -170,7 +170,7 @@
 <div class="bar">
   <div class="brand">Maui<span>Brooklyn</span></div>
   <div class="meta">
-    <div class="label">Concept <span id="idx">1</span> / 8</div>
+    <div class="label">Concept <span id="idx">1</span> / <span id="total">11</span></div>
     <div class="title" id="title">Sunset Beach</div>
   </div>
   <div class="spacer"></div>
@@ -178,22 +178,15 @@
   <div class="spacer"></div>
   <div class="ctrl">
     <button class="btn play" id="play" aria-label="auto-advance toggle"><span id="playLabel">Auto · Off</span></button>
-    <a class="btn open" id="open" href="v1/" target="_blank" rel="noopener" aria-label="open current in new tab">Open ↗</a>
+    <a class="btn open" id="open" href="../v1/" target="_blank" rel="noopener" aria-label="open current in new tab">Open ↗</a>
   </div>
 </div>
 
 <div class="progress"><div class="fill" id="fill"></div></div>
 
-<div class="stage" id="stage">
-  <div class="slide active" data-idx="0"><iframe data-src="../v1/" title="v1 Sunset Beach" loading="eager"></iframe></div>
-  <div class="slide" data-idx="1"><iframe data-src="../v2/" title="v2 Tiki After Dark" loading="lazy"></iframe></div>
-  <div class="slide" data-idx="2"><iframe data-src="../v3/" title="v3 Island Market" loading="lazy"></iframe></div>
-  <div class="slide" data-idx="3"><iframe data-src="../v4/" title="v4 Editorial Aloha" loading="lazy"></iframe></div>
-  <div class="slide" data-idx="4"><iframe data-src="../v5/" title="v5 Pacific Modern" loading="lazy"></iframe></div>
-  <div class="slide" data-idx="5"><iframe data-src="../v6/" title="v6 Neon Wave" loading="lazy"></iframe></div>
-  <div class="slide" data-idx="6"><iframe data-src="../v7/" title="v7 Mid-Century Hawaiian" loading="lazy"></iframe></div>
-  <div class="slide" data-idx="7"><iframe data-src="../v8/" title="v8 Speakeasy Lanai" loading="lazy"></iframe></div>
-</div>
+<!-- slides are generated from the paths array below, so adding a concept
+     means editing one line instead of two places that can drift apart -->
+<div class="stage" id="stage"></div>
 
 <button class="edge prev" id="prev" aria-label="previous concept">‹</button>
 <button class="edge next" id="next" aria-label="next concept">›</button>
@@ -205,13 +198,26 @@
 </div>
 
 <div class="hint">
-  <kbd>←</kbd> <kbd>→</kbd> switch · <kbd>Space</kbd> pause · <kbd>1</kbd>–<kbd>8</kbd> jump
+  <kbd>←</kbd> <kbd>→</kbd> switch · <kbd>Space</kbd> pause · <kbd>1</kbd>-<kbd>9</kbd> jump
 </div>
 
 <script>
 (function(){
-  const names = ['Sunset Beach','Tiki After Dark','Island Market','Editorial Aloha','Pacific Modern','Neon Wave','Mid-Century Hawaiian','Speakeasy Lanai'];
-  const paths = ['../v1/','../v2/','../v3/','../v4/','../v5/','../v6/','../v7/','../v8/'];
+  const names = ['Sunset Beach','Tiki After Dark','Island Market','Editorial Aloha','Pacific Modern','Neon Wave','Mid-Century Hawaiian','Speakeasy Lanai','Editorial Teal','Tabbed Ocean','Maui Queens × Swan Marina'];
+  const paths = ['../v1/','../v2/','../v3/','../v4/','../v5/','../v6/','../v7/','../v8/','../v9/','../v1l/','../v11/'];
+  const stage = document.getElementById('stage');
+  paths.forEach((p, i) => {
+    const d = document.createElement('div');
+    d.className = 'slide' + (i === 0 ? ' active' : '');
+    d.dataset.idx = i;
+    const f = document.createElement('iframe');
+    f.dataset.src = p;
+    f.title = names[i];
+    f.loading = i === 0 ? 'eager' : 'lazy';
+    d.appendChild(f);
+    stage.appendChild(d);
+  });
+
   const slides = document.querySelectorAll('.slide');
   const iframes = document.querySelectorAll('.slide iframe');
   const dotsHost = document.getElementById('dots');
@@ -229,7 +235,8 @@
   let progress = 0;
 
   // build dots
-  const COUNT = 8;
+  const COUNT = paths.length;
+  document.getElementById('total').textContent = COUNT;
   for (let i = 0; i < COUNT; i++) {
     const b = document.createElement('button');
     b.className = 'dot' + (i === 0 ? ' active' : '');
@@ -331,7 +338,7 @@
     if (e.key === 'ArrowRight') { next(); resetTimer(); }
     else if (e.key === 'ArrowLeft') { prev(); resetTimer(); }
     else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
-    else if (e.key >= '1' && e.key <= '8') { go(parseInt(e.key, 10) - 1, true); }
+    else if (e.key >= '1' && e.key <= '9') { go(parseInt(e.key, 10) - 1, true); }
   });
 
   // pause when tab not visible to save resources
