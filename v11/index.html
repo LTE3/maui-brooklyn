@@ -11,9 +11,11 @@
 <style>
   /* ------------------------------------------------------------------
      MAUI QUEENS x SWAN MARINA
-     Sibling venue to Maui Brooklyn. Deliberately NOT a reskin:
-       palette  navy hull + cool bone + ONE accent (signal orange)
-       Brooklyn is teal + yellow. They should read as family, not clones.
+     Sibling venue to Maui Brooklyn.
+       palette  navy hull + cool bone + ONE accent (Maui yellow)
+       The yellow is the family mark and carries across both venues.
+       Marina identity comes from the water, the swan, and the hull, not
+       from a different accent colour.
 
      SHAPE LOCK (applies everywhere, no exceptions):
        interactive -> pill (999px)
@@ -32,12 +34,12 @@
     --bone:#F2F5F4;
     --bone-dim:rgba(242,245,244,.76);
     --bone-faint:rgba(242,245,244,.66);   /* small uppercase labels: must clear AA */
-    --signal:#FF6B35;          /* the ONLY accent on this page */
-    --signal-ink:#170703;      /* text that sits on the accent */
+    --signal:#F2C744;          /* the ONLY accent: Maui yellow, same as Brooklyn */
+    --signal-ink:#0b2326;      /* text that sits on the accent */
     --hair:rgba(242,245,244,.14);
     /* Glass is tinted with the HULL, not with white. A white 6% fill inherits
-       whatever the video is doing behind it, and this footage is half sunlit
-       trees. Cards must carry their own contrast, on every frame. */
+       whatever the video is doing behind it, and this footage is bright
+       turquoise water (mean luminance 138). Cards carry their own contrast. */
     --glass:rgba(6,22,31,.58);
     --glass-hi:rgba(6,22,31,.72);
 
@@ -159,7 +161,7 @@
     font-family:inherit;
     transition:transform 160ms var(--ease-out), background 200ms ease;
   }
-  .btn-primary{background:var(--signal);color:var(--signal-ink);box-shadow:0 12px 30px -12px rgba(255,107,53,.55)}
+  .btn-primary{background:var(--signal);color:var(--signal-ink);box-shadow:0 12px 30px -12px rgba(242,199,68,.5)}
   .btn-ghost{
     /* sits on raw footage in the hero, so it needs a real scrim of its own */
     background:rgba(6,22,31,.58);color:var(--bone);
@@ -218,7 +220,7 @@
   .panel-header{text-align:center;margin-bottom:40px}
   .panel-eyebrow{
     display:inline-block;padding:5px 14px;border-radius:var(--r-pill);
-    background:rgba(255,107,53,.14);color:var(--signal);
+    background:rgba(242,199,68,.16);color:var(--signal);
     font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;margin-bottom:14px;
   }
   .panel h2{
@@ -367,10 +369,11 @@
 <body>
 
 <div class="bg-fallback"></div>
-<!-- preload=metadata, not auto: this is an 86s 1080p loop and nobody should
-     pay for the whole file on a phone before the hero even paints -->
+<!-- Real moving water, not a drone drifting over a still coastline.
+     preload=metadata, not auto: nobody should download the whole clip
+     before the hero even paints. -->
 <video class="bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-  <source src="https://videos.pexels.com/video-files/2169880/2169880-hd_1920_1080_30fps.mp4" type="video/mp4">
+  <source src="https://videos.pexels.com/video-files/32429435/13831702_1080_1920_30fps.mp4" type="video/mp4">
 </video>
 <div class="bg-scrim"></div>
 
@@ -478,10 +481,8 @@
     <div class="visit-grid">
       <div class="info-card">
         <h3>Address</h3>
-        <!-- TODO: real street address. Swan Marina is in Queens; exact street
-             number not supplied, so it is not invented here. -->
-        <div class="addr">Swan Marina<br>Queens, NY</div>
-        <div class="pending">Exact address announced at opening.</div>
+        <div class="addr">Swan Marina<br>163-45 Cross Bay Blvd<br>Jamaica, NY 11414</div>
+        <div class="pending">On the water, minutes from JFK.</div>
         <h3 style="margin-top:20px">Contact</h3>
         <div class="row"><span class="l">Phone</span><span class="v">(718) 555-0178</span></div>
         <div class="row"><span class="l">Email</span><span class="v">dock@mauiqueens.com</span></div>
