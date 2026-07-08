@@ -12,10 +12,10 @@
   /* ------------------------------------------------------------------
      MAUI QUEENS x SWAN MARINA
      Sibling venue to Maui Brooklyn.
-       palette  navy hull + cool bone + ONE accent (Maui yellow)
+       palette  teal hull + cool bone + ONE accent (Maui yellow)
        The yellow is the family mark and carries across both venues.
-       Marina identity comes from the water, the swan, and the hull, not
-       from a different accent colour.
+       Marina identity comes from the water and the swan, not from a
+       different accent colour.
 
      SHAPE LOCK (applies everywhere, no exceptions):
        interactive -> pill (999px)
@@ -28,9 +28,9 @@
        Tab switching is a high-frequency action, so it gets 140ms, not 450ms.
      ------------------------------------------------------------------ */
   :root{
-    --hull-deep:#06161F;
-    --hull:#0A2231;
-    --hull-mid:#123449;
+    --hull-deep:#063e45;
+    --hull:#0e5a64;
+    --hull-mid:#168088;
     --bone:#F2F5F4;
     --bone-dim:rgba(242,245,244,.76);
     --bone-faint:rgba(242,245,244,.66);   /* small uppercase labels: must clear AA */
@@ -39,9 +39,11 @@
     --hair:rgba(242,245,244,.14);
     /* Glass is tinted with the HULL, not with white. A white 6% fill inherits
        whatever the video is doing behind it, and this footage is bright
-       turquoise water (mean luminance 138). Cards carry their own contrast. */
-    --glass:rgba(6,22,31,.58);
-    --glass-hi:rgba(6,22,31,.72);
+       turquoise water (mean luminance 138). Cards carry their own contrast.
+       The hull is v1l's teal, not navy: a navy scrim halved the teal of the
+       footage (94.5 -> 49.5) and made the ocean read murky green. */
+    --glass:rgba(6,62,69,.58);
+    --glass-hi:rgba(6,62,69,.72);
 
     --r-pill:999px;
     --r-card:14px;
@@ -72,9 +74,9 @@
   .bg-scrim{
     position:fixed;inset:0;z-index:-2;pointer-events:none;
     background:
-      radial-gradient(ellipse 90% 60% at 50% 22%, rgba(6,22,31,.42), transparent 72%),
-      radial-gradient(ellipse 80% 55% at 50% 92%, rgba(6,22,31,.80), transparent 70%),
-      linear-gradient(180deg, rgba(6,22,31,.72) 0%, rgba(10,34,49,.58) 42%, rgba(6,22,31,.86) 100%);
+      radial-gradient(ellipse 90% 60% at 50% 24%, rgba(6,62,69,.30), transparent 74%),
+      radial-gradient(ellipse 80% 55% at 50% 92%, rgba(6,62,69,.70), transparent 72%),
+      linear-gradient(180deg, rgba(6,62,69,.46) 0%, rgba(14,90,100,.30) 42%, rgba(6,62,69,.78) 100%);
   }
   body::after{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
@@ -87,7 +89,7 @@
     position:fixed;top:0;left:0;right:0;z-index:20;height:64px;
     display:flex;justify-content:space-between;align-items:center;
     padding:0 26px;
-    background:rgba(6,22,31,.55);backdrop-filter:blur(14px);
+    background:rgba(6,62,69,.55);backdrop-filter:blur(14px);
     border-bottom:1px solid var(--hair);
   }
   .brand{
@@ -164,7 +166,7 @@
   .btn-primary{background:var(--signal);color:var(--signal-ink);box-shadow:0 12px 30px -12px rgba(242,199,68,.5)}
   .btn-ghost{
     /* sits on raw footage in the hero, so it needs a real scrim of its own */
-    background:rgba(6,22,31,.58);color:var(--bone);
+    background:rgba(6,62,69,.58);color:var(--bone);
     border:1px solid rgba(242,245,244,.36);backdrop-filter:blur(6px);
   }
   .btn:active,.nav-cta:active{transform:scale(.97)}
@@ -172,7 +174,7 @@
     .btn:hover{transform:translateY(-2px)}
     .btn:active{transform:scale(.97)}
     .nav-cta:hover{transform:translateY(-2px)}
-    .btn-ghost:hover{background:rgba(6,22,31,.74)}
+    .btn-ghost:hover{background:rgba(6,62,69,.74)}
   }
   :focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
 
@@ -185,15 +187,15 @@
     content:"";position:absolute;z-index:-1;pointer-events:none;
     top:-90px;bottom:-64px;left:50%;transform:translateX(-50%);width:100vw;
     background:linear-gradient(180deg,
-      rgba(6,22,31,0) 0,
-      rgba(6,22,31,.62) 110px,
-      rgba(6,22,31,.68) 100%);
+      rgba(6,62,69,0) 0,
+      rgba(6,62,69,.62) 110px,
+      rgba(6,62,69,.68) 100%);
   }
   .tabs-rail{
     position:sticky;top:64px;z-index:15;
     display:flex;gap:4px;justify-content:center;
     padding:8px;margin:0 auto 30px;width:fit-content;
-    background:rgba(6,22,31,.68);backdrop-filter:blur(14px);
+    background:rgba(6,62,69,.68);backdrop-filter:blur(14px);
     border:1px solid var(--hair);border-radius:var(--r-pill);
     flex-wrap:wrap;
   }
@@ -323,7 +325,7 @@
   footer::before{
     content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
     left:50%;transform:translateX(-50%);width:100vw;
-    background:rgba(6,22,31,.68);
+    background:rgba(6,62,69,.68);
   }
   footer .rope{width:120px;height:3px;margin:0 auto 18px;border-radius:2px;
     background:linear-gradient(90deg,transparent,var(--signal) 22%,var(--signal) 78%,transparent)}
