@@ -4,3 +4,8 @@ node_modules/
 .vscode/
 .idea/
 *.log
+
+# review artifacts, not site content
+screenshots/
+*.bak
+*.original.md
