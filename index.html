@@ -147,31 +147,20 @@
   }
   .hero .wordmark2{
     font-family:'Satisfy',cursive;
-    font-size:clamp(40px,5.6vw,68px);
-    color:var(--bone);margin-top:-2px;
-    /* "Queens" carries a Q descender and Satisfy loops it deep.
-       leading-1.1 plus reserve, or the tail gets clipped. */
-    line-height:1.1;padding-bottom:10px;
+    font-size:clamp(24px,4.2vw,54px);
+    color:var(--bone);margin-top:2px;
+    /* Q descender: Satisfy loops it deep, reserve or it clips */
+    line-height:1.15;padding-bottom:10px;
     text-shadow:0 2px 20px rgba(0,0,0,.4);
+    display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  }
+  .hero .wordmark2 .swan{
+    width:clamp(26px,3vw,40px);height:auto;opacity:.95;
+    margin:0 2px;flex:none;
   }
   .hero .rope{
-    width:150px;height:3px;border-radius:2px;margin:22px auto 0;
+    width:150px;height:3px;border-radius:2px;margin:20px auto 18px;
     background:linear-gradient(90deg,transparent,var(--signal) 22%,var(--signal) 78%,transparent);
-  }
-  /* the co-brand sits inside the hero lockup, owner's call */
-  .hero .copartner{
-    display:flex;align-items:center;justify-content:center;gap:12px;
-    margin:18px auto 20px;
-  }
-  .hero .copartner .x{
-    font-family:'Permanent Marker',cursive;font-size:22px;
-    color:var(--signal);line-height:1;
-  }
-  .hero .copartner img{width:34px;height:34px;display:block;opacity:.95}
-  .hero .copartner .name{
-    font-size:15px;letter-spacing:.34em;text-transform:uppercase;
-    color:var(--bone);font-weight:600;
-    text-shadow:0 2px 12px rgba(0,0,0,.45);
   }
   .hero .tagline{
     font-family:'Satisfy',cursive;font-size:clamp(21px,2.5vw,30px);
@@ -436,13 +425,10 @@
 <header class="hero">
   <div class="hero-eyebrow">Swan Marina - Waterfront Marina · Queens NY · July to Late September</div>
   <h1>Maui</h1>
-  <div class="wordmark2">Queens</div>
-  <div class="rope"></div>
-  <div class="copartner">
-    <span class="x" aria-hidden="true">&times;</span>
-    <img src="v11/swan-mark.png" alt="" width="34" height="34">
-    <span class="name">Swan Marina</span>
+  <div class="wordmark2">
+    Queens&nbsp;&times;&nbsp;<img class="swan" src="v11/swan-mark.png" alt="" width="40" height="40">&nbsp;Swan&nbsp;Marina
   </div>
+  <div class="rope"></div>
   <div class="tagline">This Summer, Maui Has Docked at the Marina</div>
   <div class="hero-ctas">
     <a href="#menu" class="btn btn-primary" data-tab="visit">Book a Table</a>
