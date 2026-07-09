@@ -326,23 +326,36 @@
 
   /* --- story ------------------------------------------------------- */
   .story-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  #panel-story .story-grid{align-items:start}
+  #panel-story .story-copy{padding-top:14px}
   @media(max-width:860px){.story-grid{grid-template-columns:1fr}}
-  .story-copy p{font-size:16px;line-height:1.78;color:var(--bone-dim);margin-bottom:16px;max-width:62ch}
-  .story-copy > p:first-of-type::first-letter{
-    font-family:'Playfair Display',serif;font-weight:900;font-size:64px;
-    float:left;line-height:.88;color:var(--signal);padding:6px 12px 0 0;
+  .story-pull{
+    font-family:'Satisfy',cursive;text-align:center;
+    font-size:clamp(34px,4.4vw,58px);line-height:1.25;color:var(--bone);
+    margin:6px auto 36px;text-shadow:0 2px 18px rgba(0,0,0,.4);
+  }
+  .story-copy p{font-size:16px;line-height:1.75;color:var(--bone-dim);margin-bottom:22px;max-width:60ch}
+  .xp{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(max-width:560px){.xp{grid-template-columns:1fr}}
+  .xp .tile{
+    display:flex;align-items:center;gap:12px;
+    padding:14px 16px;border-radius:var(--r-card);
+    background:var(--glass);border:1px solid var(--hair);
+    font-size:14px;font-weight:600;color:var(--bone);
+    transition:transform 200ms var(--ease-out),background 200ms ease;
+  }
+  @media (hover:hover) and (pointer:fine){ .xp .tile:hover{transform:translateY(-3px);background:var(--glass-hi)} }
+  .xp .tile span{font-size:24px;line-height:1;flex:none}
+  .story-close{
+    font-family:'Satisfy',cursive;font-size:clamp(20px,2.2vw,26px);
+    color:var(--signal);margin-top:24px;
   }
   .story-art{
     aspect-ratio:4/5;border-radius:var(--r-card);overflow:hidden;
     box-shadow:0 30px 60px -24px rgba(0,0,0,.6);
   }
   .story-art img{width:100%;height:100%;object-fit:cover;display:block}
-  /* three facts, separated by hairlines rather than boxed as cards */
-  .facts{margin-top:26px;border-top:1px solid var(--hair)}
-  .fact{padding:14px 0;border-bottom:1px solid var(--hair);display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:center}
-  @media(max-width:560px){.fact{grid-template-columns:1fr;gap:4px}}
-  .fact h3{font-size:22px;line-height:1}
-  .fact p{font-size:15px;line-height:1.5;color:var(--bone)}
+
 
   /* --- visit ------------------------------------------------------- */
   .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -555,22 +568,22 @@
       <h2>Maui has <span class="accent">docked.</span></h2>
       <p class="lead">Welcome to Maui at the Marina: a limited-time summer waterfront pop-up bringing the spirit of the islands to 163-45 Cross Bay Blvd, Jamaica, NY 11414.</p>
     </div>
+    <div class="story-pull">Escape the city<br>without leaving it.</div>
     <div class="story-grid">
       <div class="story-copy">
-        <p>Escape the city without leaving it. Tropical-inspired food, handcrafted cocktails, waterfront dining, live DJs, and unforgettable sunsets in a one-of-a-kind marina setting.</p>
-        <p>Arrive by land or by water. Dock your own boat and spend the day with us, or rent a jet ski or boat and explore the bay before coming back to eat, drink, and unwind. Whether you're joining us for brunch, dinner, or a full day on the water, Maui is your summer destination.</p>
-        <p>This summer, Maui has docked at the marina. Come experience the ultimate waterfront escape.</p>
-        <div class="facts">
-          <div class="fact"><h3>&#127796;</h3><p>Waterfront dining</p></div>
-          <div class="fact"><h3>&#127865;</h3><p>Tropical cocktails</p></div>
-          <div class="fact"><h3>&#128741;&#65039;</h3><p>Guest boat docking available</p></div>
-          <div class="fact"><h3>&#127754;</h3><p>Jet ski &amp; boat rentals</p></div>
-          <div class="fact"><h3>&#127926;</h3><p>Live DJs &amp; weekend entertainment</p></div>
-          <div class="fact"><h3>&#9728;&#65039;</h3><p>Brunch, lunch, dinner &amp; sunset vibes</p></div>
+        <p>Arrive by land or by water. Dock your own boat and spend the day, or rent a jet ski and explore the bay before coming back to eat, drink, and unwind. Brunch, dinner, or a full day on the water: Maui is your summer destination.</p>
+        <div class="xp">
+          <div class="tile"><span>&#127796;</span>Waterfront dining</div>
+          <div class="tile"><span>&#127865;</span>Tropical cocktails</div>
+          <div class="tile"><span>&#128741;&#65039;</span>Guest boat docking</div>
+          <div class="tile"><span>&#127754;</span>Jet ski &amp; boat rentals</div>
+          <div class="tile"><span>&#127926;</span>Live DJs &amp; entertainment</div>
+          <div class="tile"><span>&#9728;&#65039;</span>Brunch to sunset</div>
         </div>
+        <div class="story-close">Come experience the ultimate waterfront escape.</div>
       </div>
       <div class="story-art">
-        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=900&q=80&auto=format&fit=crop" alt="A wave breaking in open water" loading="lazy">
+        <img src="img/marina-8363.jpg" alt="The lounge deck at Swan Marina at sunset" loading="lazy">
       </div>
     </div>
   </section>
