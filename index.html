@@ -133,6 +133,11 @@
     border:1px solid var(--hair);
     font-size:11px;letter-spacing:.32em;text-transform:uppercase;
     color:var(--bone-dim);margin-bottom:24px;
+    line-height:1.8;text-wrap:balance;max-width:min(92vw,760px);
+  }
+  /* long venue line wraps on phones; keep the pill readable when it does */
+  @media(max-width:640px){
+    .hero-eyebrow{letter-spacing:.22em;border-radius:22px;padding:10px 20px}
   }
   .hero h1{
     font-family:'Permanent Marker',cursive;
@@ -429,7 +434,7 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-eyebrow">Waterfront Marina · Queens NY · July to Late September</div>
+  <div class="hero-eyebrow">Swan Marina - Waterfront Marina · Queens NY · July to Late September</div>
   <h1>Maui</h1>
   <div class="wordmark2">Queens</div>
   <div class="rope"></div>
