@@ -272,6 +272,13 @@
     font-size:12px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--signal);font-weight:700;
   }
+  .dish .sauces{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+  .dish .sauces span{
+    font-size:11px;font-weight:600;letter-spacing:.06em;
+    padding:4px 10px;border-radius:var(--r-pill);
+    background:rgba(242,199,68,.14);color:var(--signal);
+    border:1px solid rgba(242,199,68,.22);
+  }
 
   /* --- gallery ----------------------------------------------------- */
   .gal{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:120px;gap:10px;grid-auto-flow:dense}
@@ -432,7 +439,7 @@
 
 <main class="tabs-wrap" id="menu">
   <div class="tabs-rail" role="tablist" aria-label="Sections">
-    <button class="tab-btn" role="tab" id="tab-raw"     aria-selected="true"  aria-controls="panel-raw"     data-tab="raw">Raw Bar</button>
+    <button class="tab-btn" role="tab" id="tab-raw"     aria-selected="true"  aria-controls="panel-raw"     data-tab="raw">Menu</button>
     <button class="tab-btn" role="tab" id="tab-events"  aria-selected="false" aria-controls="panel-events"  data-tab="events">Events</button>
     <button class="tab-btn" role="tab" id="tab-gallery" aria-selected="false" aria-controls="panel-gallery" data-tab="gallery">Gallery</button>
     <button class="tab-btn" role="tab" id="tab-story"   aria-selected="false" aria-controls="panel-story"   data-tab="story">The Marina</button>
@@ -442,19 +449,16 @@
   <!-- RAW BAR ---------------------------------------------------------- -->
   <section class="panel active is-in" id="panel-raw" role="tabpanel" aria-labelledby="tab-raw" data-panel="raw">
     <div class="panel-header">
-      <div class="panel-eyebrow">The Raw Bar</div>
-      <h2>Cold ice. <span class="accent">Warm rum.</span></h2>
-      <p class="lead">Oysters shucked to order, fish landed the same morning, and rum drinks built for a dock in August.</p>
+      <div class="panel-eyebrow">Five off the Dock</div>
+      <h2>The specialty <span class="accent">pop-up menu.</span></h2>
+      <p class="lead">Swan Marina Saturdays, Jamaica Bay.</p>
     </div>
     <div class="menu-grid">
-      <div class="dish"><div class="name">Half Dozen Bluepoints</div><div class="desc">Long Island oysters, mignonette, lime</div><div class="meta"><span>Raw</span><span>$21</span></div></div>
-      <div class="dish"><div class="name">Kampachi Crudo</div><div class="desc">Coconut milk, chili oil, cucumber, sea salt</div><div class="meta"><span>Raw</span><span>$19</span></div></div>
-      <div class="dish"><div class="name">Peel and Eat Shrimp</div><div class="desc">Old Bay, drawn butter, half pound, cold</div><div class="meta"><span>Cold</span><span>$18</span></div></div>
-      <div class="dish"><div class="name">Whole Grilled Snapper</div><div class="desc">Scotch bonnet, charred lime, green seasoning</div><div class="meta"><span>Kitchen</span><span>$34</span></div></div>
-      <div class="dish"><div class="name">Marina Rum Punch</div><div class="desc">Four rums, guava, passionfruit, nutmeg</div><div class="meta"><span>House</span><span>$16</span></div></div>
-      <div class="dish"><div class="name">Dock Daiquiri</div><div class="desc">Aged rum, lime, cane, nothing else</div><div class="meta"><span>Bar</span><span>$15</span></div></div>
-      <div class="dish"><div class="name">Salt Air Margarita</div><div class="desc">Tequila blanco, lime, sea salt foam</div><div class="meta"><span>Bar</span><span>$17</span></div></div>
-      <div class="dish"><div class="name">Frozen Painkiller</div><div class="desc">Navy rum, pineapple, coconut, orange</div><div class="meta"><span>Frozen</span><span>$16</span></div></div>
+      <div class="dish"><div class="name">Sweet Roll Sliders</div><div class="desc">Hawaiian sweet rolls, griddled and stacked with a grilled slider patty. Charred edges, soft center, built to eat in two bites.</div><div class="meta"><span>Grill</span></div></div>
+      <div class="dish"><div class="name">Hawaiian Glaze Skewers</div><div class="desc">Grilled skewers hand-brushed with a Hawaiian glaze as they come off the flame, so the sauce sets sticky and caramelized instead of just coating raw.</div><div class="meta"><span>Grill</span></div></div>
+      <div class="dish"><div class="name">Coconut Shrimp</div><div class="desc">Coconut-crusted and fried to order. Crisp shell, snap of shrimp underneath.</div><div class="meta"><span>Fry</span></div></div>
+      <div class="dish"><div class="name">Spam Musubi</div><div class="desc">Grilled spam over rice, wrapped in nori. Built fast, served cold-stable.</div><div class="meta"><span>Build</span></div></div>
+      <div class="dish"><div class="name">Grilled Wings, 3 Sauces</div><div class="desc">Grilled wings finished with a choice of three house sauces. The centerpiece of the five, built for sharing across the table.</div><div class="sauces"><span>Guava BBQ</span><span>Pineapple-Jerk</span><span>Tamarind-Honey</span></div><div class="meta"><span>Grill</span></div></div>
     </div>
   </section>
 
