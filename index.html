@@ -272,6 +272,14 @@
     font-size:12px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--signal);font-weight:700;
   }
+  .menu-sub{text-align:center;margin:44px 0 22px}
+  .menu-sub h3{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:26px;color:var(--bone);
+    display:flex;align-items:center;gap:18px;justify-content:center;
+  }
+  .menu-sub h3::before,.menu-sub h3::after{
+    content:"";height:1px;width:70px;background:var(--hair);
+  }
   .dish .sauces{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2px}
   .dish .sauces span{
     font-size:11px;font-weight:600;letter-spacing:.06em;
@@ -459,6 +467,15 @@
       <div class="dish"><div class="name">Coconut Shrimp</div><div class="desc">Coconut-crusted and fried to order. Crisp shell, snap of shrimp underneath.</div><div class="meta"><span>Fry</span></div></div>
       <div class="dish"><div class="name">Spam Musubi</div><div class="desc">Grilled spam over rice, wrapped in nori. Built fast, served cold-stable.</div><div class="meta"><span>Build</span></div></div>
       <div class="dish"><div class="name">Grilled Wings, 3 Sauces</div><div class="desc">Grilled wings finished with a choice of three house sauces. The centerpiece of the five, built for sharing across the table.</div><div class="sauces"><span>Guava BBQ</span><span>Pineapple-Jerk</span><span>Tamarind-Honey</span></div><div class="meta"><span>Grill</span></div></div>
+    </div>
+
+    <div class="menu-sub">
+      <h3>The Bar</h3>
+    </div>
+    <div class="menu-grid">
+      <div class="dish"><div class="name">K&#333;kua Colada</div><div class="desc">Rum, cream of coconut, pineapple. The crowd-pleaser, done right.</div><div class="meta"><span>Bar</span></div></div>
+      <div class="dish"><div class="name">Kai Breeze</div><div class="desc">Rum, orange cura&ccedil;ao, lime, tamarind syrup. Shares the tamarind concentrate with the wing sauce.</div><div class="meta"><span>Bar</span></div></div>
+      <div class="dish"><div class="name">Lilikoi Sunset</div><div class="desc">Dark and light rum, passionfruit puree, lime, grenadine, soda. Shares the passionfruit puree with the wing sauce too.</div><div class="meta"><span>Bar</span></div></div>
     </div>
   </section>
 
