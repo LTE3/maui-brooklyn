@@ -70,6 +70,11 @@
     position:fixed;inset:0;z-index:-3;width:100%;height:100%;
     object-fit:cover;pointer-events:none;
   }
+  /* iOS paints a play glyph on any paused inline video (Low Power Mode
+     blocks autoplay). The poster makes the paused state look right; this
+     hides the glyph itself. */
+  .bg-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+  .bg-video::-webkit-media-controls{display:none!important}
   /* scrim: earns its keep by making bone text pass AA over moving footage */
   .bg-scrim{
     position:fixed;inset:0;z-index:-2;pointer-events:none;
@@ -376,7 +381,8 @@
 <!-- Caribbean beach: white sand, palms, turquoise shallows (Pexels 12021278).
      Chosen by the owner from seven candidates rendered in this hero.
      preload=metadata: nobody downloads the whole clip before the hero paints. -->
-<video class="bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+<video class="bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"
+       poster="https://images.pexels.com/videos/12021278/at-the-beach-beach-break-beachfront-by-the-sea-12021278.jpeg?auto=compress&cs=tinysrgb&w=1920">
   <source src="https://videos.pexels.com/video-files/12021278/12021278-hd_1920_1080_30fps.mp4" type="video/mp4">
 </video>
 <div class="bg-scrim"></div>
@@ -574,6 +580,18 @@
   const applyCalm = () => { if (!video) return; calm.matches ? video.pause() : video.play().catch(() => {}); };
   applyCalm();
   calm.addEventListener('change', applyCalm);
+
+  // iOS blocks autoplay in Low Power Mode. A user gesture un-blocks it,
+  // so the first touch anywhere restarts the water. Respect reduced motion.
+  const kick = () => {
+    if (!calm.matches && video && video.paused) video.play().catch(() => {});
+    if (video && !video.paused) {
+      removeEventListener('touchstart', kick);
+      removeEventListener('click', kick);
+    }
+  };
+  addEventListener('touchstart', kick, {passive:true});
+  addEventListener('click', kick);
 </script>
 </body>
 </html>
