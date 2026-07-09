@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Maui Queens × Swan Marina · Dockside Raw Bar &amp; Kitchen</title>
-<meta name="description" content="Maui Queens at Swan Marina. A dockside raw bar and kitchen on the Queens waterfront. Sister venue to Maui Brooklyn.">
+<meta name="description" content="Maui at the Marina. A limited-time summer waterfront pop-up at Swan Marina, 163-45 Cross Bay Blvd, Jamaica NY. July to late September.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Satisfy&family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -304,7 +304,7 @@
   .story-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
   @media(max-width:860px){.story-grid{grid-template-columns:1fr}}
   .story-copy p{font-size:16px;line-height:1.78;color:var(--bone-dim);margin-bottom:16px;max-width:62ch}
-  .story-copy p:first-of-type::first-letter{
+  .story-copy > p:first-of-type::first-letter{
     font-family:'Playfair Display',serif;font-weight:900;font-size:64px;
     float:left;line-height:.88;color:var(--signal);padding:6px 12px 0 0;
   }
@@ -315,10 +315,10 @@
   .story-art img{width:100%;height:100%;object-fit:cover;display:block}
   /* three facts, separated by hairlines rather than boxed as cards */
   .facts{margin-top:26px;border-top:1px solid var(--hair)}
-  .fact{padding:16px 0;border-bottom:1px solid var(--hair);display:grid;grid-template-columns:130px 1fr;gap:18px;align-items:baseline}
+  .fact{padding:14px 0;border-bottom:1px solid var(--hair);display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:center}
   @media(max-width:560px){.fact{grid-template-columns:1fr;gap:4px}}
-  .fact h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--signal);font-weight:700}
-  .fact p{font-size:14px;line-height:1.6;color:var(--bone-dim)}
+  .fact h3{font-size:22px;line-height:1}
+  .fact p{font-size:15px;line-height:1.5;color:var(--bone)}
 
   /* --- visit ------------------------------------------------------- */
   .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -414,7 +414,7 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-eyebrow">Dockside Raw Bar · Queens Waterfront</div>
+  <div class="hero-eyebrow">Waterfront Marina · Queens NY · July to Late September</div>
   <h1>Maui</h1>
   <div class="wordmark2">Queens</div>
   <div class="rope"></div>
@@ -423,7 +423,7 @@
     <img src="v11/swan-mark.png" alt="" width="34" height="34">
     <span class="name">Swan Marina</span>
   </div>
-  <div class="tagline">Everything comes off the boat.</div>
+  <div class="tagline">This Summer, Maui Has Docked at the Marina</div>
   <div class="hero-ctas">
     <a href="#menu" class="btn btn-primary" data-tab="visit">Book a Table</a>
     <a href="#menu" class="btn btn-ghost" data-tab="raw">See the Menu</a>
@@ -433,8 +433,9 @@
 <main class="tabs-wrap" id="menu">
   <div class="tabs-rail" role="tablist" aria-label="Sections">
     <button class="tab-btn" role="tab" id="tab-raw"     aria-selected="true"  aria-controls="panel-raw"     data-tab="raw">Raw Bar</button>
+    <button class="tab-btn" role="tab" id="tab-events"  aria-selected="false" aria-controls="panel-events"  data-tab="events">Events</button>
     <button class="tab-btn" role="tab" id="tab-gallery" aria-selected="false" aria-controls="panel-gallery" data-tab="gallery">Gallery</button>
-    <button class="tab-btn" role="tab" id="tab-story"   aria-selected="false" aria-controls="panel-story"   data-tab="story">The Boat</button>
+    <button class="tab-btn" role="tab" id="tab-story"   aria-selected="false" aria-controls="panel-story"   data-tab="story">The Marina</button>
     <button class="tab-btn" role="tab" id="tab-visit"   aria-selected="false" aria-controls="panel-visit"   data-tab="visit">Visit</button>
   </div>
 
@@ -454,6 +455,22 @@
       <div class="dish"><div class="name">Dock Daiquiri</div><div class="desc">Aged rum, lime, cane, nothing else</div><div class="meta"><span>Bar</span><span>$15</span></div></div>
       <div class="dish"><div class="name">Salt Air Margarita</div><div class="desc">Tequila blanco, lime, sea salt foam</div><div class="meta"><span>Bar</span><span>$17</span></div></div>
       <div class="dish"><div class="name">Frozen Painkiller</div><div class="desc">Navy rum, pineapple, coconut, orange</div><div class="meta"><span>Frozen</span><span>$16</span></div></div>
+    </div>
+  </section>
+
+  <!-- EVENTS ----------------------------------------------------------- -->
+  <section class="panel" id="panel-events" role="tabpanel" aria-labelledby="tab-events" data-panel="events" hidden>
+    <div class="panel-header">
+      <h2>Every week, <span class="accent">on the water.</span></h2>
+      <p class="lead">Thursday through Sunday, July to late September.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="dish"><div class="name">&#127802; Ladies Night</div><div class="desc">Kick off the weekend early with tropical cocktails, waterfront dining, live DJs, and exclusive drink specials for the ladies in an island-inspired atmosphere.</div><div class="meta"><span>Thursday</span><span>4pm to 12am</span></div></div>
+      <div class="dish"><div class="name">&#128293; Luau Dinner</div><div class="desc">An unforgettable waterfront dinner featuring island-inspired cuisine, handcrafted cocktails, live entertainment, and sunset vibes that transition into a lively evening by the marina.</div><div class="meta"><span>Friday</span><span>4pm to 12am</span></div></div>
+      <div class="dish"><div class="name">&#129346; Luau Brunch</div><div class="desc">A tropical brunch experience with island flavors, signature cocktails, waterfront seating, and live music.</div><div class="meta"><span>Saturday</span><span>11am to 4pm</span></div></div>
+      <div class="dish"><div class="name">&#9728;&#65039; Dockside Day Party</div><div class="desc">After brunch, the energy turns up with DJs, bottle service, dancing, jet ski and boat rentals, and the ultimate waterfront day party.</div><div class="meta"><span>Saturday</span><span>1pm to 9pm</span></div></div>
+      <div class="dish"><div class="name">&#129346; Luau Brunch</div><div class="desc">Relax and recharge with brunch by the water, tropical cocktails, island-inspired dishes, and laid-back marina vibes.</div><div class="meta"><span>Sunday</span><span>11am to 4pm</span></div></div>
+      <div class="dish"><div class="name">&#127754; Sunset Day Party</div><div class="desc">Close out the weekend with waterfront cocktails, live DJs, beautiful sunset views, and a relaxed tropical atmosphere perfect for ending the weekend on a high note.</div><div class="meta"><span>Sunday</span><span>4pm to 9pm</span></div></div>
     </div>
   </section>
 
@@ -482,18 +499,21 @@
   <!-- THE BOAT --------------------------------------------------------- -->
   <section class="panel" id="panel-story" role="tabpanel" aria-labelledby="tab-story" data-panel="story" hidden>
     <div class="panel-header">
-      <h2>Same family. <span class="accent">Different water.</span></h2>
-      <p class="lead">Maui Brooklyn put the islands on Myrtle Ave. Swan Marina puts them back on the water.</p>
+      <h2>Maui has <span class="accent">docked.</span></h2>
+      <p class="lead">Welcome to Maui at the Marina: a limited-time summer waterfront pop-up bringing the spirit of the islands to 163-45 Cross Bay Blvd, Jamaica, NY 11414.</p>
     </div>
     <div class="story-grid">
       <div class="story-copy">
-        <p>The Brooklyn room was always landlocked. Good rum, good fire, no horizon. We wanted the other half of it: a dock, a hull line, gulls arguing over the ice.</p>
-        <p>So the second room sits at Swan Marina in Queens. The raw bar runs the length of it. The fish comes in whole and leaves on a plate the same day, and the rum list stays exactly as long as it needs to be.</p>
-        <p>Nothing here is precious. Paper on the tables, shells in the bucket, your hands are going to smell like lime until Tuesday.</p>
+        <p>Escape the city without leaving it. Tropical-inspired food, handcrafted cocktails, waterfront dining, live DJs, and unforgettable sunsets in a one-of-a-kind marina setting.</p>
+        <p>Arrive by land or by water. Dock your own boat and spend the day with us, or rent a jet ski or boat and explore the bay before coming back to eat, drink, and unwind. Whether you're joining us for brunch, dinner, or a full day on the water, Maui is your summer destination.</p>
+        <p>This summer, Maui has docked at the marina. Come experience the ultimate waterfront escape.</p>
         <div class="facts">
-          <div class="fact"><h3>The Bar</h3><p>Four rums in the punch. None of them hiding.</p></div>
-          <div class="fact"><h3>The Ice</h3><p>Oysters shucked when you order, not before.</p></div>
-          <div class="fact"><h3>The Dock</h3><p>Forty seats outside. First come, first served.</p></div>
+          <div class="fact"><h3>&#127796;</h3><p>Waterfront dining</p></div>
+          <div class="fact"><h3>&#127865;</h3><p>Tropical cocktails</p></div>
+          <div class="fact"><h3>&#128741;&#65039;</h3><p>Guest boat docking available</p></div>
+          <div class="fact"><h3>&#127754;</h3><p>Jet ski &amp; boat rentals</p></div>
+          <div class="fact"><h3>&#127926;</h3><p>Live DJs &amp; weekend entertainment</p></div>
+          <div class="fact"><h3>&#9728;&#65039;</h3><p>Brunch, lunch, dinner &amp; sunset vibes</p></div>
         </div>
       </div>
       <div class="story-art">
