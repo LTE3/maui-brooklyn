@@ -150,8 +150,23 @@
     text-shadow:0 2px 20px rgba(0,0,0,.4);
   }
   .hero .rope{
-    width:150px;height:3px;border-radius:2px;margin:24px auto 18px;
+    width:150px;height:3px;border-radius:2px;margin:22px auto 0;
     background:linear-gradient(90deg,transparent,var(--signal) 22%,var(--signal) 78%,transparent);
+  }
+  /* the co-brand sits inside the hero lockup, owner's call */
+  .hero .copartner{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    margin:18px auto 20px;
+  }
+  .hero .copartner .x{
+    font-family:'Permanent Marker',cursive;font-size:22px;
+    color:var(--signal);line-height:1;
+  }
+  .hero .copartner img{width:34px;height:34px;display:block;opacity:.95}
+  .hero .copartner .name{
+    font-size:15px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--bone);font-weight:600;
+    text-shadow:0 2px 12px rgba(0,0,0,.45);
   }
   .hero .tagline{
     font-family:'Satisfy',cursive;font-size:clamp(21px,2.5vw,30px);
@@ -399,10 +414,15 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-eyebrow">Swan Marina · Queens Waterfront</div>
+  <div class="hero-eyebrow">Dockside Raw Bar · Queens Waterfront</div>
   <h1>Maui</h1>
   <div class="wordmark2">Queens</div>
   <div class="rope"></div>
+  <div class="copartner">
+    <span class="x" aria-hidden="true">&times;</span>
+    <img src="v11/swan-mark.png" alt="" width="34" height="34">
+    <span class="name">Swan Marina</span>
+  </div>
   <div class="tagline">Everything comes off the boat.</div>
   <div class="hero-ctas">
     <a href="#menu" class="btn btn-primary" data-tab="visit">Book a Table</a>
