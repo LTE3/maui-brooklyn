@@ -32,13 +32,17 @@ Deno.serve(async (req) => {
   }
   if (!time) return json(400, { error: "pick a time" });
 
+  // free event RSVPs ride the same table; status carries the event slug
+  const event = String(b.event ?? "").trim().slice(0, 60);
+  const status = event ? `rsvp:${event.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}` : "confirmed";
+
   const supa = createClient(
     Deno.env.get("SUPABASE_URL")!,
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
   );
   const { data, error } = await supa.from("maui_bookings").insert({
     booking_date: date, booking_time: time, party_size: party,
-    name, email, phone: phone || null,
+    name, email, phone: phone || null, status,
   }).select("id").single();
   if (error) { console.error(error.message); return json(500, { error: "could not save reservation" }); }
   return json(200, { ok: true, id: data.id });

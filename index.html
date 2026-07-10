@@ -379,6 +379,33 @@
   @media (hover:hover) and (pointer:fine){ .info-card .row .v a:hover{color:var(--signal);border-color:var(--signal)} }
   .info-card .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
 
+  /* --- featured event ---------------------------------------------- */
+  .featured{
+    display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:center;
+    padding:28px;border-radius:var(--r-card);margin-bottom:36px;
+    background:var(--glass);border:1px solid rgba(242,199,68,.35);
+  }
+  @media(max-width:820px){.featured{grid-template-columns:1fr}}
+  .featured .fly{border-radius:var(--r-media);overflow:hidden;box-shadow:0 24px 50px -20px rgba(0,0,0,.55)}
+  .featured .fly img{width:100%;display:block}
+  .featured .fx h3{
+    font-family:'Playfair Display',serif;font-weight:900;
+    font-size:clamp(26px,3vw,38px);line-height:1.1;color:var(--bone);margin-bottom:8px;
+  }
+  .featured .fx h3 .accent{font-family:'Permanent Marker',cursive;color:var(--signal);font-weight:400}
+  .featured .fx .meta-line{font-size:14px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--signal);margin-bottom:14px}
+  .featured .fx p{font-size:15px;line-height:1.65;color:var(--bone-dim);margin-bottom:18px;max-width:48ch}
+  .rsvp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:560px){.rsvp{grid-template-columns:1fr}}
+  .rsvp .full{grid-column:1/-1}
+  .rsvp input{
+    font-family:inherit;font-size:15px;color:var(--bone);width:100%;
+    background:rgba(6,62,69,.5);border:1px solid var(--hair);border-radius:10px;
+    padding:12px 14px;outline:none;
+  }
+  .rsvp input:focus{border-color:var(--signal)}
+  .rsvp ::placeholder{color:rgba(242,245,244,.4)}
+
   /* --- booking ------------------------------------------------------ */
   .book-card{
     padding:28px;border-radius:var(--r-card);margin-bottom:20px;
@@ -569,6 +596,25 @@
     <div class="panel-header">
       <h2>Every week, <span class="accent">on the water.</span></h2>
       <p class="lead">Thursday through Sunday, July - September 2026.</p>
+    </div>
+
+    <div class="featured">
+      <div class="fly"><img src="img/flyer-fnf.jpg" alt="Friends and Family Night flyer: invite only, Friday July 17, 5 PM to 10 PM at Swan Marina"></div>
+      <div class="fx">
+        <div class="meta-line">Friday, July 17 &middot; 5 PM to 10 PM &middot; Free</div>
+        <h3>Friends &amp; Family <span class="accent">Night.</span></h3>
+        <p>Invite only. First look at the pop-up before the season opens: the deck, the menu, the cocktails. RSVP free below and you are on the list.</p>
+        <form class="rsvp" id="rsvpForm" novalidate>
+          <input type="text" name="rname" placeholder="Full name" autocomplete="name" required>
+          <input type="email" name="remail" placeholder="you@email.com" autocomplete="email" required>
+          <input type="tel" name="rphone" placeholder="Phone (optional)" autocomplete="tel">
+          <input type="number" name="rparty" min="1" max="20" value="2" title="Guests">
+          <div class="full">
+            <button type="submit" class="btn btn-primary" id="rsvpSubmit">RSVP Free</button>
+            <div class="book-msg" id="rsvpMsg" role="status"></div>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="menu-grid">
       <div class="dish"><div class="name">&#127802; Ladies Night</div><div class="desc">Kick off the weekend early with tropical cocktails, waterfront dining, live DJs, and exclusive drink specials for the ladies in an island-inspired atmosphere.</div><div class="meta"><span>Thursday</span><span>4pm to 12am</span></div></div>
@@ -870,6 +916,46 @@ Phone: ${f.get('phone') || '-'}`;
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = oldLabel;
+    }
+  });
+
+  // ---- Friends & Family RSVP (free, invite-only night) ----
+  const rsvpForm = document.getElementById('rsvpForm');
+  const rsvpMsg = document.getElementById('rsvpMsg');
+  rsvpForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    rsvpMsg.className = 'book-msg';
+    const f = new FormData(rsvpForm);
+    const name = (f.get('rname')||'').trim(), email = (f.get('remail')||'').trim();
+    if (!name || !email) {
+      rsvpMsg.textContent = 'Name and email are required.';
+      rsvpMsg.className = 'book-msg err';
+      return;
+    }
+    const btn = document.getElementById('rsvpSubmit');
+    btn.disabled = true; const old = btn.textContent; btn.textContent = 'One moment...';
+    try {
+      const r = await fetch('https://tqeunmqnaoyrerkbhokk.supabase.co/functions/v1/maui-reserve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, email, phone: f.get('rphone') || '',
+          date: '2026-07-17', time: '5 PM to 10 PM',
+          party: f.get('rparty') || 2,
+          event: 'friends-family-night',
+        }),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) throw new Error(data.error || 'could not save the RSVP');
+      rsvpForm.reset();
+      rsvpMsg.textContent = 'You are on the list. See you Friday, July 17.';
+      rsvpMsg.className = 'book-msg ok';
+    } catch (err) {
+      rsvpMsg.textContent = err.message === 'Failed to fetch'
+        ? 'Could not reach the RSVP service. Try again in a minute.' : err.message;
+      rsvpMsg.className = 'book-msg err';
+    } finally {
+      btn.disabled = false; btn.textContent = old;
     }
   });
 
