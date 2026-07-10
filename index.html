@@ -379,6 +379,43 @@
   @media (hover:hover) and (pointer:fine){ .info-card .row .v a:hover{color:var(--signal);border-color:var(--signal)} }
   .info-card .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
 
+  /* --- booking ------------------------------------------------------ */
+  .book-card{
+    padding:28px;border-radius:var(--r-card);margin-bottom:20px;
+    background:var(--glass);border:1px solid var(--hair);
+  }
+  .book-card h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--signal);margin-bottom:16px}
+  .seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+  .seg button{
+    font-family:inherit;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    padding:11px 20px;border-radius:var(--r-pill);cursor:pointer;
+    background:transparent;border:1px solid var(--hair);color:var(--bone-faint);
+    transition:color 200ms ease,background 200ms ease,transform 160ms var(--ease-out);
+  }
+  .seg button:active{transform:scale(.97)}
+  .seg button[aria-pressed="true"]{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
+  .bform{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .bform .full{grid-column:1/-1}
+  .bform label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-faint)}
+  .bform [hidden]{display:none!important}
+  .bform input,.bform select{
+    font-family:inherit;font-size:15px;color:var(--bone);
+    background:rgba(6,62,69,.5);border:1px solid var(--hair);border-radius:10px;
+    padding:12px 14px;outline:none;width:100%;
+  }
+  .bform input:focus,.bform select:focus{border-color:var(--signal)}
+  .bform select option{background:#0e5a64;color:#F2F5F4}
+  .bform ::placeholder{color:rgba(242,245,244,.4)}
+  /* iOS date inputs render white-on-white without this */
+  .bform input[type=date]{color-scheme:dark}
+  .book-note{font-size:13px;color:var(--bone-dim);margin-top:12px;line-height:1.5}
+  .book-msg{
+    display:none;margin-top:14px;padding:14px 16px;border-radius:10px;
+    font-size:14px;line-height:1.5;
+  }
+  .book-msg.ok{display:block;background:rgba(242,199,68,.14);border:1px solid rgba(242,199,68,.3);color:var(--bone)}
+  .book-msg.err{display:block;background:rgba(255,107,107,.12);border:1px solid rgba(255,107,107,.35);color:var(--bone)}
+  .btn[disabled]{opacity:.55;cursor:wait;transform:none}
   footer{padding:44px 24px 54px;text-align:center;border-top:1px solid var(--hair);margin-top:64px;position:relative}
   /* the veil above stops at the footer; continue it, or a seam shows up
      wherever the footage is bright behind the fold */
@@ -595,6 +632,63 @@
       <h2>Tie up and <span class="accent">come in.</span></h2>
       <p class="lead">Walk-ins on the dock. Reservations inside for parties of four or more.</p>
     </div>
+    <div class="book-card" id="book">
+      <h3>Reserve</h3>
+      <div class="seg" role="group" aria-label="Booking type">
+        <button type="button" data-bt="table" aria-pressed="true">Table</button>
+        <button type="button" data-bt="event" aria-pressed="false">Event Tickets</button>
+        <button type="button" data-bt="bottle" aria-pressed="false">Bottle Service</button>
+      </div>
+      <form class="bform" id="bookForm" novalidate>
+        <label data-for="event" hidden>Event
+          <select name="event">
+            <option>Ladies Night (Thu)</option>
+            <option>Luau Dinner (Fri)</option>
+            <option>Luau Brunch (Sat)</option>
+            <option>Dockside Day Party (Sat)</option>
+            <option>Luau Brunch (Sun)</option>
+            <option>Sunset Day Party (Sun)</option>
+          </select>
+        </label>
+        <label data-for="bottle" hidden>Package
+          <select name="package">
+            <option value="marina-social">Marina Social &middot; $500</option>
+            <option value="day-party">Day Party Celebration &middot; $750</option>
+            <option value="waterfront-vip">Waterfront VIP &middot; $1,000</option>
+            <option value="captains-table">Captain's Table &middot; $1,250</option>
+            <option value="yacht-club">Yacht Club Experience &middot; $1,500</option>
+          </select>
+        </label>
+        <label>Date
+          <input type="date" name="date" min="2026-07-10" max="2026-09-30" required>
+        </label>
+        <label data-for="table">Time
+          <select name="time">
+            <option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option>
+            <option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option>
+            <option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option>
+            <option>9:00 PM</option><option>10:00 PM</option>
+          </select>
+        </label>
+        <label data-for="table">Party size
+          <input type="number" name="party" min="1" max="20" value="2">
+        </label>
+        <label>Name
+          <input type="text" name="name" autocomplete="name" placeholder="Full name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" placeholder="you@email.com" required>
+        </label>
+        <label>Phone
+          <input type="tel" name="phone" autocomplete="tel" placeholder="(718) 555-0100">
+        </label>
+        <div class="full">
+          <button type="submit" class="btn btn-primary" id="bookSubmit">Reserve a Table</button>
+          <div class="book-msg" id="bookMsg" role="status"></div>
+          <p class="book-note" id="bookNote">Free reservation. No card needed. We hold your table for 15 minutes past your time.</p>
+        </div>
+      </form>
+    </div>
     <div class="visit-grid">
       <div class="info-card">
         <h3>Address</h3>
@@ -604,9 +698,7 @@
         <div class="row"><span class="l">Phone</span><span class="v">(718) 555-0178</span></div>
         <div class="row"><span class="l">Email</span><span class="v"><a href="mailto:admin@pulsetix.ai">admin@pulsetix.ai</a></span></div>
         <div class="row"><span class="l">Instagram</span><span class="v">@mauiqueens</span></div>
-        <div class="actions">
-          <a class="btn btn-primary" href="#">Book a Table</a>
-        </div>
+
       </div>
       <div class="info-card">
         <h3>Hours</h3>
@@ -680,6 +772,108 @@
   document.querySelectorAll('a[data-tab]').forEach(a => {
     a.addEventListener('click', e => { e.preventDefault(); goto(a.dataset.tab); });
   });
+
+  // ---- booking ----
+  // Paid flows go straight to Stripe Payment Links (live). Free table
+  // reservations email the house via FormSubmit. No servers of our own.
+  const PAY = {
+    event:  'https://buy.stripe.com/14A4gBezS6AV4WlaZf0Jq0f',
+    'marina-social':  'https://buy.stripe.com/bJe3cx2Ra9N788xffv0Jq0g',
+    'day-party':      'https://buy.stripe.com/7sYbJ3bnG8J30G54AR0Jq0h',
+    'waterfront-vip': 'https://buy.stripe.com/6oUeVf0J2aRbbkJ6IZ0Jq0i',
+    'captains-table': 'https://buy.stripe.com/28E14pajCgbv2Od4AR0Jq0j',
+    'yacht-club':     'https://buy.stripe.com/9B614p1N6e3nfAZ9Vb0Jq0k',
+  };
+  const TABLE_INBOX = 'https://formsubmit.co/ajax/admin@pulsetix.ai';
+
+  const bookForm = document.getElementById('bookForm');
+  const bookMsg  = document.getElementById('bookMsg');
+  const bookNote = document.getElementById('bookNote');
+  const submitBtn= document.getElementById('bookSubmit');
+  let bookType = 'table';
+
+  const NOTES = {
+    table:  'Free reservation. No card needed. We hold your table for 15 minutes past your time.',
+    event:  'Tickets are $20 each. Pick your quantity on the secure Stripe page.',
+    bottle: 'Full package price is paid at checkout. Birthday and special occasion perks included.',
+  };
+  const LABELS = { table:'Reserve a Table', event:'Buy Tickets', bottle:'Book Bottle Service' };
+
+  document.querySelectorAll('.seg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bookType = btn.dataset.bt;
+      document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', String(x === btn)));
+      document.querySelectorAll('.bform [data-for]').forEach(el => { el.hidden = el.dataset.for !== bookType; });
+      submitBtn.textContent = LABELS[bookType];
+      bookNote.textContent = NOTES[bookType];
+      bookMsg.className = 'book-msg';
+    });
+  });
+
+  bookForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    bookMsg.className = 'book-msg';
+    const f = new FormData(bookForm);
+    const name = (f.get('name')||'').trim(), email = (f.get('email')||'').trim(), date = f.get('date');
+    if (!name || !email || !date) {
+      bookMsg.textContent = 'Name, email and date are required.';
+      bookMsg.className = 'book-msg err';
+      return;
+    }
+
+    // paid: hand off to Stripe
+    if (bookType === 'event' || bookType === 'bottle') {
+      const base = bookType === 'event' ? PAY.event : PAY[f.get('package')];
+      const u = new URL(base);
+      u.searchParams.set('prefilled_email', email);
+      u.searchParams.set('client_reference_id', date);   // shows on the payment in the dashboard
+      location.href = u.href;
+      return;
+    }
+
+    // free table: email the house
+    submitBtn.disabled = true;
+    const oldLabel = submitBtn.textContent;
+    submitBtn.textContent = 'One moment…';
+    try {
+      const r = await fetch(TABLE_INBOX, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `Table reservation: ${date} ${f.get('time')} - ${name} (party of ${f.get('party')})`,
+          _template: 'table',
+          type: 'Table reservation',
+          date, time: f.get('time'), party_size: f.get('party'),
+          name, email, phone: f.get('phone') || '',
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || String(data.success) !== 'true') throw new Error(data.message || 'could not send the reservation');
+      bookForm.reset();
+      bookMsg.textContent = 'You are booked. See you on the dock.';
+      bookMsg.className = 'book-msg ok';
+    } catch (err) {
+      bookMsg.textContent = err.message === 'Failed to fetch'
+        ? 'Could not reach the reservation service. Call or email us instead.'
+        : err.message;
+      bookMsg.className = 'book-msg err';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = oldLabel;
+    }
+  });
+
+  // back from Stripe: land on the Visit tab with a status banner
+  const bp = new URLSearchParams(location.search).get('booking');
+  if (bp === 'paid' || bp === 'canceled') {
+    activate('visit');
+    bookMsg.textContent = bp === 'paid'
+      ? 'Payment received. You are booked. A receipt is on the way to your email.'
+      : 'Checkout canceled. Your spot is not booked; try again whenever you are ready.';
+    bookMsg.className = 'book-msg ' + (bp === 'paid' ? 'ok' : 'err');
+    document.querySelector('.tabs-rail').scrollIntoView();
+    history.replaceState(null, '', location.pathname);
+  }
 
   // Honour reduced motion for the looping background footage too.
   const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
