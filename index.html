@@ -831,22 +831,46 @@
       return;
     }
 
-    // free table: no backend yet, so hand off to their mail app with the
-    // reservation pre-written. Replaced by a real endpoint when one exists.
-    const subject = `Table reservation: ${date} ${f.get('time')} - ${name} (party of ${f.get('party')})`;
-    const bodyTxt = [
-      'Table reservation request',
-      `Name: ${name}`,
-      `Date: ${date}`,
-      `Time: ${f.get('time')}`,
-      `Party size: ${f.get('party')}`,
-      `Email: ${email}`,
-      `Phone: ${f.get('phone') || '-'}`,
-    ].join('
-');
-    location.href = 'mailto:admin@pulsetix.ai?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyTxt);
-    bookMsg.textContent = 'Your mail app just opened with the reservation. Hit send and you are booked.';
-    bookMsg.className = 'book-msg ok';
+    // free table: straight into the reservation book (Supabase).
+    // If the service is unreachable, fall back to the guest's mail app.
+    submitBtn.disabled = true;
+    const oldLabel = submitBtn.textContent;
+    submitBtn.textContent = 'One moment…';
+    try {
+      const r = await fetch('https://tqeunmqnaoyrerkbhokk.supabase.co/functions/v1/maui-reserve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, email, date,
+          time: f.get('time'), party: f.get('party'), phone: f.get('phone') || '',
+        }),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) throw new Error(data.error || 'could not save the reservation');
+      bookForm.reset();
+      bookMsg.textContent = 'You are booked. See you on the dock.';
+      bookMsg.className = 'book-msg ok';
+    } catch (err) {
+      if (err.message === 'Failed to fetch') {
+        const subject = `Table reservation: ${date} ${f.get('time')} - ${name} (party of ${f.get('party')})`;
+        const bodyTxt = `Table reservation request
+Name: ${name}
+Date: ${date}
+Time: ${f.get('time')}
+Party size: ${f.get('party')}
+Email: ${email}
+Phone: ${f.get('phone') || '-'}`;
+        location.href = 'mailto:admin@pulsetix.ai?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyTxt);
+        bookMsg.textContent = 'Our booking service is busy, so your mail app opened with the reservation instead. Hit send and you are booked.';
+        bookMsg.className = 'book-msg ok';
+      } else {
+        bookMsg.textContent = err.message;
+        bookMsg.className = 'book-msg err';
+      }
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = oldLabel;
+    }
   });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || String(data.success) !== 'true') throw new Error(data.message || 'could not send the reservation');
