@@ -872,21 +872,6 @@ Phone: ${f.get('phone') || '-'}`;
       submitBtn.textContent = oldLabel;
     }
   });
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok || String(data.success) !== 'true') throw new Error(data.message || 'could not send the reservation');
-      bookForm.reset();
-      bookMsg.textContent = 'You are booked. See you on the dock.';
-      bookMsg.className = 'book-msg ok';
-    } catch (err) {
-      bookMsg.textContent = err.message === 'Failed to fetch'
-        ? 'Could not reach the reservation service. Call or email us instead.'
-        : err.message;
-      bookMsg.className = 'book-msg err';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = oldLabel;
-    }
-  });
 
   // back from Stripe: land on the Visit tab with a status banner
   const bp = new URLSearchParams(location.search).get('booking');
