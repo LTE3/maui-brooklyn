@@ -831,22 +831,23 @@
       return;
     }
 
-    // free table: email the house
-    submitBtn.disabled = true;
-    const oldLabel = submitBtn.textContent;
-    submitBtn.textContent = 'One moment…';
-    try {
-      const r = await fetch(TABLE_INBOX, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          _subject: `Table reservation: ${date} ${f.get('time')} - ${name} (party of ${f.get('party')})`,
-          _template: 'table',
-          type: 'Table reservation',
-          date, time: f.get('time'), party_size: f.get('party'),
-          name, email, phone: f.get('phone') || '',
-        }),
-      });
+    // free table: no backend yet, so hand off to their mail app with the
+    // reservation pre-written. Replaced by a real endpoint when one exists.
+    const subject = `Table reservation: ${date} ${f.get('time')} - ${name} (party of ${f.get('party')})`;
+    const bodyTxt = [
+      'Table reservation request',
+      `Name: ${name}`,
+      `Date: ${date}`,
+      `Time: ${f.get('time')}`,
+      `Party size: ${f.get('party')}`,
+      `Email: ${email}`,
+      `Phone: ${f.get('phone') || '-'}`,
+    ].join('
+');
+    location.href = 'mailto:admin@pulsetix.ai?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyTxt);
+    bookMsg.textContent = 'Your mail app just opened with the reservation. Hit send and you are booked.';
+    bookMsg.className = 'book-msg ok';
+  });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || String(data.success) !== 'true') throw new Error(data.message || 'could not send the reservation');
       bookForm.reset();
