@@ -379,6 +379,20 @@
   @media (hover:hover) and (pointer:fine){ .info-card .row .v a:hover{color:var(--signal);border-color:var(--signal)} }
   .info-card .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
 
+  /* --- floor plan --------------------------------------------------- */
+  .floorplan{margin-top:44px;text-align:center}
+  .floorplan h3{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(24px,3vw,34px);
+    color:var(--bone);margin-bottom:6px;
+  }
+  .floorplan h3 .accent{font-family:'Permanent Marker',cursive;color:var(--signal);font-weight:400}
+  .floorplan p{font-size:14px;color:var(--bone-dim);margin-bottom:18px}
+  .floorplan img{
+    width:100%;max-width:760px;border-radius:var(--r-card);
+    box-shadow:0 30px 70px -24px rgba(0,0,0,.65);
+    border:1px solid var(--hair);
+  }
+
   /* --- featured event ---------------------------------------------- */
   .featured{
     display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:center;
@@ -669,6 +683,12 @@
       <div class="story-art">
         <img src="img/marina-8363.jpg" alt="The lounge deck at Swan Marina at sunset" loading="lazy">
       </div>
+    </div>
+
+    <div class="floorplan">
+      <h3>The <span class="accent">layout.</span></h3>
+      <p>Two levels on the water: rooftop lounge with the screen and grill, dockside dining with the Maui Bar and jet skis.</p>
+      <img src="img/floorplan.jpg" alt="Floor plan: boardwalk entrance leading to a two-level floating venue. Dock level holds dining tables, the Maui Bar and the jet ski dock; a spiral staircase leads to the rooftop lounge with sofas, screen and grill. Boat slips line the boardwalk." loading="lazy">
     </div>
   </section>
 
