@@ -2,7 +2,7 @@
 
 Site for **Maui Queens**, a dockside raw bar and kitchen at **Swan Marina, 163-45 Cross Bay Blvd, Jamaica, NY 11414**.
 
-Live: [lte3.github.io/maui-brooklyn](https://lte3.github.io/maui-brooklyn/)
+Live: [lte3.github.io/maui-brooklyn](https://mauibrooklyn.com/)
 
 The repo is still called `maui-brooklyn` because it began as concept work for the Brooklyn venue.
 
