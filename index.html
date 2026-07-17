@@ -260,6 +260,29 @@
   .panel h2 .accent{font-family:'Permanent Marker',cursive;color:var(--signal);font-weight:400}
   .panel .lead{font-size:16px;line-height:1.65;color:var(--bone-dim);max-width:60ch;margin:0 auto}
 
+  /* --- menu switcher ------------------------------------------------ */
+  .mseg{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:0 auto 30px;width:fit-content;
+    padding:8px;background:rgba(6,62,69,.68);border:1px solid var(--hair);border-radius:var(--r-pill)}
+  .mseg button{
+    font-family:inherit;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    padding:11px 20px;border-radius:var(--r-pill);cursor:pointer;
+    background:transparent;border:none;color:var(--bone-faint);
+    transition:color 200ms ease,background 200ms ease,transform 160ms var(--ease-out);
+  }
+  .mseg button:active{transform:scale(.97)}
+  @media (hover:hover) and (pointer:fine){ .mseg button:hover{color:var(--bone)} }
+  .mseg button[aria-pressed="true"]{background:var(--signal);color:var(--signal-ink)}
+  .mview{display:none}
+  .mview.on{display:block}
+  .prix{
+    max-width:620px;margin:0 auto 30px;padding:26px 30px;border-radius:var(--r-card);text-align:center;
+    background:var(--glass);border:1px solid rgba(242,199,68,.4);
+  }
+  .prix .big{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(26px,3vw,36px);color:var(--bone)}
+  .prix .big b{color:var(--signal)}
+  .prix .or{font-family:'Satisfy',cursive;font-size:24px;color:var(--signal);margin:8px 0}
+  .prix .note{font-size:14px;color:var(--bone-dim);margin-top:10px;line-height:1.6}
+
   /* --- menu -------------------------------------------------------- */
   .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px}
   .dish{
@@ -554,8 +577,68 @@
   <!-- RAW BAR ---------------------------------------------------------- -->
   <section class="panel active is-in" id="panel-raw" role="tabpanel" aria-labelledby="tab-raw" data-panel="raw">
     <div class="panel-header">
+      <h2>The <span class="accent">menus.</span></h2>
+      <p class="lead">Pick a menu. Thursday runs the $10 list, Friday runs the full menu, weekends are the Luau Brunch.</p>
+    </div>
+
+    <div class="mseg" role="group" aria-label="Menu picker">
+      <button type="button" data-mv="full" aria-pressed="true">Friday &middot; Full Menu</button>
+      <button type="button" data-mv="thursday" aria-pressed="false">Thursday &middot; $10 Menu</button>
+      <button type="button" data-mv="brunch" aria-pressed="false">Luau Brunch</button>
+    </div>
+
+    <!-- LUAU BRUNCH -->
+    <div class="mview" data-menu="brunch">
+      <div class="prix">
+        <div class="big">Two Courses &middot; <b>$60</b> Per Person</div>
+        <div class="or">or $80 with 90-min bottomless Tequila Sunrises &amp; Mojitos</div>
+        <div class="note">One shareable + one main. Hookah available.<br>Saturday &amp; Sunday, 11am to 4pm. Pricing does not include tax or gratuity.</div>
+      </div>
+      <div class="menu-sub"><h3>First: pick a shareable</h3></div>
+      <div class="menu-grid">
+        <div class="dish"><div class="name">Coconut Shrimp</div><div class="desc">Coconut-crusted and fried to order. Crisp shell, snap of shrimp underneath.</div><div class="meta"><span>Shareable</span></div></div>
+        <div class="dish"><div class="name">Hawaiian Glaze Skewers</div><div class="desc">Grilled skewers hand-brushed with a Hawaiian glaze as they come off the flame.</div><div class="meta"><span>Shareable</span></div></div>
+        <div class="dish"><div class="name">Grilled Wings</div><div class="desc">Grilled wings finished with a choice of house sauce.</div><div class="meta"><span>Shareable</span></div></div>
+        <div class="dish"><div class="name">Spam Musubi</div><div class="desc">Grilled spam over rice, wrapped in nori.</div><div class="meta"><span>Shareable</span></div></div>
+      </div>
+      <div class="menu-sub"><h3>Then: pick a main</h3></div>
+      <div class="menu-grid">
+        <div class="dish"><div class="name">Swan Classic Smash</div><div class="desc">Double smash patties, American cheese, grilled onions, pickles, Harbor Sauce.</div><div class="meta"><span>Main</span></div></div>
+        <div class="dish"><div class="name">The Captain</div><div class="desc">Double smash patties, cheddar cheese, bacon jam, crispy onions.</div><div class="meta"><span>Main</span></div></div>
+        <div class="dish"><div class="name">Spicy Sailor</div><div class="desc">Pepper jack, jalape&ntilde;os, pickled onion, Calabrian chili aioli.</div><div class="meta"><span>Main</span></div></div>
+        <div class="dish"><div class="name">Fish Taco Basket</div><div class="desc">Three fish tacos with cabbage slaw and pickled onions.</div><div class="meta"><span>Main</span></div></div>
+        <div class="dish"><div class="name">Maine Lobster Roll</div><div class="desc">Cold lobster salad, lemon, chives.</div><div class="meta"><span>Main</span></div></div>
+      </div>
+    </div>
+
+    <!-- THURSDAY $10 -->
+    <div class="mview" data-menu="thursday">
+      <div class="prix">
+        <div class="big">Ladies Night &middot; everything <b>$10</b></div>
+        <div class="or">Mojitos &amp; Margaritas all night</div>
+        <div class="note">Thursdays, 4pm to close. Hookah available.</div>
+      </div>
+      <div class="menu-sub"><h3>$10 Drinks</h3></div>
+      <div class="menu-grid">
+        <div class="dish"><div class="name">Classic Mojito</div><div class="desc">Rum, mint, lime, cane, soda.</div><div class="meta"><span>Cocktail</span><span>$10</span></div></div>
+        <div class="dish"><div class="name">Classic Margarita</div><div class="desc">Tequila, lime, triple sec, salt rim.</div><div class="meta"><span>Cocktail</span><span>$10</span></div></div>
+      </div>
+      <div class="menu-sub"><h3>$10 Bites</h3></div>
+      <div class="menu-grid">
+        <div class="dish"><div class="name">Cheeseburger</div><div class="desc">Smash patty, American cheese, pickles, Harbor Sauce.</div><div class="meta"><span>Bite</span><span>$10</span></div></div>
+        <div class="dish"><div class="name">Sweet Roll Sliders</div><div class="desc">Hawaiian sweet rolls, griddled slider patty.</div><div class="meta"><span>Bite</span><span>$10</span></div></div>
+        <div class="dish"><div class="name">Hawaiian Glaze Skewers</div><div class="desc">Grilled, glazed, sticky.</div><div class="meta"><span>Bite</span><span>$10</span></div></div>
+        <div class="dish"><div class="name">Coconut Shrimp</div><div class="desc">Coconut-crusted and fried to order.</div><div class="meta"><span>Bite</span><span>$10</span></div></div>
+        <div class="dish"><div class="name">Spam Musubi</div><div class="desc">Grilled spam over rice, wrapped in nori.</div><div class="meta"><span>Bite</span><span>$10</span></div></div>
+        <div class="dish"><div class="name">Grilled Wings</div><div class="desc">Choice of house sauce.</div><div class="meta"><span>Bite</span><span>$10</span></div></div>
+      </div>
+    </div>
+
+    <!-- FULL MENU (Friday) -->
+    <div class="mview on" data-menu="full">
+    <div class="panel-header" style="margin-bottom:28px">
       <div class="panel-eyebrow">Five off the Dock</div>
-      <h2>The specialty <span class="accent">pop-up menu.</span></h2>
+      <h2 style="font-size:clamp(28px,3.6vw,44px)">The specialty <span class="accent">pop-up menu.</span></h2>
       <p class="lead">Off the grill, off the fryer, off the dock.</p>
     </div>
     <div class="menu-grid">
@@ -602,6 +685,7 @@
       <div class="dish"><div class="name">Citrus Herb Olives</div><div class="desc">Marinated.</div><div class="meta"><span>Sides</span><span>$12</span></div></div>
       <div class="dish"><div class="name">House Sauces</div><div class="desc">Choose your dip for anything on the menu.</div><div class="sauces"><span>Harbor Sauce</span><span>Black Garlic Aioli</span><span>Calabrian Chili Aioli</span><span>Truffle Parmesan Aioli</span><span>Old Bay Remoulade</span></div><div class="meta"><span>Extra Sauce</span><span>$3</span></div></div>
     </div>
+    </div><!-- /mview full -->
   </section>
 
   <!-- EVENTS ----------------------------------------------------------- -->
@@ -937,6 +1021,14 @@ Phone: ${f.get('phone') || '-'}`;
       submitBtn.disabled = false;
       submitBtn.textContent = oldLabel;
     }
+  });
+
+  // ---- menu switcher ----
+  document.querySelectorAll('.mseg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mseg button').forEach(x => x.setAttribute('aria-pressed', String(x === btn)));
+      document.querySelectorAll('.mview').forEach(v => v.classList.toggle('on', v.dataset.menu === btn.dataset.mv));
+    });
   });
 
   // ---- Friends & Family RSVP (free, invite-only night) ----
