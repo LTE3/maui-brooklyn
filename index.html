@@ -997,6 +997,14 @@
       { name: 'Summer Luau Day Party - Live DJ (5 PM - 10 PM)', times: ['5:00 PM','6:00 PM','7:00 PM','8:00 PM','9:00 PM'] },
     ],
   };
+  // one-off open days that break the Thu-Sat rule
+  const SPECIAL = {
+    '2026-07-19': { label: 'World Cup Final', exps: [
+      { name: 'World Cup Final Watch Party', times: ['12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM'] },
+    ]},
+  };
+  const expsFor = d => (SPECIAL[d] && SPECIAL[d].exps) || EXP[weekdayOf(d)];
+  window.__SPECIAL = SPECIAL;
   const dateInput = document.getElementById('dateSelect');
   // the venue runs Thursday to Saturday: the picker only offers those days
   (function fillDates() {
@@ -1007,11 +1015,12 @@
     const end = new Date(2026,8,30);
     for (let d = new Date(start); d <= end; d.setDate(d.getDate()+1)) {
       const wd = d.getDay();
-      if (wd < 4 || wd > 6) continue;
       const v = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const special = window.__SPECIAL && window.__SPECIAL[v];
+      if ((wd < 4 || wd > 6) && !special) continue;
       const o = document.createElement('option');
       o.value = v;
-      o.textContent = `${DAY[wd]} · ${MON[d.getMonth()]} ${d.getDate()}`;
+      o.textContent = `${DAY[wd]} · ${MON[d.getMonth()]} ${d.getDate()}` + (special ? ` · ${special.label}` : '');
       dateInput.appendChild(o);
     }
   })();
@@ -1044,7 +1053,7 @@
     bookMsg.className = 'book-msg';
     const d = dateInput.value;
     if (!d || bookType !== 'table') return;
-    const exps = EXP[weekdayOf(d)];
+    const exps = expsFor(d);
     if (!exps) {
       expWrap.hidden = true;
       bookMsg.textContent = 'Reservations run Thursday to Saturday. Pick a Thursday, Friday or Saturday.';
@@ -1059,7 +1068,7 @@
   }
   dateInput.addEventListener('change', onDate);
   expSelect.addEventListener('change', () => {
-    const exps = EXP[weekdayOf(dateInput.value)] || [];
+    const exps = expsFor(dateInput.value) || [];
     const pick = exps.find(x => x.name === expSelect.value);
     if (pick) fillTimes(pick.times);
   });
@@ -1074,7 +1083,7 @@
       bookMsg.className = 'book-msg err';
       return;
     }
-    if (bookType === 'table' && !EXP[weekdayOf(date)]) {
+    if (bookType === 'table' && !expsFor(date)) {
       bookMsg.textContent = 'Reservations run Thursday to Saturday. Pick a Thursday, Friday or Saturday.';
       bookMsg.className = 'book-msg err';
       return;

@@ -17,6 +17,10 @@ const EXPERIENCES: Record<number, string[]> = {
   5: ["Luau Dinner Party"],
   6: ["Luau Brunch (11 AM - 5 PM)", "Summer Luau Day Party - Live DJ (5 PM - 10 PM)"],
 };
+// one-off open days outside the Thu-Sat rule
+const SPECIAL: Record<string, string[]> = {
+  "2026-07-19": ["World Cup Final Watch Party"],
+};
 
 function weekday(d: string): number {
   const [y, m, day] = d.split("-").map(Number);
@@ -50,8 +54,7 @@ Deno.serve(async (req) => {
 
   // table reservations: Thu-Sat only, experience must match the day
   if (!event) {
-    const wd = weekday(date);
-    const allowed = EXPERIENCES[wd];
+    const allowed = SPECIAL[date] ?? EXPERIENCES[weekday(date)];
     if (!allowed) return json(400, { error: "reservations run Thursday to Saturday" });
     if (!allowed.includes(experience)) return json(400, { error: "pick the experience for that day" });
   }
