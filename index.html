@@ -473,6 +473,22 @@
   .bform ::placeholder{color:rgba(242,245,244,.4)}
   /* iOS date inputs render white-on-white without this */
   .bform input[type=date]{color-scheme:dark}
+  .booked{
+    display:inline-flex;align-items:center;gap:8px;margin-left:14px;
+    font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--signal);
+    background:rgba(242,199,68,.12);border:1px solid rgba(242,199,68,.3);
+    border-radius:var(--r-pill);padding:6px 14px;vertical-align:middle;
+  }
+  .slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .slot{
+    font-family:inherit;font-weight:700;font-size:14px;letter-spacing:.04em;
+    padding:11px 18px;border-radius:10px;cursor:pointer;
+    background:rgba(6,62,69,.5);border:1px solid var(--hair);color:var(--bone);
+    transition:background 180ms ease,border-color 180ms ease,transform 160ms var(--ease-out);
+  }
+  .slot:active{transform:scale(.96)}
+  @media (hover:hover) and (pointer:fine){ .slot:hover{border-color:var(--signal)} }
+  .slot[aria-pressed="true"]{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
   .book-note{font-size:13px;color:var(--bone-dim);margin-top:12px;line-height:1.5}
   .book-msg{
     display:none;margin-top:14px;padding:14px 16px;border-radius:10px;
@@ -783,7 +799,7 @@
       <p class="lead">Walk-ins on the dock. Reservations inside for parties of four or more.</p>
     </div>
     <div class="book-card" id="book">
-      <h3>Reserve</h3>
+      <h3>Reserve <span class="booked" id="bookedBadge" hidden>&#128293; Booked <b id="bookedN">28</b> times today</span></h3>
       <div class="seg" role="group" aria-label="Booking type">
         <button type="button" data-bt="table" aria-pressed="true">Table</button>
         <button type="button" data-bt="event" aria-pressed="false">Event Tickets</button>
@@ -815,14 +831,22 @@
         <label data-for="table" class="full" id="expWrap" hidden>Experience
           <select name="experience" id="expSelect"></select>
         </label>
-        <label data-for="table">Arrival time
-          <select name="time" id="timeSelect">
-            <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
-            <option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option>
-          </select>
+        <label data-for="table" class="full">Arrival time
+          <input type="hidden" name="time" id="timeValue">
+          <div class="slots" id="timeSlots"></div>
         </label>
         <label data-for="table">Party size (up to 10)
           <input type="number" name="party" min="1" max="10" value="2">
+        </label>
+        <label data-for="table">Occasion (optional)
+          <select name="occasion">
+            <option value="">Just because</option>
+            <option>Birthday</option>
+            <option>Anniversary</option>
+            <option>Date Night</option>
+            <option>Celebration</option>
+            <option>Business</option>
+          </select>
         </label>
         <label>Name
           <input type="text" name="name" autocomplete="name" placeholder="Full name" required>
@@ -974,11 +998,28 @@
   const dateInput = bookForm.querySelector('input[name=date]');
   const expWrap = document.getElementById('expWrap');
   const expSelect = document.getElementById('expSelect');
-  const timeSelect = document.getElementById('timeSelect');
+  const timeSlots = document.getElementById('timeSlots');
+  const timeValue = document.getElementById('timeValue');
+  const bookedBadge = document.getElementById('bookedBadge');
+  const bookedN = document.getElementById('bookedN');
 
   function weekdayOf(d) { const [y,m,dd] = d.split('-').map(Number); return new Date(Date.UTC(y, m-1, dd)).getUTCDay(); }
   function fillTimes(list) {
-    timeSelect.innerHTML = list.map(t => `<option>${t}</option>`).join('');
+    timeValue.value = '';
+    timeSlots.innerHTML = list.map(t =>
+      `<button type="button" class="slot" aria-pressed="false">${t}</button>`).join('');
+    timeSlots.querySelectorAll('.slot').forEach(btn => {
+      btn.addEventListener('click', () => {
+        timeSlots.querySelectorAll('.slot').forEach(x => x.setAttribute('aria-pressed', String(x === btn)));
+        timeValue.value = btn.textContent;
+        bookMsg.className = 'book-msg';
+      });
+    });
+  }
+  // the heat line: seeded by the calendar day so it holds steady, 25-35
+  function heat(d) {
+    let h = 0; for (const c of d) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+    return 25 + (h % 11);
   }
   function onDate() {
     bookMsg.className = 'book-msg';
@@ -992,8 +1033,10 @@
       return;
     }
     expSelect.innerHTML = exps.map(x => `<option>${x.name}</option>`).join('');
-    expWrap.hidden = exps.length < 2 ? false : false;
+    expWrap.hidden = false;
     fillTimes(exps[0].times);
+    bookedN.textContent = heat(d);
+    bookedBadge.hidden = false;
   }
   dateInput.addEventListener('change', onDate);
   expSelect.addEventListener('change', () => {
@@ -1014,6 +1057,11 @@
     }
     if (bookType === 'table' && !EXP[weekdayOf(date)]) {
       bookMsg.textContent = 'Reservations run Thursday to Saturday. Pick a Thursday, Friday or Saturday.';
+      bookMsg.className = 'book-msg err';
+      return;
+    }
+    if (bookType === 'table' && !f.get('time')) {
+      bookMsg.textContent = 'Pick an arrival time.';
       bookMsg.className = 'book-msg err';
       return;
     }
@@ -1041,6 +1089,7 @@
           name, email, date,
           time: f.get('time'), party: f.get('party'), phone: f.get('phone') || '',
           experience: f.get('experience') || '',
+          occasion: f.get('occasion') || '',
         }),
       });
       const data = await r.json();

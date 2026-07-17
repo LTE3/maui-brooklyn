@@ -38,6 +38,7 @@ Deno.serve(async (req) => {
   const party = Math.min(Math.max(parseInt(String(b.party ?? "2"), 10) || 2, 1), 10);
   const event = String(b.event ?? "").trim().slice(0, 60);
   const experience = String(b.experience ?? "").trim().slice(0, 80);
+  const occasion = String(b.occasion ?? "").trim().slice(0, 40);
 
   if (!name || !/.+@.+\..+/.test(email)) return json(400, { error: "name and a valid email are required" });
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < "2026-07-01" || date > "2026-09-30") {
@@ -62,7 +63,7 @@ Deno.serve(async (req) => {
   const { data, error } = await supa.from("maui_bookings").insert({
     booking_date: date, booking_time: time, party_size: party,
     name, email, phone: phone || null, status,
-    experience: experience || null,
+    experience: experience || null, occasion: occasion || null,
   }).select("id").single();
   if (error) { console.error(error.message); return json(500, { error: "could not save reservation" }); }
   return json(200, { ok: true, id: data.id });
