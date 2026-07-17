@@ -595,7 +595,7 @@
   <section class="panel active is-in" id="panel-raw" role="tabpanel" aria-labelledby="tab-raw" data-panel="raw">
     <div class="panel-header">
       <h2>The <span class="accent">menus.</span></h2>
-      <p class="lead">Pick a menu. Thursday runs the $10 list, Friday runs the full menu, weekends are the Luau Brunch.</p>
+      <p class="lead">Pick a menu. Thursday runs the $10 list, Friday runs the full menu, Saturday runs the Luau Brunch.</p>
     </div>
 
     <div class="mseg" role="group" aria-label="Menu picker">
@@ -607,9 +607,9 @@
     <!-- LUAU BRUNCH -->
     <div class="mview" data-menu="brunch">
       <div class="prix">
-        <div class="big">Two Courses &middot; <b>$60</b> Per Person</div>
+        <div class="big">Two Courses + Bottomless Mimosas &middot; <b>$60</b> Per Person</div>
         <div class="or">or $80 with 90-min bottomless Tequila Sunrises &amp; Mojitos</div>
-        <div class="note">One shareable + one main. Hookah available.<br>Saturday &amp; Sunday, 11am to 4pm. Pricing does not include tax or gratuity.</div>
+        <div class="note">One shareable + one main. Hookah available.<br>Saturdays, 11am to 4pm. Pricing does not include tax or gratuity.</div>
       </div>
       <div class="menu-sub"><h3>First: pick a shareable</h3></div>
       <div class="menu-grid">
@@ -826,7 +826,9 @@
           </select>
         </label>
         <label>Date
-          <input type="date" name="date" min="2026-07-17" max="2026-09-30" required>
+          <select name="date" id="dateSelect" required>
+            <option value="">Pick a date</option>
+          </select>
         </label>
         <label data-for="table" class="full" id="expWrap" hidden>Experience
           <select name="experience" id="expSelect"></select>
@@ -881,8 +883,8 @@
         <div class="row"><span class="l">Mon to Wed</span><span class="v">Closed</span></div>
         <div class="row"><span class="l">Thu</span><span class="v">4pm to 12am</span></div>
         <div class="row"><span class="l">Fri</span><span class="v">4pm to 12am</span></div>
-        <div class="row"><span class="l">Sat</span><span class="v">11am to 9pm</span></div>
-        <div class="row"><span class="l">Sun</span><span class="v">11am to 9pm</span></div>
+        <div class="row"><span class="l">Sat</span><span class="v">11am to 10pm</span></div>
+        <div class="row"><span class="l">Sun</span><span class="v">Closed</span></div>
         <h3 style="margin-top:22px">Season</h3>
         <div class="row"><span class="l">Pop-Up</span><span class="v">July - September 2026</span></div>
       </div>
@@ -995,7 +997,24 @@
       { name: 'Summer Luau Day Party - Live DJ (5 PM - 10 PM)', times: ['5:00 PM','6:00 PM','7:00 PM','8:00 PM','9:00 PM'] },
     ],
   };
-  const dateInput = bookForm.querySelector('input[name=date]');
+  const dateInput = document.getElementById('dateSelect');
+  // the venue runs Thursday to Saturday: the picker only offers those days
+  (function fillDates() {
+    const DAY = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const today = new Date(); today.setHours(0,0,0,0);
+    const start = new Date(Math.max(today.getTime(), new Date(2026,6,17).getTime()));
+    const end = new Date(2026,8,30);
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate()+1)) {
+      const wd = d.getDay();
+      if (wd < 4 || wd > 6) continue;
+      const v = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const o = document.createElement('option');
+      o.value = v;
+      o.textContent = `${DAY[wd]} · ${MON[d.getMonth()]} ${d.getDate()}`;
+      dateInput.appendChild(o);
+    }
+  })();
   const expWrap = document.getElementById('expWrap');
   const expSelect = document.getElementById('expSelect');
   const timeSlots = document.getElementById('timeSlots');
